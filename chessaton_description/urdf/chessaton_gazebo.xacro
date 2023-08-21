@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Gazebo is unable to use the same <material> tags that are already in the URDF (that RViz uses). -->
+    <!-- Instead, we need to add gazebo tags for our links that refer to Gazebo materials -->
+
+    <gazebo reference="chessaton_link0">
+        <material>Gazebo/Green</material>
+    </gazebo>
+
+    <gazebo reference="chessaton_link1">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="chessaton_link2">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="chessaton_link3">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="chessaton_link4">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="chessaton_gripper">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="left_finger">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="right_finger">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+</robot>
