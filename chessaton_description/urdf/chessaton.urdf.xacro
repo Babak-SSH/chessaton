@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="chessaton">
+  <link
+    name="chessaton_link0">
+    <inertial>
+      <origin
+        xyz="-0.00074394 -0.016912 0.016688"
+        rpy="0 0 0" />
+      <mass
+        value="0.094842" />
+      <inertia
+        ixx="3.0463E-05"
+        ixy="-6.3087E-09"
+        ixz="4.236E-07"
+        iyy="4.8143E-05"
+        iyz="-8.1925E-08"
+        izz="5.1511E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link0.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link0.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="chessaton_link1">
+    <inertial>
+      <origin
+        xyz="0.012256 -0.0045169 0.011915"
+        rpy="0 0 0" />
+      <mass
+        value="0.047535" />
+      <inertia
+        ixx="8.1555E-06"
+        ixy="-8.4986E-08"
+        ixz="1.6429E-09"
+        iyy="1.0365E-05"
+        iyz="4.236E-07"
+        izz="1.4637E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="chessaton_joint1"
+    type="revolute">
+    <origin
+      xyz="0.00014502 -0.00865 0.06255"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_link0" />
+    <child
+      link="chessaton_link1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="1"
+      velocity="6" />
+  </joint>
+  <link
+    name="chessaton_link2">
+    <inertial>
+      <origin
+        xyz="-3.53536644404073E-13 -0.0247721366408157 0.051"
+        rpy="0 0 0" />
+      <mass
+        value="0.045902162826317" />
+      <inertia
+        ixx="4.65002565093795E-05"
+        ixy="2.14870070379761E-19"
+        ixz="1.12006959666857E-14"
+        iyy="2.1142916326109E-05"
+        iyz="-2.60991681564389E-20"
+        izz="3.01847862586687E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="chessaton_joint2"
+    type="revolute">
+    <origin
+      xyz="0.022504 0.022833 0.013792"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_link1" />
+    <child
+      link="chessaton_link2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="1"
+      velocity="6" />
+  </joint>
+  <link
+    name="chessaton_link3">
+    <inertial>
+      <origin
+        xyz="0.030212 -0.026096 -0.0011497"
+        rpy="0 0 0" />
+      <mass
+        value="0.076498" />
+      <inertia
+        ixx="2.3983E-05"
+        ixy="7.4374E-08"
+        ixz="-3.21E-07"
+        iyy="2.2146E-05"
+        iyz="4.236E-07"
+        izz="3.9025E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="chessaton_joint3"
+    type="revolute">
+    <origin
+      xyz="0 0 0.10200000000001"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_link2" />
+    <child
+      link="chessaton_link3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="1"
+      velocity="6" />
+  </joint>
+  <link
+    name="chessaton_link4">
+    <inertial>
+      <origin
+        xyz="0.0016488 -0.027436 -0.0097099"
+        rpy="0 0 0" />
+      <mass
+        value="0.046643" />
+      <inertia
+        ixx="1.458E-05"
+        ixy="-4.236E-07"
+        ixz="-1.6429E-09"
+        iyy="1.0335E-05"
+        iyz="-8.4986E-08"
+        izz="8.1259E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="chessaton_joint4"
+    type="revolute">
+    <origin
+      xyz="0.0985044567554144 0.000417307954157516 0.00195777592325097"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_link3" />
+    <child
+      link="chessaton_link4" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="1"
+      velocity="6" />
+  </joint>
+  <link
+    name="chessaton_gripper">
+    <inertial>
+      <origin
+        xyz="-0.027242 0.0063062 -0.003963"
+        rpy="0 0 0" />
+      <mass
+        value="0.07416" />
+      <inertia
+        ixx="2.5968E-05"
+        ixy="8.488E-08"
+        ixz="-4.236E-07"
+        iyy="1.3082E-05"
+        iyz="-1.6429E-09"
+        izz="2.6136E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_gripper.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/chessaton_gripper.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="gripper_joint"
+    type="fixed">
+    <origin
+      xyz="0.0728422240767261 -0.0341939566220146 -0.00485465935539839"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_link4" />
+    <child
+      link="chessaton_gripper" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="left_finger">
+    <inertial>
+      <origin
+        xyz="0.011393939393262 0.00863240266060371 -0.0049999999993352"
+        rpy="0 0 0" />
+      <mass
+        value="0.00880000000000001" />
+      <inertia
+        ixx="6.06464646464647E-07"
+        ixy="1.41414141414141E-07"
+        ixz="-7.44294350512605E-19"
+        iyy="9.03967676767678E-07"
+        iyz="4.43617317735603E-19"
+        izz="8.43765656565658E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/left_finger.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/left_finger.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_finger_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_gripper" />
+    <child
+      link="left_finger" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0.03"
+      effort="1"
+      velocity="6" />
+  </joint>
+  <link
+    name="right_finger">
+    <inertial>
+      <origin
+        xyz="0.011394 -0.0086324 -0.005"
+        rpy="0 0 0" />
+      <mass
+        value="0.0088" />
+      <inertia
+        ixx="6.0646E-07"
+        ixy="-1.4141E-07"
+        ixz="-7.4453E-19"
+        iyy="9.0397E-07"
+        iyz="-4.4355E-19"
+        izz="8.4377E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/right_finger.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://chessaton/meshes/right_finger.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_finger_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="chessaton_gripper" />
+    <child
+      link="right_finger" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.03"
+      upper="0"
+      effort="1"
+      velocity="6" />
+  </joint>
+</robot>
