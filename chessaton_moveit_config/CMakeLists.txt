@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.5)
 project(chessaton_moveit_config)
 
 find_package(ament_cmake REQUIRED)
+find_package(chessaton_description REQUIRED)
 
+# Install directories
+install(DIRECTORY config launch rviz srdf DESTINATION share/${PROJECT_NAME})
+
+# Setup the project
 ament_package()
-
-install(DIRECTORY launch DESTINATION share/${PROJECT_NAME}
-  PATTERN "setup_assistant.launch" EXCLUDE)
-install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
-install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})
