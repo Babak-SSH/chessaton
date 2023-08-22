@@ -36,4 +36,29 @@
         <material>Gazebo/White</material>
     </gazebo>
 
+    <!--       -->
+    <!-- Macro -->
+    <!--       -->
+     <xacro:macro name="gz_ros2_control" params="ros2_controller_parameters">
+      <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <parameters>${ros2_controller_parameters}</parameters>
+        </plugin>
+      </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="mein_ros2_control" params="
+        ros2_control
+        prefix
+        ros2_control_plugin
+        ros2_control_command_interface
+        ros2_controller_parameters
+    ">
+
+        <!-- ROS 2 control -->
+        <xacro:if value="${ros2_control}">
+            <xacro:ros2_control_chessaton_arm prefix="${prefix}" plugin="${ros2_control_plugin}" command_interface="${ros2_control_command_interface}"/>
+        </xacro:if>
+    </xacro:macro>
+
 </robot>
