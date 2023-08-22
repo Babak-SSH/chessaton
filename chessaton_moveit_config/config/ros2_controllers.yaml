@@ -1,0 +1,38 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    chessaton_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    chessaton_hand_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+chessaton_arm_controller:
+  ros__parameters:
+    joints:
+      - chessaton_joint1
+      - chessaton_joint2
+      - chessaton_joint3
+      - chessaton_joint4
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+chessaton_hand_controller:
+  ros__parameters:
+    joints:
+      - left_finger_joint
+      - right_finger_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
