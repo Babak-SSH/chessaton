@@ -1,9 +1,0 @@
-# Default initial positions for chessaton's ros2_control fake system
-
-initial_positions:
-  chessaton_joint1: 0
-  chessaton_joint2: 0
-  chessaton_joint3: 0
-  chessaton_joint4: 0
-  left_finger_joint: 0
-  right_finger_joint: 0
