@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
-  name="chessaton">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" 
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    name="chessaton">
 
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton_include.xacro" />
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton_gazebo.xacro" />
@@ -12,11 +15,11 @@
     <!-- Name of the robot (mandatory) -->
     <xacro:arg name="name" default="chessaton"/>
     <!-- Prefix for all entities -->
-    <xacro:arg name="prefix" default=""/>
+    <xacro:arg name="prefix" default="chessaton_"/>
 
     <!-- Flag to enable default gripper -->
     <xacro:arg name="gripper" default="true" />
-    ros2_control
+    <!-- ros2_control -->
     <!-- Flag to enable ros2 controllers for manipulator -->
     <xacro:arg name="ros2_control" default="true"/>
     <!-- The ros2_control plugin that should be loaded for the manipulator ('fake', 'gz', 'real' or custom) -->
@@ -24,7 +27,7 @@
     <!-- The output control command interface provided by ros2_control ('position', 'velocity', 'effort' or certain combinations 'position,velocity') -->
     <xacro:arg name="ros2_control_command_interface" default="position"/>
     <!-- The filepath to parameters of ROS 2 controllers -->
-    <xacro:arg name="ros2_controller_parameters" default="$(find chessaton_moveit_config)/config/controllers_$(arg ros2_control_command_interface).yaml"/>
+    <xacro:arg name="ros2_controller_parameters" default="$(find chessaton_description)/config/controllers_$(arg ros2_control_command_interface).yaml"/>
 
     <!-- Flag to preserve fixed joints and prevent lumping when generating SDF for Gazebo -->
     <xacro:arg name="gazebo_preserve_fixed_joint" default="false"/>
@@ -42,7 +45,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-              <mesh filename="package://chessaton_description/meshes/chessaton_link0.STL" />
+              <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link0.STL" />
             </geometry>
             <material name="color_link0" />
         </visual>
@@ -50,37 +53,37 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://chessaton_description/meshes/chessaton_link0.STL" />
+            <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link0.STL" />
           </geometry>
         </collision>
 
         <inertial>
-          <origin xyz="-0.00074394 -0.016912 0.016688" rpy="0 0 0" />
-          <mass value="0.094842" />
-          <inertia
-            ixx="3.0463E-05"
-            ixy="-6.3087E-09"
-            ixz="4.236E-07"
-            iyy="4.8143E-05"
-            iyz="-8.1925E-08"
-            izz="5.1511E-05" />
-        </inertial>
+            <origin xyz="-0.00073528 0.0040282 0.031188" rpy="0 0 0" />
+            <mass value="0.094842" />
+            <inertia
+              ixx="3.0463E-05"
+              ixy="-6.3087E-09"
+              ixz="4.236E-07"
+              iyy="4.8143E-05"
+              iyz="-8.1925E-08"
+              izz="5.1511E-05" />
+        </inertial> 
     </link>
 
     <joint name="chessaton_joint1" type="revolute">
-        <origin xyz="0.00014502 -0.00865 0.06255" rpy="0 0 0" />
+        <origin xyz="0.00015368 0.01229 0.07705" rpy="0 0 0" />
         <parent link="chessaton_link0" />
         <child link="chessaton_link1" />
         <axis xyz="0 0 -1" />
 		<dynamics damping="1.0" friction="1.0" />
-        <limit lower="${-pi}" upper="${pi}" effort="100" velocity="60" />
+        <limit lower="${-pi}" upper="${pi}" effort="0" velocity="5" />
     </joint>
 
     <link name="chessaton_link1">
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://chessaton_description/meshes/chessaton_link1.STL" />
+            <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link1.STL" />
           </geometry>
           <material name="color_link1" />
         </visual>
@@ -88,20 +91,20 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://chessaton_description/meshes/chessaton_link1.STL" />
+            <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link1.STL" />
           </geometry>
         </collision>
 
         <inertial>
-          <origin xyz="0.012256 -0.0045169 0.011915" rpy="0 0 0" />
-          <mass value="0.047535" />
-          <inertia
-            ixx="8.1555E-06"
-            ixy="-8.4986E-08"
-            ixz="1.6429E-09"
-            iyy="1.0365E-05"
-            iyz="4.236E-07"
-            izz="1.4637E-05" />
+            <origin xyz="0.012256 -0.0045169 0.011915" rpy="0 0 0" />
+            <mass value="0.047535" />
+            <inertia
+              ixx="8.1555E-06"
+              ixy="-8.4986E-08"
+              ixz="1.6429E-09"
+              iyy="1.0365E-05"
+              iyz="4.236E-07"
+              izz="1.4637E-05" />
         </inertial>
     </link>
 
@@ -111,52 +114,52 @@
 		<child link="chessaton_link2" />
 		<axis xyz="0 -1 0" />
 		<dynamics damping="1.0" friction="1.0" />
-		<limit lower="${-pi/2}" upper="${pi/2}" effort="100" velocity="60" />
+		<limit lower="${-pi/2}" upper="${pi/2}" effort="0" velocity="5" />
 	</joint>
 
     <link name="chessaton_link2">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-              <mesh filename="package://chessaton_description/meshes/chessaton_link2.STL" />
+              <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link2.STL" />
             </geometry>
             <material name="color_link2" />
         </visual>
 
         <inertial>
-          <origin xyz="-3.53536644404073E-13 -0.0247721366408157 0.051" rpy="0 0 0" />
-          <mass value="0.045902162826317" />
-          <inertia
-            ixx="4.65002565093795E-05"
-            ixy="2.14870070379761E-19"
-            ixz="1.12006959666857E-14"
-            iyy="2.1142916326109E-05"
-            iyz="-2.60991681564389E-20"
-            izz="3.01847862586687E-05" />
+            <origin xyz="1.94289029309402E-16 -0.0247721366408157 0.0510000000000001" rpy="0 0 0" />
+            <mass value="0.045902162826317" />
+            <inertia
+              ixx="4.65002565093796E-05"
+              ixy="2.26509482575262E-19"
+              ixz="1.10875380838109E-14"
+              iyy="2.11429163261091E-05"
+              iyz="-2.47808875423641E-23"
+              izz="3.01847862586687E-05" />
         </inertial>
 
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <mesh filename="package://chessaton_description/meshes/chessaton_link2.STL" />
+            <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link2.STL" />
           </geometry>
         </collision>
     </link>
 
 	<joint name="chessaton_joint3" type="revolute">
-	  	<origin xyz="0 0 0.10200000000001" rpy="0 0 0" />
+	  	<origin xyz="0 0 0.102" rpy="0 0 0" />
 	  	<parent link="chessaton_link2" />
 	  	<child link="chessaton_link3" />
 	  	<axis xyz="0 -1 0" />
 	  	<dynamics damping="1.0" friction="1.0" />
-	  	<limit lower="${-pi/2}" upper="${pi/2}" effort="1" velocity="6" />
+	  	<limit lower="${-pi/2}" upper="${pi/2}" effort="0" velocity="6" />
 	</joint>
 
 	<link name="chessaton_link3">
 		<visual>
 		  <origin xyz="0 0 0" rpy="0 0 0" />
 		  <geometry>
-		    <mesh filename="package://chessaton_description/meshes/chessaton_link3.STL" />
+		    <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link3.STL" />
 		  </geometry>
 		  <material name="color_link3" />
 		</visual>
@@ -164,37 +167,37 @@
 		<collision>
 		  <origin xyz="0 0 0" rpy="0 0 0" />
 		  <geometry>
-		    <mesh filename="package://chessaton_description/meshes/chessaton_link3.STL" />
+		    <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link3.STL" />
 		  </geometry>
 		</collision>
 
 		<inertial>
-		  <origin xyz="0.030212 -0.026096 -0.0011497" rpy="0 0 0" />
-		  <mass value="0.076498" />
-		  <inertia
-		    ixx="2.3983E-05"
-		    ixy="7.4374E-08"
-		    ixz="-3.21E-07"
-		    iyy="2.2146E-05"
-		    iyz="4.236E-07"
-		    izz="3.9025E-05" />
-		</inertial>
+            <origin xyz="0.030212 -0.026096 -0.0011497" rpy="0 0 0" />
+            <mass value="0.076498" />
+            <inertia
+              ixx="2.3983E-05"
+              ixy="7.4374E-08"
+              ixz="-3.21E-07"
+              iyy="2.2146E-05"
+              iyz="4.236E-07"
+              izz="3.9025E-05" />
+        </inertial>
 	</link>
 
 	<joint name="chessaton_joint4" type="revolute">
-	    <origin xyz="0.0985044567554144 0.000417307954157516 0.00195777592325097" rpy="0 0 0" />
+	    <origin xyz="0.098504 0.00041731 0.0019578" rpy="0 0 0" />
 	    <parent link="chessaton_link3" />
 	    <child link="chessaton_link4" />
 	    <axis xyz="0 -1 0" />
 		<dynamics damping="1.0" friction="1.0" />
-	    <limit lower="${-pi/2}" upper="${pi/2}" effort="1" velocity="6" />
+	    <limit lower="${-pi/2}" upper="${pi/2}" effort="0" velocity="6" />
 	</joint>
 
 	<link name="chessaton_link4">
 		<visual>
 		  <origin xyz="0 0 0" rpy="0 0 0" />
 		  <geometry>
-		    <mesh filename="package://chessaton_description/meshes/chessaton_link4.STL" />
+		    <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link4.STL" />
 		  </geometry>
 		  <material name="color_link4" />
 		</visual>
@@ -202,25 +205,25 @@
 		<collision>
 		  <origin xyz="0 0 0" rpy="0 0 0" />
 		  <geometry>
-		    <mesh filename="package://chessaton_description/meshes/chessaton_link4.STL" />
+		    <mesh filename="file://$(find chessaton_description)/meshes/chessaton_link4.STL" />
 		  </geometry>
 		</collision>
 
-		<inertial>
-		  <origin xyz="0.0016488 -0.027436 -0.0097099" rpy="0 0 0" />
-		  <mass value="0.046643" />
-		  <inertia
-		    ixx="1.458E-05"
-		    ixy="-4.236E-07"
-		    ixz="-1.6429E-09"
-		    iyy="1.0335E-05"
-		    iyz="-8.4986E-08"
-		    izz="8.1259E-06" />
-		</inertial>
+        <inertial>
+            <origin xyz="0.0016488 -0.027436 -0.0097099" rpy="0 0 0" />
+            <mass value="0.046643" />
+            <inertia
+              ixx="1.458E-05"
+              ixy="-4.236E-07"
+              ixz="-1.6429E-09"
+              iyy="1.0335E-05"
+              iyz="-8.4986E-08"
+              izz="8.1259E-06" />
+        </inertial>
 	</link>
 
 	<joint name="gripper_joint" type="fixed">
-	  <origin xyz="0.0728422240767261 -0.0341939566220146 -0.00485465935539839" rpy="0 0 0" />
+	  <origin xyz="0.072842 -0.034194 -0.0048547" rpy="0 0 0" />
 	  <parent link="chessaton_link4" />
 	  <child link="chessaton_gripper" />
 	  <axis xyz="0 0 0" />
@@ -230,7 +233,7 @@
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-			  <mesh filename="package://chessaton_description/meshes/chessaton_gripper.STL" />
+			  <mesh filename="file://$(find chessaton_description)/meshes/chessaton_gripper.STL" />
 			</geometry>
 			<material name="color_gripper" />
 		</visual>
@@ -238,21 +241,21 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="package://chessaton_description/meshes/chessaton_gripper.STL" />
+				<mesh filename="file://$(find chessaton_description)/meshes/chessaton_gripper.STL" />
 			</geometry>
 		</collision>
 
-		<inertial>
-			<origin xyz="-0.027242 0.0063062 -0.003963" rpy="0 0 0" />
-			<mass value="0.07416" />
-			<inertia
-			  ixx="2.5968E-05"
-			  ixy="8.488E-08"
-			  ixz="-4.236E-07"
-			  iyy="1.3082E-05"
-			  iyz="-1.6429E-09"
-			  izz="2.6136E-05" />
-		</inertial>
+        <inertial>
+            <origin xyz="-0.027242 0.0063062 -0.003963" rpy="0 0 0" />
+            <mass value="0.07416" />
+            <inertia
+              ixx="2.5968E-05"
+              ixy="8.488E-08"
+              ixz="-4.236E-07"
+              iyy="1.3082E-05"
+              iyz="-1.6429E-09"
+              izz="2.6136E-05" />
+        </inertial>
 	</link>
 
 	<joint name="left_finger_joint" type="prismatic">
@@ -261,14 +264,14 @@
 		<child link="left_finger" />
 		<axis xyz="0 1 0" />
 		<dynamics damping="1.0" friction="1.0" />
-		<limit lower="0" upper="0.03" effort="1" velocity="6" />
+		<limit lower="0" upper="0.03" effort="100" velocity="0.2" />
 	</joint>
 
 	<link name="left_finger">
     	<visual>
     	  <origin xyz="0 0 0" rpy="0 0 0" />
     	  <geometry>
-    	    <mesh filename="package://chessaton_description/meshes/left_finger.STL" />
+    	    <mesh filename="file://$(find chessaton_description)/meshes/left_finger.STL" />
     	  </geometry>
     	  <material name="color_gripper_lfinger" />
     	</visual>
@@ -276,21 +279,24 @@
     	<collision>
     	  <origin xyz="0 0 0" rpy="0 0 0" />
     	  <geometry>
-    	    <mesh filename="package://chessaton_description/meshes/left_finger.STL" />
+    	    <mesh filename="file://$(find chessaton_description)/meshes/left_finger.STL" />
     	  </geometry>
     	</collision>
 
-    	<inertial>
-    	  <origin xyz="0.011393939393262 0.00863240266060371 -0.0049999999993352" rpy="0 0 0" />
-    	  <mass value="0.00880000000000001" />
-    	  <inertia
-    	    ixx="6.06464646464647E-07"
-    	    ixy="1.41414141414141E-07"
-    	    ixz="-7.44294350512605E-19"
-    	    iyy="9.03967676767678E-07"
-    	    iyz="4.43617317735603E-19"
-    	    izz="8.43765656565658E-07" />
-    	</inertial>
+        <inertial>
+            <origin
+              xyz="0.011394 0.0086324 -0.005"
+              rpy="0 0 0" />
+            <mass
+              value="0.0088" />
+            <inertia
+              ixx="6.0646E-07"
+              ixy="1.4141E-07"
+              ixz="2.4551E-21"
+              iyy="9.0397E-07"
+              iyz="-6.5992E-22"
+              izz="8.4377E-07" />
+        </inertial>
 	</link>
 
 	<joint name="right_finger_joint" type="prismatic">
@@ -299,34 +305,35 @@
 		<child link="right_finger" />
 		<axis xyz="0 1 0" />
 		<dynamics damping="1.0" friction="1.0" />
-		<limit lower="-0.03" upper="0" effort="1" velocity="6" />
+		<limit lower="-0.03" upper="0" effort="100" velocity="0.2" />
 	</joint>
 
 	<link name="right_finger">
-		<inertial>
-		  <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
-		  <mass value="0.0088" />
-		  <inertia
-		    ixx="6.0646E-07"
-		    ixy="-1.4141E-07"
-		    ixz="-7.4453E-19"
-		    iyy="9.0397E-07"
-		    iyz="-4.4355E-19"
-		    izz="8.4377E-07" />
-		</inertial>
 		<visual>
 		  <origin xyz="0 0 0" rpy="0 0 0" />
 		  <geometry>
-		    <mesh filename="package://chessaton_description/meshes/right_finger.STL" />
+		    <mesh filename="file://$(find chessaton_description)/meshes/right_finger.STL" />
 		  </geometry>
 		  <material name="color_gripper_rfinger" />
 		</visual>
+
 		<collision>
 		  <origin xyz="0 0 0" rpy="0 0 0" />
 		  <geometry>
-		    <mesh filename="package://chessaton_description/meshes/right_finger.STL" />
+		    <mesh filename="file://$(find chessaton_description)/meshes/right_finger.STL" />
 		  </geometry>
 		</collision>
+        <inertial>
+            <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
+            <mass value="0.0088" />
+            <inertia
+              ixx="6.0646E-07"
+              ixy="-1.4141E-07"
+              ixz="1.2142E-21"
+              iyy="9.0397E-07"
+              iyz="7.2151E-22"
+              izz="8.4377E-07" />
+        </inertial>
 	</link>
 
     <xacro:gz_ros2_control
