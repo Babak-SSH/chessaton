@@ -4,6 +4,7 @@
 from os import path
 from typing import List
 
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess, RegisterEventHandler
 from launch.conditions import IfCondition
@@ -36,12 +37,13 @@ def generate_launch_description() -> LaunchDescription:
     )
     world = LaunchConfiguration("world")
     model = LaunchConfiguration("model")
+    rviz_config = LaunchConfiguration("rviz_config")
     use_sim_time = LaunchConfiguration("use_sim_time")
     ign_verbosity = LaunchConfiguration("ign_verbosity")
     log_level = LaunchConfiguration("log_level")
 
     # URDF
-    _robot_description_xml = Command(
+    robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
@@ -68,7 +70,7 @@ def generate_launch_description() -> LaunchDescription:
             model,
         ]
     )
-    robot_description = {"robot_description": _robot_description_xml}
+    robot_description = {"robot_description": robot_description_content}
 
     # Launch Gazebo
     gazebo = IncludeLaunchDescription(
@@ -80,16 +82,17 @@ def generate_launch_description() -> LaunchDescription:
                     "gazebo.launch.py",
                 ]
             )
-        )
+        ),
+                launch_arguments={'world': world}.items(),
     )
 
     # robot state publisher
     node_robot_state_publisher=Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        output="screen",
+        output="log",
         arguments=["--ros-args", "--log-level", log_level],
-        parameters=[robot_description, {'use_sim_time': True}]
+        parameters=[robot_description, {'use_sim_time': use_sim_time}]
     )
     # spawning robot in gazebo
     spawn_entity=Node(
@@ -99,34 +102,65 @@ def generate_launch_description() -> LaunchDescription:
                    '-entity', 'chessaton'],
         output='screen')
 
-    nodes = [node_robot_state_publisher, spawn_entity]
-
-    load_joint_state_controller=Node(
+    joint_state_controller_spawner=Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
     )
-    load_joint_trajectory_controller=Node(
+
+    joint_trajectory_controller_spawner=Node(
         package="controller_manager",
         executable="spawner",
         arguments=["chessaton_arm_controller", "-c", "/controller_manager"],
     )
+
+    left_finger_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["chessaton_finger_left_controller", "-c", "/controller_manager"],
+    )
+
+    right_finger_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["chessaton_finger_right_controller", "-c", "/controller_manager"],
+    )
         
     return LaunchDescription(declared_arguments+[
+
+        gazebo, 
+        node_robot_state_publisher,
+        spawn_entity,
+
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,
-                on_exit=[load_joint_state_controller],
+                on_exit=[joint_state_controller_spawner],
             )
         ),
         RegisterEventHandler(
             event_handler=OnProcessExit(
-                target_action=load_joint_state_controller,
-                on_exit=[load_joint_trajectory_controller],
+                target_action=joint_state_controller_spawner,
+                on_exit=[joint_trajectory_controller_spawner],
             )
         ),
-        gazebo,
-    ]+nodes)
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action = joint_trajectory_controller_spawner,
+                on_exit = [
+                    left_finger_controller_spawner,
+                ]
+            )
+        ),
+        RegisterEventHandler(
+            OnProcessExit(
+                target_action = left_finger_controller_spawner,
+                on_exit = [
+                    right_finger_controller_spawner,
+                ]
+            )
+        ),
+    ])
 
 def generate_declared_arguments() -> List[DeclareLaunchArgument]:
     """
@@ -153,7 +187,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         ),
         DeclareLaunchArgument(
             "prefix",
-            default_value="",
+            default_value="chessaton_",
             description="Prefix for all robot entities. If modified, then joint names in the configuration of controllers must also be updated.",
         ),
         # ROS 2 control
@@ -175,7 +209,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # World and model for Ignition Gazebo
         DeclareLaunchArgument(
             "world",
-            default_value="",
+            default_value=path.join("worlds", "chessaton.world"),
             description="Name or filepath of world to load.",
         ),
         DeclareLaunchArgument(
