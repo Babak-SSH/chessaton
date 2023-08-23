@@ -1,0 +1,517 @@
+<sdf version='1.9'>
+  <model name='chessaton'>
+    <joint name='virtual_joint' type='fixed'>
+      <pose relative_to='__model__'>0 0 0 0 0 0</pose>
+      <parent>world</parent>
+      <child>chessaton_link0</child>
+    </joint>
+    <link name='chessaton_link0'>
+      <pose relative_to='virtual_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.00073528 0.0040282 0.031188 0 0 0</pose>
+        <mass>0.094841999999999996</mass>
+        <inertia>
+          <ixx>3.0463e-05</ixx>
+          <ixy>-6.3086999999999999e-09</ixy>
+          <ixz>4.2360000000000001e-07</ixz>
+          <iyy>4.8143000000000003e-05</iyy>
+          <iyz>-8.1925000000000001e-08</iyz>
+          <izz>5.1511000000000002e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='chessaton_link0_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link0.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chessaton_link0_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link0.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='chessaton_joint1' type='revolute'>
+      <pose relative_to='chessaton_link0'>0.00015368 0.01229 0.07704999999999999 0 0 0</pose>
+      <parent>chessaton_link0</parent>
+      <child>chessaton_link1</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-3.1415926535897931</lower>
+          <upper>3.1415926535897931</upper>
+          <effort>0</effort>
+          <velocity>5</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='chessaton_link1'>
+      <pose relative_to='chessaton_joint1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.012256 -0.0045169 0.011915 0 0 0</pose>
+        <mass>0.047535000000000001</mass>
+        <inertia>
+          <ixx>8.1555000000000001e-06</ixx>
+          <ixy>-8.4986000000000004e-08</ixy>
+          <ixz>1.6429e-09</ixz>
+          <iyy>1.0365e-05</iyy>
+          <iyz>4.2360000000000001e-07</iyz>
+          <izz>1.4637000000000001e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='chessaton_link1_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link1.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chessaton_link1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link1.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Blue</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.62255 0.62255 0.62255 1</diffuse>
+          <ambient>0.62255 0.62255 0.62255 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='chessaton_joint2' type='revolute'>
+      <pose relative_to='chessaton_link1'>0.022504 0.022833 0.013792 0 0 0</pose>
+      <parent>chessaton_link1</parent>
+      <child>chessaton_link2</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0</effort>
+          <velocity>5</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='chessaton_link2'>
+      <pose relative_to='chessaton_joint2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>1.94289029309402e-16 -0.0247721366408157 0.0510000000000001 0 0 0</pose>
+        <mass>0.045902162826316997</mass>
+        <inertia>
+          <ixx>4.6500256509379599e-05</ixx>
+          <ixy>2.2650948257526202e-19</ixy>
+          <ixz>1.10875380838109e-14</ixz>
+          <iyy>2.1142916326109098e-05</iyy>
+          <iyz>-2.4780887542364101e-23</iyz>
+          <izz>3.0184786258668701e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='chessaton_link2_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link2.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chessaton_link2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link2.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.941176 0.941176 0.941176 1</diffuse>
+          <ambient>0.941176 0.941176 0.941176 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='chessaton_joint3' type='revolute'>
+      <pose relative_to='chessaton_link2'>0 0 0.102 0 0 0</pose>
+      <parent>chessaton_link2</parent>
+      <child>chessaton_link3</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0</effort>
+          <velocity>6</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='chessaton_link3'>
+      <pose relative_to='chessaton_joint3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.030212 -0.026096 -0.0011497 0 0 0</pose>
+        <mass>0.076497999999999997</mass>
+        <inertia>
+          <ixx>2.3983000000000001e-05</ixx>
+          <ixy>7.4374000000000001e-08</ixy>
+          <ixz>-3.2099999999999998e-07</ixz>
+          <iyy>2.2146000000000001e-05</iyy>
+          <iyz>4.2360000000000001e-07</iyz>
+          <izz>3.9025e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='chessaton_link3_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link3.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chessaton_link3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link3.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.941176 0.941176 0.941176 1</diffuse>
+          <ambient>0.941176 0.941176 0.941176 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='chessaton_joint4' type='revolute'>
+      <pose relative_to='chessaton_link3'>0.09850399999999999 0.00041731 0.0019578 0 0 0</pose>
+      <parent>chessaton_link3</parent>
+      <child>chessaton_link4</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0</effort>
+          <velocity>6</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='chessaton_link4'>
+      <pose relative_to='chessaton_joint4'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.0286300917891112 -0.02771335642326764 -0.009162185522710531 0 0 0</pose>
+        <mass>0.12080299999999999</mass>
+        <inertia>
+          <ixx>4.0576637891933041e-05</ixx>
+          <ixy>2.298650559210205e-07</ixy>
+          <ixz>-1.54806624416279e-06</ixz>
+          <iyy>7.8751868129650258e-05</iyy>
+          <iyz>-7.508674445264648e-08</iyz>
+          <izz>8.9579819872050978e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='chessaton_link4_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link4.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='chessaton_link4_fixed_joint_lump__chessaton_gripper_collision_1'>
+        <pose>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_gripper.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='chessaton_link4_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_link4.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.941175 0.941175 0.941175 1</diffuse>
+          <ambient>0.941175 0.941175 0.941175 1</ambient>
+        </material>
+      </visual>
+      <visual name='chessaton_link4_fixed_joint_lump__chessaton_gripper_visual_1'>
+        <pose>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/chessaton_gripper.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.62255 0.62255 0.62255 1</diffuse>
+          <ambient>0.62255 0.62255 0.62255 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='left_finger_joint' type='prismatic'>
+      <pose relative_to='chessaton_link4'>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+      <parent>chessaton_link4</parent>
+      <child>left_finger</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0.029999999999999999</upper>
+          <effort>100</effort>
+          <velocity>0.20000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_finger'>
+      <pose relative_to='left_finger_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.011394 0.0086324 -0.005 0 0 0</pose>
+        <mass>0.0088000000000000005</mass>
+        <inertia>
+          <ixx>6.0645999999999999e-07</ixx>
+          <ixy>1.4140999999999999e-07</ixy>
+          <ixz>2.4551e-21</ixz>
+          <iyy>9.0396999999999996e-07</iyy>
+          <iyz>-6.5991999999999996e-22</iyz>
+          <izz>8.4376999999999999e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_finger_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/left_finger.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='left_finger_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/left_finger.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.990196 1 1 1</diffuse>
+          <ambient>0.990196 1 1 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='right_finger_joint' type='prismatic'>
+      <pose relative_to='chessaton_link4'>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+      <parent>chessaton_link4</parent>
+      <child>right_finger</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.029999999999999999</lower>
+          <upper>0</upper>
+          <effort>100</effort>
+          <velocity>0.20000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_finger'>
+      <pose relative_to='right_finger_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.011394 -0.0086324 -0.005 0 0 0</pose>
+        <mass>0.0088000000000000005</mass>
+        <inertia>
+          <ixx>6.0645999999999999e-07</ixx>
+          <ixy>-1.4140999999999999e-07</ixy>
+          <ixz>1.2141999999999999e-21</ixz>
+          <iyy>9.0396999999999996e-07</iyy>
+          <iyz>7.2150999999999998e-22</iyz>
+          <izz>8.4376999999999999e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_finger_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/right_finger.STL</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='right_finger_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ros/workspace/install/chessaton_description/share/chessaton_description/meshes/right_finger.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0.9902 1 1 1</diffuse>
+          <ambient>0.9902 1 1 1</ambient>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <static>false</static>
+    <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
+      <parameters>/home/ros/workspace/install/chessaton_description/share/chessaton_description/config/controllers_position.yaml</parameters>
+    </plugin>
+  </model>
+</sdf>
