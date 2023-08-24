@@ -10,31 +10,31 @@ default_acceleration_scaling_factor: 1.0
 joint_limits:
   chessaton_joint1:
     has_velocity_limits: true
-    max_velocity: 60
+    max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
   chessaton_joint2:
     has_velocity_limits: true
-    max_velocity: 60
+    max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
   chessaton_joint3:
     has_velocity_limits: true
-    max_velocity: 60
+    max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
   chessaton_joint4:
     has_velocity_limits: true
-    max_velocity: 60
+    max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
   left_finger_joint:
     has_velocity_limits: true
-    max_velocity: 60
+    max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
   right_finger_joint:
     has_velocity_limits: true
-    max_velocity: 60
+    max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
