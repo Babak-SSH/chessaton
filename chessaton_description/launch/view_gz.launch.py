@@ -206,7 +206,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             default_value="position",
             description="The output control command interface provided by ros2_control ('position', 'velocity', 'effort' or certain combinations 'position,velocity').",
         ),
-        # World and model for Ignition Gazebo
+        # World and model for Gazebo
         DeclareLaunchArgument(
             "world",
             default_value=path.join("worlds", "chessaton.world"),
