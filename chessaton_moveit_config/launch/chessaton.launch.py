@@ -43,6 +43,8 @@ def generate_launch_description():
     ros2_control_command_interface = LaunchConfiguration(
         "ros2_control_command_interface"
     )
+    world = LaunchConfiguration("world")
+    model = LaunchConfiguration("model")
     gazebo_preserve_fixed_joint = LaunchConfiguration("gazebo_preserve_fixed_joint")
     enable_servo = LaunchConfiguration("enable_servo")
     enable_rviz = LaunchConfiguration("enable_rviz")
@@ -51,7 +53,7 @@ def generate_launch_description():
     log_level = LaunchConfiguration("log_level")
 
     # URDF
-    _robot_description_xml = Command(
+    robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
@@ -78,10 +80,10 @@ def generate_launch_description():
             gazebo_preserve_fixed_joint,
         ]
     )
-    robot_description = {"robot_description": _robot_description_xml}
+    robot_description = {"robot_description": robot_description_content}
 
     # SRDF
-    _robot_description_semantic_xml = Command(
+    robot_description_semantic_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
@@ -101,7 +103,7 @@ def generate_launch_description():
         ]
     )
     robot_description_semantic = {
-        "robot_description_semantic": _robot_description_semantic_xml
+        "robot_description_semantic": robot_description_semantic_content
     }
 
     # Kinematics
@@ -136,7 +138,8 @@ def generate_launch_description():
             # TODO: Re-enable `default_planner_request_adapters/AddRuckigTrajectorySmoothing` once its issues are resolved
             "request_adapters": "default_planner_request_adapters/AddTimeOptimalParameterization default_planner_request_adapters/ResolveConstraintFrames default_planner_request_adapters/FixWorkspaceBounds default_planner_request_adapters/FixStartStateBounds default_planner_request_adapters/FixStartStateCollision default_planner_request_adapters/FixStartStatePathConstraints",
             # TODO: Reduce start_state_max_bounds_error once spawning with specific joint configuration is enabled
-            "start_state_max_bounds_error": 0.31416,
+            # "start_state_max_bounds_error": 0.31416,
+            "start_state_max_bounds_error": 0.1,
         },
     }
     _ompl_yaml = load_yaml(
@@ -154,7 +157,7 @@ def generate_launch_description():
 
     # MoveIt controller manager
     moveit_controller_manager_yaml = load_yaml(
-        moveit_config_package, path.join("config", "moveit_controller_manager.yaml")
+        moveit_config_package, path.join("config", "chessaton_controllers.yaml")
     )
     moveit_controller_manager = {
         "moveit_controller_manager": "moveit_simple_controller_manager/MoveItSimpleControllerManager",
@@ -179,7 +182,7 @@ def generate_launch_description():
     )
     controller_parameters = PathJoinSubstitution(
         [
-            FindPackageShare(moveit_config_package),
+            FindPackageShare(description_package),
             "config",
             LaunchConfiguration("__controller_parameters_basename"),
         ]
@@ -205,6 +208,7 @@ def generate_launch_description():
 
     processes = [xacro2sdf]
 
+    # Launch Gazebo
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
@@ -214,7 +218,8 @@ def generate_launch_description():
                     "gazebo.launch.py",
                 ]
             )
-        )
+        ),
+                launch_arguments={'world': world}.items(),
     )
 
     spawn_entity=Node(
@@ -229,7 +234,7 @@ def generate_launch_description():
         executable="robot_state_publisher",
         output="screen",
         arguments=["--ros-args", "--log-level", log_level],
-        parameters=[robot_description, {'use_sim_time': True}]
+        parameters=[robot_description, {'use_sim_time': use_sim_time}]
     )
 
     joint_state_broadcaster_spawner=Node(
@@ -242,6 +247,18 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["chessaton_arm_controller", "-c", "/controller_manager"],
+    )
+
+    left_finger_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["chessaton_finger_left_controller", "-c", "/controller_manager"],
+    )
+
+    right_finger_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["chessaton_finger_right_controller", "-c", "/controller_manager"],
     )
 
     # ros2_control_node (only for fake controller)
@@ -274,7 +291,7 @@ def generate_launch_description():
     run_move_group_node=Node(
         package="moveit_ros_move_group",
         executable="move_group",
-        output="log",
+        output="screen",
         arguments=["--ros-args", "--log-level", log_level],
         parameters=[
             robot_description,
@@ -334,9 +351,10 @@ def generate_launch_description():
 
     return LaunchDescription(declared_arguments+
         [
+            # Gazebo nodes:
             gazebo,
             spawn_entity,
-
+            # ROS2_control:
             robot_state_publisher,
 
             # ROS2 Controllers:
@@ -359,6 +377,22 @@ def generate_launch_description():
             RegisterEventHandler(
                 OnProcessExit(
                     target_action = joint_trajectory_controller_spawner,
+                    on_exit = [
+                        left_finger_controller_spawner,
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnProcessExit(
+                    target_action = left_finger_controller_spawner,
+                    on_exit = [
+                        right_finger_controller_spawner,
+                    ]
+                )
+            ),
+            RegisterEventHandler(
+                OnProcessExit(
+                    target_action = right_finger_controller_spawner,
                     on_exit = [
 
                         # MoveIt!2:
@@ -443,6 +477,16 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             description="The output control command interface provided by ros2_control ('position', 'velocity', 'effort' or certain combinations 'position,velocity').",
         ),
         # Gazebo
+        DeclareLaunchArgument(
+            "world",
+            default_value=path.join(get_package_share_directory('chessaton_description'), "worlds", "chessaton.world"),
+            description="Name or filepath of world to load.",
+        ),
+        DeclareLaunchArgument(
+            "model",
+            default_value="chessaton",
+            description="Name or filepath of model to load.",
+        ),
         DeclareLaunchArgument(
             "gazebo_preserve_fixed_joint",
             default_value="false",
