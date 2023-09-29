@@ -36,6 +36,13 @@
         <material>Gazebo/White</material>
     </gazebo>
 
+    <gazebo reference="virtual_roll_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="virtual_yaw_link">
+        <material>Gazebo/White</material>
+    </gazebo>
     <!--       -->
     <!-- Macro -->
     <!--       -->

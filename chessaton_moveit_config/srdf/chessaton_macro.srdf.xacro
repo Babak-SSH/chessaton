@@ -16,6 +16,8 @@
             <joint name="chessaton_joint2"/>
             <joint name="chessaton_joint3"/>
             <joint name="chessaton_joint4"/>
+            <joint name="virtual_roll_joint"/>
+            <joint name="virtual_yaw_joint"/>
         </group>
         <group name="chessaton_hand">
             <link name="chessaton_gripper"/>
@@ -28,6 +30,8 @@
             <joint name="chessaton_joint2" value="0"/>
             <joint name="chessaton_joint3" value="0"/>
             <joint name="chessaton_joint4" value="0"/>
+            <joint name="virtual_roll_joint" value="0"/>
+            <joint name="virtual_yaw_joint" value="0"/>
         </group_state>
         <group_state name="hand_close" group="chessaton_hand">
             <joint name="left_finger_joint" value="0"/>
@@ -41,19 +45,34 @@
         <end_effector name="chessaton_hand" parent_link="chessaton_link4" group="chessaton_hand" parent_group="chessaton_arm"/>
         <!--DISABLE COLLISIONS- By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
         <disable_collisions link1="chessaton_gripper" link2="chessaton_link3" reason="Never"/>
-        <disable_collisions link1="chessaton_gripper" link2="chessaton_link4" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_gripper" link2="left_finger" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_gripper" link2="right_finger" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_link0" link2="chessaton_link1" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_link0" link2="chessaton_link2" reason="Never"/>
-        <disable_collisions link1="chessaton_link1" link2="chessaton_link2" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_link1" link2="chessaton_link3" reason="Never"/>
-        <disable_collisions link1="chessaton_link2" link2="chessaton_link3" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_link3" link2="chessaton_link4" reason="Adjacent"/>
-        <disable_collisions link1="chessaton_link3" link2="left_finger" reason="Never"/>
-        <disable_collisions link1="chessaton_link3" link2="right_finger" reason="Never"/>
-        <disable_collisions link1="chessaton_link4" link2="left_finger" reason="Never"/>
-        <disable_collisions link1="chessaton_link4" link2="right_finger" reason="Never"/>
-        <disable_collisions link1="left_finger" link2="right_finger" reason="Never"/> 
+  <disable_collisions link1="chessaton_gripper" link2="chessaton_link4" reason="Adjacent"/>
+  <disable_collisions link1="chessaton_gripper" link2="left_finger" reason="Adjacent"/>
+  <disable_collisions link1="chessaton_gripper" link2="right_finger" reason="Adjacent"/>
+  <disable_collisions link1="chessaton_link0" link2="chessaton_link1" reason="Adjacent"/>
+  <disable_collisions link1="chessaton_link0" link2="chessaton_link2" reason="Never"/>
+  <disable_collisions link1="chessaton_link1" link2="chessaton_link2" reason="Adjacent"/>
+  <disable_collisions link1="chessaton_link1" link2="chessaton_link3" reason="Never"/>
+  <disable_collisions link1="chessaton_link2" link2="chessaton_link3" reason="Adjacent"/>
+    <disable_collisions link1="chessaton_link2" link2="virtual_roll_link" reason="Never"/>
+    <disable_collisions link1="chessaton_link2" link2="virtual_yaw_link" reason="Never"/>
+  <disable_collisions link1="chessaton_link3" link2="chessaton_link4" reason="Adjacent"/>
+  <disable_collisions link1="chessaton_link3" link2="left_finger" reason="Never"/>
+  <disable_collisions link1="chessaton_link3" link2="right_finger" reason="Never"/>
+  <disable_collisions link1="chessaton_link4" link2="left_finger" reason="Never"/>
+  <disable_collisions link1="chessaton_link4" link2="right_finger" reason="Never"/>
+  <disable_collisions link1="left_finger" link2="right_finger" reason="Never"/>
+    <disable_collisions link1="chessaton_link3" link2="virtual_roll_link" reason="Never"/>
+    <disable_collisions link1="chessaton_link3" link2="virtual_yaw_link" reason="Never"/>
+    <disable_collisions link1="chessaton_link4" link2="virtual_roll_link" reason="Adjacent"/>
+    <disable_collisions link1="chessaton_link4" link2="virtual_yaw_link" reason="Never"/>
+    <disable_collisions link1="virtual_roll_link" link2="virtual_yaw_link" reason="Adjacent"/>
+    <disable_collisions link1="chessaton_link1" link2="virtual_roll_link" reason="Never"/>
+    <disable_collisions link1="chessaton_link1" link2="virtual_yaw_link" reason="Never"/>
+    <disable_collisions link1="chessaton_gripper" link2="virtual_roll_link" reason="Default"/>
+    <disable_collisions link1="chessaton_gripper" link2="virtual_yaw_link" reason="Adjacent"/>
+    <disable_collisions link1="right_finger" link2="virtual_roll_link" reason="Never"/>
+    <disable_collisions link1="right_finger" link2="virtual_yaw_link" reason="Never"/>
+    <disable_collisions link1="left_finger" link2="virtual_roll_link" reason="Never"/>
+    <disable_collisions link1="left_finger" link2="virtual_yaw_link" reason="Never"/> 
     </xacro:macro>
 </robot>

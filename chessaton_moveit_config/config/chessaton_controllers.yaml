@@ -16,6 +16,8 @@ chessaton_arm_controller:
     - chessaton_joint2
     - chessaton_joint3
     - chessaton_joint4
+    - virtual_roll_joint
+    - virtual_yaw_joint
 
 chessaton_finger_left_controller:
   action_ns: gripper_cmd

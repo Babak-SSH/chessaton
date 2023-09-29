@@ -67,6 +67,12 @@
   <gazebo reference="right_finger">
     <material>Gazebo/White</material>
   </gazebo>
+  <gazebo reference="virtual_roll_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+  <gazebo reference="virtual_yaw_link">
+    <material>Gazebo/White</material>
+  </gazebo>
   <link name="world"/>
   <joint name="virtual_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -205,9 +211,61 @@
       <inertia ixx="1.458E-05" ixy="-4.236E-07" ixz="-1.6429E-09" iyy="1.0335E-05" iyz="-8.4986E-08" izz="8.1259E-06"/>
     </inertial>
   </link>
-  <joint name="gripper_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.072842 -0.034194 -0.0048547"/>
+  <!-- Virtual roll joint -->
+  <joint name="virtual_roll_joint" type="revolute">
+    <limit effort="54.0" lower="-3.1415" upper="3.1415" velocity="3.14"/>
     <parent link="chessaton_link4"/>
+    <child link="virtual_roll_link"/>
+    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz="0.072842 -0.034194 -0.0048547"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <!-- Virtual roll link -->
+  <link name="virtual_roll_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="1.0e-03"/>
+      <inertia ixx="1.0e-03" ixy="0.0" ixz="0.0" iyy="1.0e-03" iyz="0.0" izz="1.0e-03"/>
+    </inertial>
+  </link>
+  <!-- Virtual yaw joint -->
+  <joint name="virtual_yaw_joint" type="revolute">
+    <limit effort="54.0" lower="-3.1415" upper="3.1415" velocity="3.14"/>
+    <parent link="virtual_roll_link"/>
+    <child link="virtual_yaw_link"/>
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+  <!-- Virtual yaw link -->
+  <link name="virtual_yaw_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="1.0e-03"/>
+      <inertia ixx="1.0e-03" ixy="0.0" ixz="0.0" iyy="1.0e-03" iyz="0.0" izz="1.0e-03"/>
+    </inertial>
+  </link>
+  <!-- <joint name="gripper_joint" type="fixed"> -->
+  <!-- <origin xyz="0.072842 -0.034194 -0.0048547" rpy="0 0 0" /> -->
+  <!-- <parent link="virtual_yaw_link" /> -->
+  <!-- <child link="chessaton_gripper" /> -->
+  <!-- <axis xyz="0 0 0" /> -->
+  <!-- </joint> -->
+  <joint name="gripper_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <parent link="virtual_yaw_link"/>
     <child link="chessaton_gripper"/>
     <axis xyz="0 0 0"/>
   </joint>

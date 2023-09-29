@@ -28,6 +28,15 @@ joint_limits:
     max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
+  virtual_roll_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14
+    has_acceleration_limits: false
+    max_acceleration: 0
+  virtual_yaw_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14
+    has_acceleration_limits: false
   left_finger_joint:
     has_velocity_limits: true
     max_velocity: 60.0
