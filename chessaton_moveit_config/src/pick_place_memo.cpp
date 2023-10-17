@@ -168,7 +168,7 @@ mtc::Task MTCTaskNode::createTask() {
             stage->properties().set("marker_ns", "grasp_pose");
             stage->setPreGraspPose("hand_open");
             stage->setObject("object");
-            stage->setAngleDelta(M_PI / 12);
+            stage->setAngleDelta(M_PI / 24);
             stage->setMonitoredStage(current_state_ptr);  // Hook into current state
 
             Eigen::Isometry3d grasp_frame_transform;
@@ -177,7 +177,7 @@ mtc::Task MTCTaskNode::createTask() {
                                   Eigen::AngleAxisd(M_PI , Eigen::Vector3d::UnitZ());
             grasp_frame_transform.linear() = q.matrix();
             // grasp_frame_transform.translation().z() = -0.019;
-            grasp_frame_transform.translation().x() = 0.07;
+            grasp_frame_transform.translation().x() = 0.05;
             // grasp_frame_transform.translation().y() = 0.02;
 
             // Compute IK
