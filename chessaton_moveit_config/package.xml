@@ -30,6 +30,7 @@
        We don't include them by default to prevent installing gazebo and all its dependencies. -->
   <!-- <exec_depend>joint_trajectory_controller</exec_depend> -->
   <!-- <exec_depend>gazebo_ros_control</exec_depend> -->
+  <exec_depend>chessaton_chessaton_arm_ikfast_plugin</exec_depend>
   <exec_depend>chessaton_description</exec_depend>
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>moveit_configs_utils</exec_depend>

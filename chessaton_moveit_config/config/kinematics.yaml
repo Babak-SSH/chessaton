@@ -1,5 +1,6 @@
 chessaton_arm:
-  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  # kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver: chessaton_chessaton_arm/IKFastKinematicsPlugin
   # kinematics_solver: cached_ik_kinematics_plugin/CachedKDLKinematicsPlugin
   # kinematics_solver: lma_kinematics_plugin/LMAKinematicsPlugin
   kinematics_solver_search_resolution: 0.0025
