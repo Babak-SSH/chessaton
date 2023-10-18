@@ -10,10 +10,6 @@
 
   <license>BSD</license>
 
-  <url type="website">http://moveit.ros.org/</url>
-  <url type="bugtracker">https://github.com/ros-planning/moveit2/issues</url>
-  <url type="repository">https://github.com/ros-planning/moveit2</url>
-
   <author email="babak.sefidgar@gmail.com">Babak-SSH</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
