@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<library path="chessaton_chessaton_arm_moveit_ikfast_plugin">
+  <class name="chessaton_chessaton_arm/IKFastKinematicsPlugin" type="chessaton_chessaton_arm::IKFastKinematicsPlugin" base_class_type="kinematics::KinematicsBase">
+    <description>IKFast61 plugin for closed-form kinematics of chessaton chessaton_arm</description>
+  </class>
+</library>
