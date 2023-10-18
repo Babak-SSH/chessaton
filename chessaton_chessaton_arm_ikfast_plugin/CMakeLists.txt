@@ -26,6 +26,7 @@ ament_target_dependencies(${IKFAST_LIBRARY_NAME}
   tf2_kdl
   orocos_kdl
   tf2_eigen
+  LAPACK
 )
 # suppress warnings about unused variables in OpenRave's solver code
 target_compile_options(${IKFAST_LIBRARY_NAME} PRIVATE -Wno-unused-variable -Wno-unused-parameter)
@@ -38,10 +39,12 @@ install(TARGETS ${IKFAST_LIBRARY_NAME}
 
 pluginlib_export_plugin_description_file(moveit_core chessaton_chessaton_arm_moveit_ikfast_plugin_description.xml)
 
+ament_export_libraries(${IKFAST_LIBRARY_NAME})
 ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
 ament_export_dependencies(moveit_core)
 ament_export_dependencies(pluginlib)
 ament_export_dependencies(rclcpp)
 ament_export_dependencies(tf2_kdl)
 ament_export_dependencies(tf2_eigen)
+ament_export_dependencies(generate_parameter_library)
 ament_package()

@@ -1,3 +1,4 @@
+# needs change won't work in ros2
 search_mode=OPTIMIZE_MAX_JOINT
 srdf_filename=chessaton.srdf
 robot_name_in_srdf=chessaton
