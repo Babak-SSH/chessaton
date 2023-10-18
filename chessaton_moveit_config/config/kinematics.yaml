@@ -1,5 +1,5 @@
 chessaton_arm:
-  position_only_ik: true
+  # position_only_ik: true
   # kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
   kinematics_solver: chessaton_chessaton_arm/IKFastKinematicsPlugin
   # kinematics_solver: cached_ik_kinematics_plugin/CachedKDLKinematicsPlugin

@@ -167,7 +167,7 @@ def generate_launch_description():
     # Trajectory execution
     trajectory_execution = {
         "allow_trajectory_execution": True,
-        "moveit_manage_controllers": False,
+        "moveit_manage_controllers": True,
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
         "trajectory_execution.allowed_goal_duration_margin": 0.5,
         "trajectory_execution.allowed_start_tolerance": 0.01,
@@ -176,7 +176,7 @@ def generate_launch_description():
     # MTC Demo node
     pick_place_demo = Node(
         package="chessaton_moveit_config",
-        executable="pick_place_memo",
+        executable="movep",
         output="screen",
         parameters=[
             robot_description,
@@ -184,6 +184,7 @@ def generate_launch_description():
             robot_description_kinematics,
             planning_pipeline,
             joint_limits,
+            {'use_sim_time': use_sim_time},
         ],
     )
 
