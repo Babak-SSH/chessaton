@@ -153,6 +153,8 @@ def generate_launch_description():
         "publish_geometry_updates": True,
         "publish_state_updates": True,
         "publish_transforms_updates": True,
+        "publish_robot_description": True,
+        "publish_robot_description_semantic": True, 
     }
 
     # MoveIt controller manager
@@ -167,7 +169,7 @@ def generate_launch_description():
     # Trajectory execution
     trajectory_execution = {
         "allow_trajectory_execution": True,
-        "moveit_manage_controllers": False,
+        "moveit_manage_controllers": True,
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
         "trajectory_execution.allowed_goal_duration_margin": 0.5,
         "trajectory_execution.allowed_start_tolerance": 0.01,
