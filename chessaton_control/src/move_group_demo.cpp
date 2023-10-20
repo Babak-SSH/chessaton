@@ -1,44 +1,45 @@
 #include <memory>
 
 #include <rclcpp/rclcpp.hpp>
+
 #include <moveit/move_group_interface/move_group_interface.h>
+#include <moveit/planning_scene_interface/planning_scene_interface.h>
+
 #include <moveit_visual_tools/moveit_visual_tools.h>
 
 int main(int argc, char * argv[]) {
     // Initialize ROS and create the Node
     rclcpp::init(argc, argv);
     auto const node = std::make_shared<rclcpp::Node>(
-      "hello_moveit",
+      "move_group_demo",
       rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true)
     );
 
-    // Create a ROS logger
-    auto const logger = rclcpp::get_logger("hello_moveit");
+    // ROS logger
+    auto const logger = rclcpp::get_logger("move_group_demo");
 //   node->set_parameter(rclcpp::Parameter("use_sim_time", true));
 
- // We spin up a SingleThreadedExecutor for the current state monitor to get information
-  // about the robot's state.
-  rclcpp::executors::SingleThreadedExecutor executor;
-  executor.add_node(node);
-  std::thread([&executor]() { executor.spin(); }).detach();
+    // We spin up a SingleThreadedExecutor for the current state monitor to get information
+    // about the robot's state.
+    rclcpp::executors::SingleThreadedExecutor executor;
+    executor.add_node(node);
+    std::thread([&executor]() { executor.spin(); }).detach();
 
-    // Next step goes here
-    // Create the MoveIt MoveGroup Interface
+    // set planning group (joint model group)
+    static const std::string PLANNING_GROUP = "chessaton_arm";
+
+    // MoveIt MoveGroup Interface
     using moveit::planning_interface::MoveGroupInterface;
-    auto move_group_interface = MoveGroupInterface(node, "chessaton_arm");
+    auto move_group_interface = MoveGroupInterface(node, PLANNING_GROUP);
 
-  // Raw pointers are frequently used to refer to the planning group for improved performance.
+    // MoveIt planning scene interface
+    moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+
+    // Raw pointers are frequently used to refer to the planning group for improved performance.
     const moveit::core::JointModelGroup* joint_model_group =
-      move_group_interface.getCurrentState()->getJointModelGroup("chessaton_arm");
+      move_group_interface.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
 
-    geometry_msgs::msg::PoseStamped myPose = move_group_interface.getCurrentPose(); 
-
-    RCLCPP_INFO(logger, "%f %f %f", myPose.pose.position.x, myPose.pose.position.y, myPose.pose.position.z);
-    moveit::core::RobotStatePtr current_state = move_group_interface.getCurrentState();
-    std::vector<double> joint_group_positions;
-    current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
     // Visualization
-    // ^^^^^^^^^^^^^
     namespace rvt = rviz_visual_tools;
     moveit_visual_tools::MoveItVisualTools visual_tools(node, "chessaton_link0", "testp",
                                                         move_group_interface.getRobotModel());
@@ -57,21 +58,23 @@ int main(int argc, char * argv[]) {
     // Batch publishing is used to reduce the number of messages being sent to RViz for large visualizations
     visual_tools.trigger();
 
- // Getting Basic Information
-  // ^^^^^^^^^^^^^^^^^^^^^^^^^
-  //
-  // We can print the name of the reference frame for this robot.
-  RCLCPP_INFO(logger, "Planning frame: %s", move_group_interface.getPlanningFrame().c_str());
-
-  // We can also print the name of the end-effector link for this group.
-  RCLCPP_INFO(logger, "End effector link: %s", move_group_interface.getEndEffectorLink().c_str());
-
-  // We can get a list of all the groups in the robot:
-  RCLCPP_INFO(logger, "Available Planning Groups:");
-  std::copy(move_group_interface.getJointModelGroupNames().begin(), move_group_interface.getJointModelGroupNames().end(),
+    // Getting Basic Information
+    RCLCPP_INFO(logger, "Planning frame: %s", move_group_interface.getPlanningFrame().c_str());
+    RCLCPP_INFO(logger, "End effector link: %s", move_group_interface.getEndEffectorLink().c_str());
+    RCLCPP_INFO(logger, "Available Planning Groups:");
+    std::copy(move_group_interface.getJointModelGroupNames().begin(), move_group_interface.getJointModelGroupNames().end(),
             std::ostream_iterator<std::string>(std::cout, ", "));
 
+    geometry_msgs::msg::PoseStamped myPose = move_group_interface.getCurrentPose(); 
+
+    RCLCPP_INFO(logger, "%f %f %f", myPose.pose.position.x, myPose.pose.position.y, myPose.pose.position.z);
+    moveit::core::RobotStatePtr current_state = move_group_interface.getCurrentState();
+    std::vector<double> joint_group_positions;
+    current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
+
     move_group_interface.setPlanningTime(60);
+
+    // Planning to a Pose goal
     // Set a target Pose
     // auto const target_pose = []{
       geometry_msgs::msg::Pose msg;
