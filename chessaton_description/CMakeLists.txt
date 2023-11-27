@@ -27,7 +27,7 @@ install(PROGRAMS
     DESTINATION lib/${PROJECT_NAME}
 )
 
-install(DIRECTORY meshes launch chessaton urdf rviz config
+install(DIRECTORY meshes launch chessaton urdf rviz config world
   DESTINATION share/${PROJECT_NAME}
 )
 

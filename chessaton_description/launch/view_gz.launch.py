@@ -86,6 +86,11 @@ def generate_launch_description() -> LaunchDescription:
                 launch_arguments={'world': world}.items(),
     )
 
+    # gazebo = ExecuteProcess(
+    #         cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', world],
+    #         output='screen'
+    #     )
+
     # robot state publisher
     node_robot_state_publisher=Node(
         package="robot_state_publisher",
@@ -209,7 +214,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # World and model for Gazebo
         DeclareLaunchArgument(
             "world",
-            default_value=path.join("worlds", "chessaton.world"),
+            default_value=path.join("world", "chessaton.world"),
             description="Name or filepath of world to load.",
         ),
         DeclareLaunchArgument(
