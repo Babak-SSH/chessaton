@@ -87,7 +87,7 @@ endif()
 # )
 
 # Install directories
-install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch world DESTINATION share/${PROJECT_NAME})
 
 # Setup the project
 ament_package()
