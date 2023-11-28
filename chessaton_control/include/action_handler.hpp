@@ -3,9 +3,8 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include <moveit/move_group_interface/move_group_interface.h>
-// #include <moveit/planning_scene_interface/planning_scene_interface.h>
-
-// #include <moveit_visual_tools/moveit_visual_tools.h>
+#include <moveit/planning_scene_interface/planning_scene_interface.h>
+#include <moveit_visual_tools/moveit_visual_tools.h>
 
 
 namespace Chessaton {
@@ -20,11 +19,15 @@ class ActionHandler {
         rclcpp::Node::SharedPtr node;
         moveit::planning_interface::MoveGroupInterface* move_group_interface_arm;
         moveit::planning_interface::MoveGroupInterface* move_group_interface_hand;
+
     public:
         std::string PLANNING_GROUP_ARM = "chessaton_arm";
         std::string PLANNING_GROUP_HAND = "chessaton_hand";
+
         ActionHandler(rclcpp::Node::SharedPtr);
+        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan, const moveit::core::JointModelGroup*, const moveit::core::LinkModel*, Position);
         bool move_to(Position);
 };
 
+extern rclcpp::Logger logger;  // ROS logger
 }
