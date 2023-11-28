@@ -5,36 +5,74 @@
     <!-- Instead, we need to add gazebo tags for our links that refer to Gazebo materials -->
 
     <gazebo reference="chessaton_link0">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
         <material>Gazebo/Green</material>
     </gazebo>
 
     <gazebo reference="chessaton_link1">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
         <material>Gazebo/Blue</material>
     </gazebo>
 
     <gazebo reference="chessaton_link2">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
         <material>Gazebo/Orange</material>
     </gazebo>
 
     <gazebo reference="chessaton_link3">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
         <material>Gazebo/Red</material>
     </gazebo>
 
     <gazebo reference="chessaton_link4">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
         <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="chessaton_gripper">
+        <mu1 value="0.85"/>
+        <mu2 value="0.85"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
         <material>Gazebo/White</material>
     </gazebo>
 
     <gazebo reference="left_finger">
+        <mu1 value="1.15"/>
+        <mu2 value="1.15"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
+        <minDepth>0.001</minDepth>
         <material>Gazebo/White</material>
     </gazebo>
 
     <gazebo reference="right_finger">
+        <mu1 value="1.15"/>
+        <mu2 value="1.15"/>
+        <kp value="1000000.0"/>
+        <kd value="1.0"/>
+        <minDepth>0.001</minDepth>
         <material>Gazebo/White</material>
     </gazebo>
+
+    <!-- <gazebo reference="[joint name]">
+        <implicitSpringDamper>1</implicitSpringDamper>
+    </gazebo> -->
 
     <!--       -->
     <!-- Macro -->

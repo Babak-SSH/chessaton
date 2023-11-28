@@ -29,10 +29,16 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>0.84999999999999998</mu>
+              <mu2>0.84999999999999998</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -99,10 +105,16 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>0.84999999999999998</mu>
+              <mu2>0.84999999999999998</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -169,10 +181,16 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>0.84999999999999998</mu>
+              <mu2>0.84999999999999998</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -239,10 +257,16 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>0.84999999999999998</mu>
+              <mu2>0.84999999999999998</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -309,10 +333,16 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>0.84999999999999998</mu>
+              <mu2>0.84999999999999998</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -326,10 +356,16 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>0.84999999999999998</mu>
+              <mu2>0.84999999999999998</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -413,10 +449,17 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+              <min_depth>0.001</min_depth>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>1.1499999999999999</mu>
+              <mu2>1.1499999999999999</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
@@ -483,10 +526,17 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+              <min_depth>0.001</min_depth>
+            </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode>
+              <mu>1.1499999999999999</mu>
+              <mu2>1.1499999999999999</mu2>
+            </ode>
           </friction>
         </surface>
       </collision>
