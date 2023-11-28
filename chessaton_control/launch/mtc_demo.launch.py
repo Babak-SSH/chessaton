@@ -213,25 +213,26 @@ def generate_launch_description():
     processes = [xacro2sdf]
 
     # Launch Gazebo
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("gazebo_ros"),
-                    "launch",
-                    "gazebo.launch.py",
-                ]
-            )
-        ),
-                launch_arguments={'world': world}.items(),
-    )
+    # uncomment if you want to use gazebo and set ros2_control_plugin to "gz"
+    # gazebo = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(
+    #         PathJoinSubstitution(
+    #             [
+    #                 FindPackageShare("gazebo_ros"),
+    #                 "launch",
+    #                 "gazebo.launch.py",
+    #             ]
+    #         )
+    #     ),
+    #             launch_arguments={'world': world}.items(),
+    # )
 
-    spawn_entity=Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        arguments=['-topic', 'robot_description',
-                   '-entity', 'chessaton'],
-        output='screen')
+    # spawn_entity=Node(
+    #     package='gazebo_ros',
+    #     executable='spawn_entity.py',
+    #     arguments=['-topic', 'robot_description',
+    #                '-entity', 'chessaton'],
+    #     output='screen')
 
     robot_state_publisher=Node(
         package="robot_state_publisher",
@@ -353,23 +354,30 @@ def generate_launch_description():
         condition=IfCondition(enable_rviz),
     )
 
+    # MTC Demo node
+    mtc_pick_place_demo = Node(
+        package="chessaton_control",
+        executable="mtc_pick_place_demo",
+        output="screen",
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            robot_description_kinematics,
+            planning_pipeline,
+            joint_limits,
+            {'use_sim_time': use_sim_time},
+        ],
+    )
+
     return LaunchDescription(declared_arguments+
         [
-            # Gazebo nodes:
-            gazebo,
-            spawn_entity,
-            # ROS2_control:
             robot_state_publisher,
 
+            # ROS2_control:
+            fake_ros2_controller_node,
+
             # ROS2 Controllers:
-            RegisterEventHandler(
-                OnProcessExit(
-                    target_action = spawn_entity,
-                    on_exit = [
-                        joint_state_broadcaster_spawner,
-                    ]
-                )
-            ),
+            joint_state_broadcaster_spawner,
             RegisterEventHandler(
                 OnProcessExit(
                     target_action = joint_state_broadcaster_spawner,
@@ -398,8 +406,6 @@ def generate_launch_description():
                 OnProcessExit(
                     target_action = right_finger_controller_spawner,
                     on_exit = [
-
-                        # MoveIt!2:
                         TimerAction(
                             period=5.0,
                             actions=[
@@ -409,7 +415,8 @@ def generate_launch_description():
                         ),
                     ]
                 )
-            )
+            ),
+            mtc_pick_place_demo,
         ]
     )
 
@@ -472,7 +479,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         ),
         DeclareLaunchArgument(
             "ros2_control_plugin",
-            default_value="gz",
+            default_value="fake",
             description="The ros2_control plugin that should be loaded for the manipulator ('fake', 'gz', 'real' or custom).",
         ),
         DeclareLaunchArgument(
@@ -483,7 +490,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # Gazebo
         DeclareLaunchArgument(
             "world",
-            default_value=path.join(get_package_share_directory('chessaton_description'), "worlds", "chessaton.world"),
+            default_value=path.join(get_package_share_directory('chessaton_control'), "world", "simple_pick_place"),
             description="Name or filepath of world to load.",
         ),
         DeclareLaunchArgument(
@@ -509,9 +516,9 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         DeclareLaunchArgument(
             "rviz_config",
             default_value=path.join(
-                get_package_share_directory("chessaton_moveit_config"),
+                get_package_share_directory("chessaton_control"),
                 "rviz",
-                "moveit.rviz",
+                "mtc_demo.rviz",
             ),
             description="Path to configuration for RViz2.",
         ),
