@@ -34,7 +34,21 @@ find_package(rclcpp REQUIRED)
 #   COMMAND ${${PROJECT_NAME}_MOVEIT_CONFIG_SCRIPTS_DIR}/xacro2srdf.bash
 # )
 
-add_executable(movep_demo src/action_handler.cpp src/movep_demo.cpp)
+add_executable(pick_place_demo src/pick_place_demo.cpp src/action_handler.cpp)
+target_include_directories(pick_place_demo PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_compile_features(pick_place_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(
+  pick_place_demo
+  "moveit_ros_planning_interface"
+  "moveit_visual_tools"
+  "rclcpp"
+)
+install(TARGETS pick_place_demo
+  DESTINATION lib/${PROJECT_NAME})
+
+add_executable(movep_demo src/movep_demo.cpp src/action_handler.cpp)
 target_include_directories(movep_demo PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
