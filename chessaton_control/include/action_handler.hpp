@@ -5,6 +5,7 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
+#include <moveit_msgs/msg/collision_object.hpp>
 
 
 namespace Chessaton {
@@ -25,8 +26,11 @@ class ActionHandler {
         std::string PLANNING_GROUP_HAND = "chessaton_hand";
 
         ActionHandler(rclcpp::Node::SharedPtr);
-        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan, const moveit::core::JointModelGroup*, const moveit::core::LinkModel*, Position);
+        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan, const moveit::core::JointModelGroup*,  Position);
         bool move_to(Position);
+        bool move_to(geometry_msgs::msg::Pose);
+        bool move_gripper(double);
+        bool add_collision_obj(shape_msgs::msg::SolidPrimitive, geometry_msgs::msg::Pose, std::string);
 };
 
 extern rclcpp::Logger logger;  // ROS logger
