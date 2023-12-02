@@ -73,6 +73,23 @@
     <!-- <gazebo reference="[joint name]">
         <implicitSpringDamper>1</implicitSpringDamper>
     </gazebo> -->
+    <gazebo>
+        <plugin name="gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
+             <arm>
+                <arm_name>chessaton</arm_name>
+                <palm_link> chessaton_link4  </palm_link>
+                <gripper_link> right_finger </gripper_link>
+                <gripper_link> left_finger </gripper_link>
+             </arm>
+            <forces_angle_tolerance>100</forces_angle_tolerance>
+            <update_rate>10</update_rate>
+            <grip_count_threshold>5</grip_count_threshold>
+            <max_grip_count>10</max_grip_count>
+            <release_tolerance>0.005</release_tolerance>
+            <disable_collisions_on_attach>false</disable_collisions_on_attach>
+            <contact_topic>__default_topic__</contact_topic>
+         </plugin>
+    </gazebo>
 
     <!--       -->
     <!-- Macro -->

@@ -405,6 +405,78 @@
       </visual>
       <self_collide>false</self_collide>
     </link>
+    <joint name='chessaton_hand_tcp_roll_virtual_joint' type='revolute'>
+      <pose relative_to='chessaton_link4'>0.09284200000000001 -0.034194 -0.009854700000000001 0 0 0</pose>
+      <parent>chessaton_link4</parent>
+      <child>chessaton_hand_tcp_roll</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0</effort>
+          <velocity>6</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='chessaton_hand_tcp_roll'>
+      <pose relative_to='chessaton_hand_tcp_roll_virtual_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.011394 -0.0086324 -0.005 0 0 0</pose>
+        <mass>0.0088000000000000005</mass>
+        <inertia>
+          <ixx>6.0645999999999999e-07</ixx>
+          <ixy>-1.4140999999999999e-07</ixy>
+          <ixz>1.2141999999999999e-21</ixz>
+          <iyy>9.0396999999999996e-07</iyy>
+          <iyz>7.2150999999999998e-22</iyz>
+          <izz>8.4376999999999999e-07</izz>
+        </inertia>
+      </inertial>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name='chessaton_hand_tcp_yaw_virtual_joint' type='revolute'>
+      <pose relative_to='chessaton_hand_tcp_roll'>0 0 0 0 0 0</pose>
+      <parent>chessaton_hand_tcp_roll</parent>
+      <child>chessaton_hand_tcp_yaw</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0</effort>
+          <velocity>6</velocity>
+        </limit>
+        <dynamics>
+          <damping>1</damping>
+          <friction>1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='chessaton_hand_tcp_yaw'>
+      <pose relative_to='chessaton_hand_tcp_yaw_virtual_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.011394 -0.0086324 -0.005 0 0 0</pose>
+        <mass>0.0088000000000000005</mass>
+        <inertia>
+          <ixx>6.0645999999999999e-07</ixx>
+          <ixy>-1.4140999999999999e-07</ixy>
+          <ixz>1.2141999999999999e-21</ixz>
+          <iyy>9.0396999999999996e-07</iyy>
+          <iyz>7.2150999999999998e-22</iyz>
+          <izz>8.4376999999999999e-07</izz>
+        </inertia>
+      </inertial>
+      <self_collide>false</self_collide>
+    </link>
     <joint name='left_finger_joint' type='prismatic'>
       <pose relative_to='chessaton_link4'>0.072842 -0.034194 -0.0048547 0 0 0</pose>
       <parent>chessaton_link4</parent>
@@ -559,6 +631,21 @@
       </visual>
       <self_collide>false</self_collide>
     </link>
+    <plugin name='gazebo_grasp_fix' filename='libgazebo_grasp_fix.so'>
+      <arm>
+        <arm_name>chessaton</arm_name>
+        <palm_link>chessaton_link4</palm_link>
+        <gripper_link>right_finger</gripper_link>
+        <gripper_link>left_finger</gripper_link>
+      </arm>
+      <forces_angle_tolerance>100</forces_angle_tolerance>
+      <update_rate>10</update_rate>
+      <grip_count_threshold>5</grip_count_threshold>
+      <max_grip_count>10</max_grip_count>
+      <release_tolerance>0.005</release_tolerance>
+      <disable_collisions_on_attach>false</disable_collisions_on_attach>
+      <contact_topic>__default_topic__</contact_topic>
+    </plugin>
     <static>false</static>
     <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
       <parameters>/home/ros/workspace/install/chessaton_description/share/chessaton_description/config/controllers_position.yaml</parameters>

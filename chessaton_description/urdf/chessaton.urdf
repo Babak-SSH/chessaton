@@ -104,6 +104,23 @@
   <!-- <gazebo reference="[joint name]">
         <implicitSpringDamper>1</implicitSpringDamper>
     </gazebo> -->
+  <gazebo>
+    <plugin filename="libgazebo_grasp_fix.so" name="gazebo_grasp_fix">
+      <arm>
+        <arm_name>chessaton</arm_name>
+        <palm_link> chessaton_link4  </palm_link>
+        <gripper_link> right_finger </gripper_link>
+        <gripper_link> left_finger </gripper_link>
+      </arm>
+      <forces_angle_tolerance>100</forces_angle_tolerance>
+      <update_rate>10</update_rate>
+      <grip_count_threshold>5</grip_count_threshold>
+      <max_grip_count>10</max_grip_count>
+      <release_tolerance>0.005</release_tolerance>
+      <disable_collisions_on_attach>false</disable_collisions_on_attach>
+      <contact_topic>__default_topic__</contact_topic>
+    </plugin>
+  </gazebo>
   <link name="world"/>
   <joint name="virtual_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -324,6 +341,78 @@
       <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
     </inertial>
   </link>
+  <link name="chessaton_hand_tcp_roll">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.011394 -0.0086324 -0.005"/>
+      <mass value="0.0088"/>
+      <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
+    </inertial>
+  </link>
+  <joint name="chessaton_hand_tcp_roll_virtual_joint" type="revolute">
+    <parent link="chessaton_gripper"/>
+    <child link="chessaton_hand_tcp_roll"/>
+    <origin rpy="0 0 0" xyz="0.02 0 -0.005"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="6"/>
+  </joint>
+  <link name="chessaton_hand_tcp_yaw">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.011394 -0.0086324 -0.005"/>
+      <mass value="0.0088"/>
+      <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
+    </inertial>
+  </link>
+  <joint name="chessaton_hand_tcp_yaw_virtual_joint" type="revolute">
+    <parent link="chessaton_hand_tcp_roll"/>
+    <child link="chessaton_hand_tcp_yaw"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="6"/>
+  </joint>
+  <link name="chessaton_hand_tcp">
+            </link>
+  <joint name="chessaton_hand_tcp_virtual_joint" type="fixed">
+    <parent link="chessaton_hand_tcp_yaw"/>
+    <child link="chessaton_hand_tcp"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <!-- Transmission macro -->
+  <!-- <xacro:macro name="SimpleTransmissionPosition" params="joint n">
+    <transmission name="tran${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor${n}">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro> -->
+  <!-- Transmission macro -->
+  <!-- <xacro:macro name="SimpleTransmissionEffort" params="joint n">
+    <transmission name="tran${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor${n}">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro> -->
+  <!-- <xacro:SimpleTransmissionEffort n="1" joint="chessaton_joint1" />
+
+  <xacro:SimpleTransmissionEffort n="2" joint="chessaton_joint2" />
+
+  <xacro:SimpleTransmissionEffort n="3" joint="chessaton_joint3" />
+
+  <xacro:SimpleTransmissionEffort n="4" joint="chessaton_joint4" />
+
+  <xacro:SimpleTransmissionEffort n="5" joint="left_finger_joint" />
+
+  <xacro:SimpleTransmissionEffort n="6" joint="right_finger_joint" /> -->
   <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <parameters>/home/ros/workspace/install/chessaton_description/share/chessaton_description/config/controllers_position.yaml</parameters>
@@ -358,6 +447,22 @@
       <state_interface name="effort"/>
     </joint>
     <joint name="chessaton_joint4">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="chessaton_hand_tcp_roll_virtual_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="chessaton_hand_tcp_yaw_virtual_joint">
       <command_interface name="position"/>
       <state_interface name="position">
         <param name="initial_value">0.0</param>
@@ -401,6 +506,12 @@
     <selfCollide>false</selfCollide>
   </gazebo>
   <gazebo reference="chessaton_link6">
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <gazebo reference="chessaton_hand_tcp_roll">
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <gazebo reference="chessaton_hand_tcp_yaw">
     <selfCollide>false</selfCollide>
   </gazebo>
   <gazebo reference="chessaton_gripper">

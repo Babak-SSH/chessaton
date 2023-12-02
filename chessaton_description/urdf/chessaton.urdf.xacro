@@ -8,6 +8,7 @@
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton_include.xacro" />
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton_gazebo.xacro" />
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton.ros2_control" />
+    <xacro:include filename="$(find chessaton_description)/urdf/chessaton_hand.xacro" />
 
     <!--            -->
     <!-- Parameters -->
@@ -19,6 +20,7 @@
 
     <!-- Flag to enable default gripper -->
     <xacro:arg name="gripper" default="true" />
+    <xacro:arg name="virtual_dof" default="true" />
     <!-- ros2_control -->
     <!-- Flag to enable ros2 controllers for manipulator -->
     <xacro:arg name="ros2_control" default="true"/>
@@ -229,112 +231,47 @@
 	  <axis xyz="0 0 0" />
 	</joint>
 
-	<link name="chessaton_gripper">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-			  <mesh filename="file://$(find chessaton_description)/meshes/chessaton_gripper.STL" />
-			</geometry>
-			<material name="color_gripper" />
-		</visual>
+    <xacro:chessaton_hand
+        virtual_dof="$(arg virtual_dof)"
+    />
+    
+      <!-- Transmission macro -->
+  <!-- <xacro:macro name="SimpleTransmissionPosition" params="joint n">
+    <transmission name="tran${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor${n}">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro> -->
 
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<mesh filename="file://$(find chessaton_description)/meshes/chessaton_gripper.STL" />
-			</geometry>
-		</collision>
+  <!-- Transmission macro -->
+  <!-- <xacro:macro name="SimpleTransmissionEffort" params="joint n">
+    <transmission name="tran${n}">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor${n}">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro> -->
 
-        <inertial>
-            <origin xyz="-0.027242 0.0063062 -0.003963" rpy="0 0 0" />
-            <mass value="0.07416" />
-            <inertia
-              ixx="2.5968E-05"
-              ixy="8.488E-08"
-              ixz="-4.236E-07"
-              iyy="1.3082E-05"
-              iyz="-1.6429E-09"
-              izz="2.6136E-05" />
-        </inertial>
-	</link>
+  <!-- <xacro:SimpleTransmissionEffort n="1" joint="chessaton_joint1" />
 
-	<joint name="left_finger_joint" type="prismatic">
-		<origin xyz="0 0 0" rpy="0 0 0" />
-		<parent link="chessaton_gripper" />
-		<child link="left_finger" />
-		<axis xyz="0 1 0" />
-		<dynamics damping="1.0" friction="1.0" />
-		<limit lower="0" upper="0.03" effort="100" velocity="0.2" />
-	</joint>
+  <xacro:SimpleTransmissionEffort n="2" joint="chessaton_joint2" />
 
-	<link name="left_finger">
-    	<visual>
-    	  <origin xyz="0 0 0" rpy="0 0 0" />
-    	  <geometry>
-    	    <mesh filename="file://$(find chessaton_description)/meshes/left_finger.STL" />
-    	  </geometry>
-    	  <material name="color_gripper_lfinger" />
-    	</visual>
+  <xacro:SimpleTransmissionEffort n="3" joint="chessaton_joint3" />
 
-    	<collision>
-    	  <origin xyz="0 0 0" rpy="0 0 0" />
-    	  <geometry>
-    	    <mesh filename="file://$(find chessaton_description)/meshes/left_finger.STL" />
-    	  </geometry>
-    	</collision>
+  <xacro:SimpleTransmissionEffort n="4" joint="chessaton_joint4" />
 
-        <inertial>
-            <origin
-              xyz="0.011394 0.0086324 -0.005"
-              rpy="0 0 0" />
-            <mass
-              value="0.0088" />
-            <inertia
-              ixx="6.0646E-07"
-              ixy="1.4141E-07"
-              ixz="2.4551E-21"
-              iyy="9.0397E-07"
-              iyz="-6.5992E-22"
-              izz="8.4377E-07" />
-        </inertial>
-	</link>
+  <xacro:SimpleTransmissionEffort n="5" joint="left_finger_joint" />
 
-	<joint name="right_finger_joint" type="prismatic">
-		<origin xyz="0 0 0" rpy="0 0 0" />
-		<parent link="chessaton_gripper" />
-		<child link="right_finger" />
-		<axis xyz="0 1 0" />
-		<dynamics damping="1.0" friction="1.0" />
-		<limit lower="-0.03" upper="0" effort="100" velocity="0.2" />
-	</joint>
-
-	<link name="right_finger">
-		<visual>
-		  <origin xyz="0 0 0" rpy="0 0 0" />
-		  <geometry>
-		    <mesh filename="file://$(find chessaton_description)/meshes/right_finger.STL" />
-		  </geometry>
-		  <material name="color_gripper_rfinger" />
-		</visual>
-
-		<collision>
-		  <origin xyz="0 0 0" rpy="0 0 0" />
-		  <geometry>
-		    <mesh filename="file://$(find chessaton_description)/meshes/right_finger.STL" />
-		  </geometry>
-		</collision>
-        <inertial>
-            <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
-            <mass value="0.0088" />
-            <inertia
-              ixx="6.0646E-07"
-              ixy="-1.4141E-07"
-              ixz="1.2142E-21"
-              iyy="9.0397E-07"
-              iyz="7.2151E-22"
-              izz="8.4377E-07" />
-        </inertial>
-	</link>
+  <xacro:SimpleTransmissionEffort n="6" joint="right_finger_joint" /> -->
 
     <xacro:gz_ros2_control
         ros2_controller_parameters="$(arg ros2_controller_parameters)"
