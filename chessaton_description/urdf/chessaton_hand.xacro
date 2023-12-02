@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" 
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    name="chessaton">
+    <xacro:macro name="chessaton_hand" params="
+        virtual_dof
+    ">
+    	<link name="chessaton_gripper">
+    		<visual>
+    			<origin xyz="0 0 0" rpy="0 0 0" />
+    			<geometry>
+    			  <mesh filename="file://$(find chessaton_description)/meshes/chessaton_gripper.STL" />
+    			</geometry>
+    			<material name="color_gripper" />
+    		</visual>
+
+    		<collision>
+    			<origin xyz="0 0 0" rpy="0 0 0" />
+    			<geometry>
+    				<mesh filename="file://$(find chessaton_description)/meshes/chessaton_gripper.STL" />
+    			</geometry>
+    		</collision>
+
+            <inertial>
+                <origin xyz="-0.027242 0.0063062 -0.003963" rpy="0 0 0" />
+                <mass value="0.07416" />
+                <inertia
+                  ixx="2.5968E-05"
+                  ixy="8.488E-08"
+                  ixz="-4.236E-07"
+                  iyy="1.3082E-05"
+                  iyz="-1.6429E-09"
+                  izz="2.6136E-05" />
+            </inertial>
+    	</link>
+
+    	<joint name="left_finger_joint" type="prismatic">
+    		<origin xyz="0 0 0" rpy="0 0 0" />
+    		<parent link="chessaton_gripper" />
+    		<child link="left_finger" />
+    		<axis xyz="0 1 0" />
+    		<dynamics damping="1.0" friction="1.0" />
+    		<limit lower="0" upper="0.03" effort="100" velocity="0.2" />
+    	</joint>
+
+    	<link name="left_finger">
+        	<visual>
+        	  <origin xyz="0 0 0" rpy="0 0 0" />
+        	  <geometry>
+        	    <mesh filename="file://$(find chessaton_description)/meshes/left_finger.STL" />
+        	  </geometry>
+        	  <material name="color_gripper_lfinger" />
+        	</visual>
+
+        	<collision>
+        	  <origin xyz="0 0 0" rpy="0 0 0" />
+        	  <geometry>
+        	    <mesh filename="file://$(find chessaton_description)/meshes/left_finger.STL" />
+        	  </geometry>
+        	</collision>
+
+            <inertial>
+                <origin
+                  xyz="0.011394 0.0086324 -0.005"
+                  rpy="0 0 0" />
+                <mass
+                  value="0.0088" />
+                <inertia
+                  ixx="6.0646E-07"
+                  ixy="1.4141E-07"
+                  ixz="2.4551E-21"
+                  iyy="9.0397E-07"
+                  iyz="-6.5992E-22"
+                  izz="8.4377E-07" />
+            </inertial>
+    	</link>
+
+    	<joint name="right_finger_joint" type="prismatic">
+    		<origin xyz="0 0 0" rpy="0 0 0" />
+    		<parent link="chessaton_gripper" />
+    		<child link="right_finger" />
+    		<axis xyz="0 1 0" />
+    		<dynamics damping="1.0" friction="1.0" />
+    		<limit lower="-0.03" upper="0" effort="100" velocity="0.2" />
+    	</joint>
+
+    	<link name="right_finger">
+    		<visual>
+    		  <origin xyz="0 0 0" rpy="0 0 0" />
+    		  <geometry>
+    		    <mesh filename="file://$(find chessaton_description)/meshes/right_finger.STL" />
+    		  </geometry>
+    		  <material name="color_gripper_rfinger" />
+    		</visual>
+
+    		<collision>
+    		  <origin xyz="0 0 0" rpy="0 0 0" />
+    		  <geometry>
+    		    <mesh filename="file://$(find chessaton_description)/meshes/right_finger.STL" />
+    		  </geometry>
+    		</collision>
+            <inertial>
+                <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
+                <mass value="0.0088" />
+                <inertia
+                  ixx="6.0646E-07"
+                  ixy="-1.4141E-07"
+                  ixz="1.2142E-21"
+                  iyy="9.0397E-07"
+                  iyz="7.2151E-22"
+                  izz="8.4377E-07" />
+            </inertial>
+    	</link>
+
+        <xacro:if value="${virtual_dof}">
+            <link name="chessaton_hand_tcp_roll">
+                <inertial>
+                    <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
+                    <mass value="0.0088" />
+                    <inertia
+                      ixx="6.0646E-07"
+                      ixy="-1.4141E-07"
+                      ixz="1.2142E-21"
+                      iyy="9.0397E-07"
+                      iyz="7.2151E-22"
+                      izz="8.4377E-07" />
+                </inertial>
+            </link>
+            <joint name="chessaton_hand_tcp_roll_virtual_joint" type="revolute">
+                <parent link="chessaton_gripper"/>
+                <child link="chessaton_hand_tcp_roll"/>
+                <origin rpy="0 0 0" xyz="0.02 0 -0.005"/>
+                <axis xyz="-1 0 0" />
+    		<dynamics damping="1.0" friction="1.0" />
+    	     <limit lower="${-pi/2}" upper="${pi/2}" effort="0" velocity="6" />
+            </joint>
+
+            <link name="chessaton_hand_tcp_yaw">
+                <inertial>
+                    <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
+                    <mass value="0.0088" />
+                    <inertia
+                      ixx="6.0646E-07"
+                      ixy="-1.4141E-07"
+                      ixz="1.2142E-21"
+                      iyy="9.0397E-07"
+                      iyz="7.2151E-22"
+                      izz="8.4377E-07" />
+                </inertial>
+            </link>
+            <joint name="chessaton_hand_tcp_yaw_virtual_joint" type="revolute">
+                <parent link="chessaton_hand_tcp_roll"/>
+                <child link="chessaton_hand_tcp_yaw"/>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <axis xyz="0 0 -1" />
+    		<dynamics damping="1.0" friction="1.0" />
+    	     <limit lower="${-pi/2}" upper="${pi/2}" effort="0" velocity="6" />
+            </joint>
+
+            <link name="chessaton_hand_tcp">
+            </link>
+            <joint name="chessaton_hand_tcp_virtual_joint" type="fixed">
+              <parent link="chessaton_hand_tcp_yaw"/>
+              <child link="chessaton_hand_tcp"/>
+              <origin rpy="0 0 0" xyz="0 0 0"/>
+            </joint>
+        </xacro:if>
+        <xacro:unless value="${virtual_dof}">
+            <link name="chessaton_hand_tcp">
+            </link>
+            <joint name="chessaton_hand_tcp_virtual_joint" type="fixed">
+              <parent link="chessaton_gripper"/>
+              <child link="chessaton_hand_tcp"/>
+              <origin rpy="0 0 0" xyz="0.02 0 -0.005"/>
+            </joint>
+        </xacro:unless>
+    </xacro:macro>
+</robot>
