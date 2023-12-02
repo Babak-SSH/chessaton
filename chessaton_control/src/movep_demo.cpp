@@ -2,10 +2,10 @@
 
 
 int main(int argc, char * argv[]) {
-   // Initialize ROS and create the Node
+    // Initialize ROS and create the Node
     rclcpp::init(argc, argv);
     auto const node = std::make_shared<rclcpp::Node>(
-      "move_group_demo",
+      "movep_demo",
       rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true)
     );
     // we use sim_time for simulation in gazebo
@@ -18,21 +18,60 @@ int main(int argc, char * argv[]) {
     std::thread([&executor]() { executor.spin(); }).detach();
 
     Chessaton::ActionHandler robot_mp(node);
+    double px, py, pz, ox, oy, oz, ow;
+    int goal_type;
 
-    // get the position to move to
-    double x,y,z;
+    std::cout << "- Goal type\n     + Option N1: position\n     + Option N2: pose" << std::endl;
+    std::cout << "  Please select: ";
+    std::cin >> goal_type;
 
-    std::cout << "enter position!" << std::endl;    
-    std::cout << "x: ";
-    std::cin >> x;
-    std::cout << "y: ";
-    std::cin >> y;
-    std::cout << "z: ";
-    std::cin >> z;
+    if (goal_type == 1) {
+        std::cout << "enter position!" << std::endl;    
+        std::cout << "x: ";
+        std::cin >> px;
+        std::cout << "y: ";
+        std::cin >> py;
+        std::cout << "z: ";
+        std::cin >> pz;
 
-    Chessaton::Position position(x, y, z);
+        geometry_msgs::msg::Point position;
+        position.x = px;
+        position.y = py;
+        position.z = pz;
 
-    robot_mp.move_to(position);
+        robot_mp.move_to(position);
+    }
+    else if (goal_type == 2) {
+        std::cout << "enter position!" << std::endl;    
+        std::cout << "position x: ";
+        std::cin >> px;
+        std::cout << "position y: ";
+        std::cin >> py;
+        std::cout << "position z: ";
+        std::cin >> pz;
+        std::cout << "orientation x: ";
+        std::cin >> ox;
+        std::cout << "orientation y: ";
+        std::cin >> oy;
+        std::cout << "orientation z: ";
+        std::cin >> oz;
+        std::cout << "orientation w: ";
+        std::cin >> ow;
+
+        geometry_msgs::msg::Pose pose;
+        pose.orientation.x = ox;
+        pose.orientation.y = oy;
+        pose.orientation.z = oz;
+        pose.orientation.w = ow;
+        pose.position.x = px;
+        pose.position.y = py;
+        pose.position.z = pz;
+
+        robot_mp.move_to(pose);
+    }
+    else {
+        std::cout << "  Please select a valid option!" << std::endl;
+    }
 
     // Shutdown ROS
     rclcpp::shutdown();
