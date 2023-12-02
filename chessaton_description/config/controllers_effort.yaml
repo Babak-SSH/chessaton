@@ -6,13 +6,16 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     chessaton_arm_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      # type: joint_trajectory_controller/JointTrajectoryController
+      type: effort_controllers/JointGroupEffortController
 
     chessaton_hand_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      # type: joint_trajectory_controller/JointTrajectoryController
+      type: effort_controllers/JointGroupEffortController
 
 chessaton_arm_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - chessaton_joint1
       - chessaton_joint2
@@ -26,27 +29,28 @@ chessaton_arm_controller:
     gains:
       chessaton_joint1:
         p: 4000.0
-        d: 10.0
-        i: 250.0
-        i_clamp: 15.0
+        d: 50.0
+        i: 25.0
+        i_clamp: 100.0
       chessaton_joint2:
         p: 10000.0
-        d: 25.0
-        i: 600.0
-        i_clamp: 45.0
+        d: 45.0
+        i: 6.0
+        i_clamp: 100.0
       chessaton_joint3:
         p: 8000.0
-        d: 20.0
-        i: 450.0
-        i_clamp: 30.0
+        d: 40.0
+        i: 4.0
+        i_clamp: 100.0
       chessaton_joint4:
         p: 6000.0
-        d: 15.0
-        i: 300.0
-        i_clamp: 30.0
+        d: 25.0
+        i: 3.0
+        i_clamp: 100.0
 
 chessaton_hand_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - left_finger_joint
       - right_finger_joint
@@ -60,9 +64,9 @@ chessaton_hand_controller:
         p: 225.0
         d: 0.001
         i: 0.4
-        i_clamp: 4.0
+        i_clamp: 1.0
       right_finger_joint:
         p: 225.0
         d: 0.001
         i: 0.4
-        i_clamp: 4.0
+        i_clamp: 1.0
