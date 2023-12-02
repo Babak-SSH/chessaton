@@ -1,0 +1,9 @@
+chessaton_arm:
+  # this doesn't support the virtual yaw and roll joints of gripper 
+  # hence can't plan for (quaternion, position) and only accepts 
+  # pure position (with random orientation) for planning.
+  kinematics_solver: chessaton_chessaton_arm/IKFastKinematicsPlugin
+  kinematics_solver_search_resolution: 0.0025
+  kinematics_solver_timeout: 0.05
+  kinematics_solver_attempts: 5
+  # max_cache_size: 100000

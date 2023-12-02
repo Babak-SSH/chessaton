@@ -28,6 +28,16 @@ joint_limits:
     max_velocity: 60.0
     has_acceleration_limits: true
     max_acceleration: 5.0
+  chessaton_hand_tcp_roll_virtual_joint:
+    has_velocity_limits: true
+    max_velocity: 60.0
+    has_acceleration_limits: true
+    max_acceleration: 5.0
+  chessaton_hand_tcp_yaw_virtual_joint:
+    has_velocity_limits: true
+    max_velocity: 60.0
+    has_acceleration_limits: true
+    max_acceleration: 5.0
   left_finger_joint:
     has_velocity_limits: true
     max_velocity: 60.0
