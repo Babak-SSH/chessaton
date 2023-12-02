@@ -5,10 +5,11 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /MotionPlanning1
-        - /MotionPlanning1/Scene Robot1
+        - /MotionPlanning1/Planned Path1
+        - /MotionPlanning1/Planned Path1/Links1/chessaton_gripper1
         - /MarkerArray1
       Splitter Ratio: 0.5
-    Tree Height: 350
+    Tree Height: 327
   - Class: rviz_common/Help
     Name: Help
   - Class: rviz_common/Views
@@ -73,6 +74,18 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          chessaton_hand_tcp:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          chessaton_hand_tcp_roll:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          chessaton_hand_tcp_yaw:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           chessaton_link0:
             Alpha: 1
             Show Axes: false
@@ -118,7 +131,7 @@ Visualization Manager:
         Show Robot Collision: false
         Show Robot Visual: true
         Show Trail: false
-        State Display Time: 0.05 s
+        State Display Time: 0.1s
         Trail Step Size: 1
         Trajectory Topic: display_planned_path
         Use Sim Time: false
@@ -163,6 +176,18 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          chessaton_hand_tcp:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          chessaton_hand_tcp_roll:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          chessaton_hand_tcp_yaw:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           chessaton_link0:
             Alpha: 1
             Show Axes: false
@@ -203,7 +228,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
         Robot Alpha: 0.5
-        Show Robot Collision: false
+        Show Robot Collision: true
         Show Robot Visual: true
       Value: true
       Velocity_Scaling_Factor: 0.1
@@ -214,6 +239,7 @@ Visualization Manager:
         Path: true
         Sphere: true
         Text: true
+        pose1: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -254,10 +280,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6297968626022339
+      Pitch: 0.5797969102859497
       Target Frame: world
       Value: Orbit (rviz_default_plugins)
-      Yaw: 5.220163822174072
+      Yaw: 5.49516487121582
     Saved: ~
 Window Geometry:
   Displays:
@@ -271,7 +297,7 @@ Window Geometry:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000002b4000005aafc0200000005fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000003f00fffffffb000000100044006900730070006c006100790073010000003b000001df000000c700fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670100000220000002950000016900fffffffb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a0056006900650077007301000004bb0000012a000000a000ffffff00000746000005aa00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000002b4000005aafc0200000005fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c0069006400650072010000003b0000003f0000003f00fffffffb000000100044006900730070006c0061007900730100000080000001c8000000c700fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000024e000002750000016900fffffffb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a0056006900650077007301000004c90000011c000000a000ffffff00000746000005aa00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
   Width: 2560

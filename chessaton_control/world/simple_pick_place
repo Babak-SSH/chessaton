@@ -180,20 +180,20 @@
           </link>
         </model> -->
         <model name='unit_box_2'>
-          <pose frame=''>0 1.5 1.23541 0 0 -0.000368</pose>
+          <pose frame=''>0 0.3 0.1 0 0 -0.000368</pose>
           <scale>1 1 1</scale>
           <link name='link'>
-            <pose frame=''>0 1.5 1.23541 0 0 -0.000368</pose>
+            <pose frame=''>0 0.3 0.1 0 0 -0.000368</pose>
             <velocity>0 0 0 0 -0 0</velocity>
             <acceleration>0 0 0 0 -0 0</acceleration>
             <wrench>0 0 0 0 -0 0</wrench>
           </link>
         </model>
         <model name='unit_box_blue'>
-          <pose frame=''>0.18 0 0.04493 1e-06 2e-05 1e-06</pose>
+          <pose frame=''>0.22 0 0.04493 1e-06 2e-05 1e-06</pose>
           <scale>1 1 1</scale>
           <link name='link'>
-            <pose frame=''>0.18 0 0.04493 1e-06 2e-05 1e-06</pose>
+            <pose frame=''>0.22 0 0.04493 1e-06 2e-05 1e-06</pose>
             <velocity>0 0 0 0 -0 0</velocity>
             <acceleration>0 0 -9.8 0 0 -2e-06</acceleration>
             <wrench>0 0 -0.98 0 -0 0</wrench>
@@ -558,17 +558,17 @@
               <iyz>0</iyz>
               <izz>0.166667</izz>
             </inertia>
-            <pose frame=''>0 0 0 0 -0 0</pose>
+            <pose>0 0 0 0 -0 0</pose>
           </inertial>
           <self_collide>0</self_collide>
           <enable_wind>0</enable_wind>
           <kinematic>0</kinematic>
-          <pose frame=''>0 0 0 0 -0 0</pose>
+          <pose>0 0 0 0 -0 0</pose>
           <gravity>1</gravity>
           <visual name='visual'>
             <geometry>
               <box>
-                <size>0.2 0.4 0.4</size>
+                <size>0.2 0.2 0.15</size>
               </box>
             </geometry>
             <material>
@@ -584,17 +584,17 @@
               <specular>0.01 0.01 0.01 1</specular>
               <emissive>0 0 0 1</emissive>
             </material>
-            <pose frame=''>0 0 0 0 -0 0</pose>
+            <pose>0 0 0 0 -0 0</pose>
             <transparency>0</transparency>
             <cast_shadows>1</cast_shadows>
           </visual>
           <collision name='collision'>
             <laser_retro>0</laser_retro>
             <max_contacts>10</max_contacts>
-            <pose frame=''>0 0 0 0 -0 0</pose>
+            <pose>0 0 0 0 -0 0</pose>
             <geometry>
               <box>
-                <size>0.197218 0.337057 0.440816</size>
+                <size>0.2 0.2 0.15</size>
               </box>
             </geometry>
             <surface>
@@ -646,7 +646,6 @@
         </link>
         <static>0</static>
         <allow_auto_disable>1</allow_auto_disable>
-        <pose frame=''>0 1.5 1.23541 0 0 -0.000368</pose>
       </model>
     </world>
 </sdf>
