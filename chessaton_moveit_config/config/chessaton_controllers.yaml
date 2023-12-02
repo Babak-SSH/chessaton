@@ -9,8 +9,9 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 controller_names:
   - chessaton_arm_controller
-  - chessaton_finger_left_controller
-  - chessaton_finger_right_controller
+  - chessaton_hand_controller
+  # - chessaton_finger_left_controller
+  # - chessaton_finger_right_controller
 
 chessaton_arm_controller:
   type: FollowJointTrajectory
@@ -21,17 +22,28 @@ chessaton_arm_controller:
     - chessaton_joint2
     - chessaton_joint3
     - chessaton_joint4
+    - chessaton_hand_tcp_roll_virtual_joint
+    - chessaton_hand_tcp_yaw_virtual_joint
 
-chessaton_finger_left_controller:
-  action_ns: gripper_cmd
-  type: GripperCommand
+chessaton_hand_controller:
+  type: FollowJointTrajectory
+  action_ns: follow_joint_trajectory
   default: true
   joints:
     - left_finger_joint
-
-chessaton_finger_right_controller:
-  action_ns: gripper_cmd
-  type: GripperCommand
-  default: true
-  joints:
     - right_finger_joint
+
+
+# chessaton_finger_left_controller:
+#   action_ns: gripper_cmd
+#   type: GripperCommand
+#   default: true
+#   joints:
+#     - left_finger_joint
+
+# chessaton_finger_right_controller:
+#   action_ns: gripper_cmd
+#   type: GripperCommand
+#   default: true
+#   joints:
+#     - right_finger_joint

@@ -119,17 +119,23 @@ def generate_launch_description() -> LaunchDescription:
         arguments=["chessaton_arm_controller", "-c", "/controller_manager"],
     )
 
-    left_finger_controller_spawner = Node(
+    chessaton_hand_controller_spawner=Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["chessaton_finger_left_controller", "-c", "/controller_manager"],
+        arguments=["chessaton_hand_controller", "-c", "/controller_manager"],
     )
 
-    right_finger_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["chessaton_finger_right_controller", "-c", "/controller_manager"],
-    )
+    # left_finger_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["chessaton_finger_left_controller", "-c", "/controller_manager"],
+    # )
+
+    # right_finger_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["chessaton_finger_right_controller", "-c", "/controller_manager"],
+    # )
         
     return LaunchDescription(declared_arguments+[
 
@@ -150,21 +156,13 @@ def generate_launch_description() -> LaunchDescription:
             )
         ),
         RegisterEventHandler(
-            OnProcessExit(
-                target_action = joint_trajectory_controller_spawner,
-                on_exit = [
-                    left_finger_controller_spawner,
-                ]
-            )
-        ),
-        RegisterEventHandler(
-            OnProcessExit(
-                target_action = left_finger_controller_spawner,
-                on_exit = [
-                    right_finger_controller_spawner,
-                ]
-            )
-        ),
+                OnProcessExit(
+                    target_action = joint_trajectory_controller_spawner,
+                    on_exit = [
+                        chessaton_hand_controller_spawner,
+                    ]
+                )
+            ),
     ])
 
 def generate_declared_arguments() -> List[DeclareLaunchArgument]:

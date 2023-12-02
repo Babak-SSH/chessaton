@@ -251,17 +251,23 @@ def generate_launch_description():
         arguments=["chessaton_arm_controller", "-c", "/controller_manager"],
     )
 
-    left_finger_controller_spawner = Node(
+    chessaton_hand_controller_spawner=Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["chessaton_finger_left_controller", "-c", "/controller_manager"],
+        arguments=["chessaton_hand_controller", "-c", "/controller_manager"],
     )
 
-    right_finger_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["chessaton_finger_right_controller", "-c", "/controller_manager"],
-    )
+    # left_finger_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["chessaton_finger_left_controller", "-c", "/controller_manager"],
+    # )
+
+    # right_finger_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["chessaton_finger_right_controller", "-c", "/controller_manager"],
+    # )
 
     # ros2_control_node (only for fake controller)
     fake_ros2_controller_node=Node(
@@ -376,28 +382,18 @@ def generate_launch_description():
                     ]
                 )
             ),
-            RegisterEventHandler(
+        RegisterEventHandler(
                 OnProcessExit(
                     target_action = joint_trajectory_controller_spawner,
                     on_exit = [
-                        left_finger_controller_spawner,
+                        chessaton_hand_controller_spawner,
                     ]
                 )
             ),
-            RegisterEventHandler(
+           RegisterEventHandler(
                 OnProcessExit(
-                    target_action = left_finger_controller_spawner,
+                    target_action = chessaton_hand_controller_spawner,
                     on_exit = [
-                        right_finger_controller_spawner,
-                    ]
-                )
-            ),
-            RegisterEventHandler(
-                OnProcessExit(
-                    target_action = right_finger_controller_spawner,
-                    on_exit = [
-
-                        # MoveIt!2:
                         TimerAction(
                             period=5.0,
                             actions=[
