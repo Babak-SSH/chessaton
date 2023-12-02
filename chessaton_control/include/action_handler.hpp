@@ -26,10 +26,12 @@ class ActionHandler {
         std::string PLANNING_GROUP_HAND = "chessaton_hand";
 
         ActionHandler(rclcpp::Node::SharedPtr);
-        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan, const moveit::core::JointModelGroup*,  Position);
-        bool move_to(Position);
+        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Point);
+        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Pose);
+        bool move_to(geometry_msgs::msg::Point);
         bool move_to(geometry_msgs::msg::Pose);
         bool move_gripper(double);
+        bool move_gripper(std::string);
         bool add_collision_obj(shape_msgs::msg::SolidPrimitive, geometry_msgs::msg::Pose, std::string);
 };
 
