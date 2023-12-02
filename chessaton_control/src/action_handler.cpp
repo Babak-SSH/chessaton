@@ -12,6 +12,7 @@ namespace Chessaton {
         node = newNode;
         move_group_interface_arm = new moveit::planning_interface::MoveGroupInterface(node, PLANNING_GROUP_ARM);
         move_group_interface_hand = new moveit::planning_interface::MoveGroupInterface(node, PLANNING_GROUP_HAND);
+        move_group_interface_arm_hand = new moveit::planning_interface::MoveGroupInterface(node, PLANNING_GROUP_ARM_HAND);
     }
 
     void ActionHandler::visualize_path(moveit::planning_interface::MoveGroupInterface::Plan plan, geometry_msgs::msg::Point pos) {
@@ -62,6 +63,23 @@ namespace Chessaton {
         visual_tools.trigger();
         /* Sleep to give Rviz time to visualize the plan. */
         sleep(1.0);
+    }
+
+    bool ActionHandler::home() {
+         // Plan the move
+        moveit::planning_interface::MoveGroupInterface::Plan my_plan;
+        move_group_interface_arm_hand->setPlanningTime(60);
+        move_group_interface_arm_hand->setJointValueTarget(move_group_interface_arm_hand->getNamedTargetValues("home"));
+        auto const success = static_cast<bool>(move_group_interface_arm_hand->plan(my_plan));
+
+        // Execute the plan
+        if(success) {
+            move_group_interface_arm_hand->execute(my_plan);
+        } else {
+            RCLCPP_ERROR(logger, "Planning failed!");
+        }
+
+        return success;       
     }
 
     bool ActionHandler::move_to(geometry_msgs::msg::Point pos) {

@@ -20,14 +20,16 @@ class ActionHandler {
         rclcpp::Node::SharedPtr node;
         moveit::planning_interface::MoveGroupInterface* move_group_interface_arm;
         moveit::planning_interface::MoveGroupInterface* move_group_interface_hand;
-
+        moveit::planning_interface::MoveGroupInterface* move_group_interface_arm_hand;
     public:
         std::string PLANNING_GROUP_ARM = "chessaton_arm";
         std::string PLANNING_GROUP_HAND = "chessaton_hand";
+        std::string PLANNING_GROUP_ARM_HAND = "chessaton_arm_hand";
 
         ActionHandler(rclcpp::Node::SharedPtr);
         void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Point);
         void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Pose);
+        bool home();
         bool move_to(geometry_msgs::msg::Point);
         bool move_to(geometry_msgs::msg::Pose);
         bool move_gripper(double);
