@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="sensor_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:include filename="$(find chessaton_description)/urdf/sensors/camera_gazebo.xacro" />
+
+    <xacro:property name="cam_px" value="0.2" />
+	<xacro:property name="cam_py" value="0.0" />
+	<xacro:property name="cam_pz" value="0.8" />
+	<xacro:property name="cam_or" value="0" />
+	<xacro:property name="cam_op" value="1.5707" />
+	<xacro:property name="cam_oy" value="0" />
+
+    <!-- camera_name has to be unique -->
+    <xacro:camera_sensor link_name="camera_link" camera_name="my_camera"
+                       frame_name="camera_link_optical"/>
+
+	<xacro:macro name="sensor_camera">
+        <joint name="camera_joint" type="fixed">
+            <origin xyz="${cam_px} ${cam_py} ${cam_pz}" rpy="${cam_or} ${cam_op} ${cam_oy}" />
+            <parent link="world" />
+            <child link="camera_link" />
+        </joint>
+        <xacro:property name="camera_link" value="0.05" />
+        <link name="camera_link">
+            <collision>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <geometry>
+                <box size="${camera_link} ${camera_link} ${camera_link}"/>
+              </geometry>
+            </collision>
+    
+            <visual>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <geometry>
+            <box size="${camera_link} ${camera_link} ${camera_link}"/>
+              </geometry>
+            </visual>
+    
+            <inertial>
+              <mass value="1e-5" />
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+            </inertial>
+        </link>
+
+        <joint name="camera_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707" />
+            <parent link="camera_link" />
+            <child link="camera_link_optical" />
+        </joint>
+
+        <link name="camera_link_optical"></link>
+	</xacro:macro>
+</robot>

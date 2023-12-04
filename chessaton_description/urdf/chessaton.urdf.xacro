@@ -9,6 +9,7 @@
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton_gazebo.xacro" />
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton.ros2_control" />
     <xacro:include filename="$(find chessaton_description)/urdf/chessaton_hand.xacro" />
+    <xacro:include filename="$(find chessaton_description)/urdf/sensors/camera.urdf.xacro" />
 
     <!--            -->
     <!-- Parameters -->
@@ -17,10 +18,11 @@
     <xacro:arg name="name" default="chessaton"/>
     <!-- Prefix for all entities -->
     <xacro:arg name="prefix" default="chessaton_"/>
-
     <!-- Flag to enable default gripper -->
     <xacro:arg name="gripper" default="true" />
     <xacro:arg name="virtual_dof" default="true" />
+    <!-- Flag to enable camera -->
+    <xacro:arg name="use_camera" default="false" />
     <!-- ros2_control -->
     <!-- Flag to enable ros2 controllers for manipulator -->
     <xacro:arg name="ros2_control" default="true"/>
@@ -30,7 +32,6 @@
     <xacro:arg name="ros2_control_command_interface" default="position"/>
     <!-- The filepath to parameters of ROS 2 controllers -->
     <xacro:arg name="ros2_controller_parameters" default="$(find chessaton_description)/config/controllers_$(arg ros2_control_command_interface).yaml"/>
-
     <!-- Flag to preserve fixed joints and prevent lumping when generating SDF for Gazebo -->
     <xacro:arg name="gazebo_preserve_fixed_joint" default="false"/>
 
@@ -234,7 +235,11 @@
     <xacro:chessaton_hand
         virtual_dof="$(arg virtual_dof)"
     />
-    
+
+    <xacro:if value="$(arg use_camera)">
+        <xacro:sensor_camera /> 
+    </xacro:if>
+
       <!-- Transmission macro -->
   <!-- <xacro:macro name="SimpleTransmissionPosition" params="joint n">
     <transmission name="tran${n}">

@@ -1,0 +1,11 @@
+# The name of this file shouldn't be changed, or else the Setup Assistant won't detect it
+sensors:  ["sensor1"]
+sensor1:
+    sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+    filtered_cloud_topic: filtered_cloud
+    max_range: 6.0
+    max_update_rate: 6.0
+    padding_offset: 0.1
+    padding_scale: 1.0
+    point_cloud_topic: /my_camera/points
+    point_subsample: 1
