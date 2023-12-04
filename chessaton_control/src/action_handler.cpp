@@ -200,4 +200,47 @@ namespace Chessaton {
         return success;
     }
 
+    void ActionHandler::remove_obj(std::string object_id) {
+        moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+        moveit_msgs::msg::CollisionObject collision_object;
+        std::vector<std::string> object_ids;
+        moveit_msgs::msg::AttachedCollisionObject aco;
+
+        aco.object.id = object_id;
+        aco.object.operation = moveit_msgs::msg::CollisionObject::REMOVE;
+        planning_scene_interface.applyAttachedCollisionObject(aco);
+
+        collision_object.id = object_id;
+        collision_object.operation = collision_object.REMOVE; 
+        object_ids.push_back(collision_object.id);
+        planning_scene_interface.removeCollisionObjects(object_ids); 
+    }
+
+    void ActionHandler::allow_collision(std::string object_id) {
+        moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+
+        planning_scene_monitor::PlanningSceneMonitorPtr planning_scene_monitor(new planning_scene_monitor::PlanningSceneMonitor(node, "robot_description"));
+
+        planning_scene_monitor::LockedPlanningSceneRW ls(planning_scene_monitor);
+        collision_detection::AllowedCollisionMatrix& acm = ls->getAllowedCollisionMatrixNonConst();
+        acm.setEntry(object_id, "left_finger", true);
+        acm.setEntry(object_id, "right_finger", true);
+        acm.setEntry(object_id, "chessaton_gripper", true);
+        moveit_msgs::msg::PlanningScene diff_scene;
+        ls->getPlanningSceneDiffMsg(diff_scene);
+    
+        planning_scene_interface.applyPlanningScene(diff_scene); 
+    }
+
+    void ActionHandler::attach_obj(std::string obj) {
+        moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+        moveit_msgs::msg::AttachedCollisionObject aco;
+
+        aco.object.id = obj;
+        aco.link_name = "right_finger";
+        aco.touch_links.push_back("left_finger");
+        aco.object.operation = moveit_msgs::msg::CollisionObject::ADD;
+        planning_scene_interface.applyAttachedCollisionObject(aco);
+    }
+
 } // namespace chessaton

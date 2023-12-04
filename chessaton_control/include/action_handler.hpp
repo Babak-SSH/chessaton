@@ -4,7 +4,12 @@
 
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
+#include <moveit/planning_scene_monitor/planning_scene_monitor.h>
+#include <moveit/robot_model_loader/robot_model_loader.h>
+
 #include <moveit_visual_tools/moveit_visual_tools.h>
+
+// #include <moveit_msgs/msg/AttachedCollisionObject.hpp>
 #include <moveit_msgs/msg/collision_object.hpp>
 
 
@@ -35,6 +40,9 @@ class ActionHandler {
         bool move_gripper(double);
         bool move_gripper(std::string);
         bool add_collision_obj(shape_msgs::msg::SolidPrimitive, geometry_msgs::msg::Pose, std::string);
+        void remove_obj(std::string);
+        void allow_collision(std::string);
+        void attach_obj(std::string);
 };
 
 extern rclcpp::Logger logger;  // ROS logger
