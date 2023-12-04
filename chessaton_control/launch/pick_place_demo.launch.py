@@ -51,6 +51,8 @@ def generate_launch_description():
     rviz_config = LaunchConfiguration("rviz_config")
     use_sim_time = LaunchConfiguration("use_sim_time")
     log_level = LaunchConfiguration("log_level")
+    use_camera = LaunchConfiguration("use_camera")
+    demo_program = LaunchConfiguration("demo_program")
 
     # URDF
     robot_description_content = Command(
@@ -78,6 +80,9 @@ def generate_launch_description():
             " ",
             "gazebo_preserve_fixed_joint:=",
             gazebo_preserve_fixed_joint,
+            " ",
+            "use_camera:=",
+            use_camera,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -191,6 +196,12 @@ def generate_launch_description():
             LaunchConfiguration("__controller_parameters_basename"),
         ]
     )
+
+    # sensors
+    octomap_config = {'octomap_frame': 'camera_link_optical', 
+                      'octomap_resolution': 0.01,
+                      'max_range': 6.0} 
+    octomap_updater_config = load_yaml(moveit_config_package, "config/sensor_3d.yaml")
 
     # List of processes to be executed
     # xacro2sdf
@@ -311,6 +322,8 @@ def generate_launch_description():
             trajectory_execution,
             planning_scene_monitor_parameters,
             moveit_controller_manager,
+            octomap_config,
+            octomap_updater_config,
             {"use_sim_time": use_sim_time},
         ],
     )
@@ -359,9 +372,9 @@ def generate_launch_description():
     )
 
     # Pick Place Demo node
-    pick_place_demo = Node(
+    demo_program_node = Node(
         package="chessaton_control",
-        executable="pick_place_demo",
+        executable= demo_program,
         output="screen",
         parameters=[
             robot_description,
@@ -421,7 +434,7 @@ def generate_launch_description():
                     ]
                 )
             ),
-            pick_place_demo,
+            demo_program_node,
         ]
     )
 
@@ -536,5 +549,15 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             "log_level",
             default_value="warn",
             description="The level of logging that is applied to all ROS 2 nodes launched by this script.",
+        ),
+        DeclareLaunchArgument(
+            "use_camera",
+            default_value="true",
+            description="If true, add camera to scene",
+        ),
+        DeclareLaunchArgument(
+            "demo_program",
+            default_value="pick_place_demo",
+            description="name of the demo program to run.",
         ),
     ]
