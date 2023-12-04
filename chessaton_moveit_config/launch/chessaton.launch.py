@@ -51,6 +51,7 @@ def generate_launch_description():
     rviz_config = LaunchConfiguration("rviz_config")
     use_sim_time = LaunchConfiguration("use_sim_time")
     log_level = LaunchConfiguration("log_level")
+    use_camera = LaunchConfiguration("use_camera")
 
     # URDF
     robot_description_content = Command(
@@ -78,6 +79,9 @@ def generate_launch_description():
             " ",
             "gazebo_preserve_fixed_joint:=",
             gazebo_preserve_fixed_joint,
+            " ",
+            "use_camera:=",
+            use_camera,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -189,6 +193,12 @@ def generate_launch_description():
             LaunchConfiguration("__controller_parameters_basename"),
         ]
     )
+
+    # sensors
+    octomap_config = {'octomap_frame': 'camera_link_optical', 
+                      'octomap_resolution': 0.01,
+                      'max_range': 6.0} 
+    octomap_updater_config = load_yaml(moveit_config_package, "config/sensor_3d.yaml")
 
     # List of processes to be executed
     # xacro2sdf
@@ -310,6 +320,8 @@ def generate_launch_description():
             trajectory_execution,
             planning_scene_monitor_parameters,
             moveit_controller_manager,
+            octomap_config,
+            octomap_updater_config,
             {"use_sim_time": use_sim_time},
         ],
     )
@@ -477,7 +489,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # Gazebo
         DeclareLaunchArgument(
             "world",
-            default_value=path.join(get_package_share_directory('chessaton_description'), "worlds", "chessaton.world"),
+            default_value=path.join(get_package_share_directory('chessaton_description'), "world", "chessaton.world"),
             description="Name or filepath of world to load.",
         ),
         DeclareLaunchArgument(
@@ -518,5 +530,10 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             "log_level",
             default_value="warn",
             description="The level of logging that is applied to all ROS 2 nodes launched by this script.",
+        ),
+        DeclareLaunchArgument(
+            "use_camera",
+            default_value="false",
+            description="If true, add camera to scene",
         ),
     ]

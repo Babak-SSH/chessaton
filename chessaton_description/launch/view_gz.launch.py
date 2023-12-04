@@ -41,6 +41,7 @@ def generate_launch_description() -> LaunchDescription:
     use_sim_time = LaunchConfiguration("use_sim_time")
     ign_verbosity = LaunchConfiguration("ign_verbosity")
     log_level = LaunchConfiguration("log_level")
+    use_camera = LaunchConfiguration("use_camera")
 
     # URDF
     robot_description_content = Command(
@@ -68,6 +69,9 @@ def generate_launch_description() -> LaunchDescription:
             " ",
             "model:=",
             model,
+            " ",
+            "use_camera:=",
+            use_camera,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -230,5 +234,10 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             "log_level",
             default_value="warn",
             description="The level of logging that is applied to all ROS 2 nodes launched by this script.",
+        ),
+        DeclareLaunchArgument(
+            "use_camera",
+            default_value="false",
+            description="If true, add camera to scene",
         ),
     ]
