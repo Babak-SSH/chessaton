@@ -1,0 +1,3 @@
+---
+geometry_msgs/Point box_position
+geometry_msgs/Point target_position
