@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project(chessaton_control)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -13,12 +13,20 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(chessaton_description REQUIRED)
 find_package(chessaton_moveit_config REQUIRED)
+find_package(chessaton_interfaces REQUIRED)
 find_package(chessaton_chessaton_arm_ikfast_plugin REQUIRED)
 
 find_package(moveit_task_constructor_core REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_visual_tools REQUIRED)
+
+find_package(cv_bridge REQUIRED)
+find_package(image_transport REQUIRED)
+find_package(OpenCV REQUIRED COMPONENTS highgui imgcodecs imgproc videoio)
 find_package(rclcpp REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 
 # Convert xacros of description and moveit_config packages to URDF, SDF and SRDF
 # get_filename_component(${PROJECT_NAME}_REPO_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
@@ -33,6 +41,26 @@ find_package(rclcpp REQUIRED)
 # execute_process(
 #   COMMAND ${${PROJECT_NAME}_MOVEIT_CONFIG_SCRIPTS_DIR}/xacro2srdf.bash
 # )
+# rosidl_generate_interfaces(${PROJECT_NAME}
+#     "srv/BoxPositions.srv"
+#     DEPENDENCIES std_msgs geometry_msgs
+#     ADD_LINTER_TESTS
+# )
+
+add_executable(opencv_object_detection src/find_object_position.cpp)
+target_compile_features(opencv_object_detection PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(opencv_object_detection
+  "rclcpp"
+  "chessaton_interfaces"
+  "image_transport"
+  "cv_bridge"
+  "tf2_ros"
+  "tf2_geometry_msgs"
+  "OpenCV"
+)
+install(TARGETS opencv_object_detection 
+  RUNTIME DESTINATION lib/${PROJECT_NAME})
+
 add_executable(pick_place_depth_demo src/pick_place_depth_demo.cpp src/action_handler.cpp)
 target_include_directories(pick_place_depth_demo PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -46,7 +74,6 @@ ament_target_dependencies(
 )
 install(TARGETS pick_place_depth_demo
   DESTINATION lib/${PROJECT_NAME})
-
 
 add_executable(pick_place_demo src/pick_place_demo.cpp src/action_handler.cpp)
 target_include_directories(pick_place_demo PUBLIC
@@ -114,6 +141,7 @@ endif()
 
 # Install directories
 install(DIRECTORY launch world rviz DESTINATION share/${PROJECT_NAME})
+ament_export_dependencies(cv_bridge image_transport rosidl_default_runtime rclcpp sensor_msgs std_msgs)
 
 # Setup the project
 ament_package()
