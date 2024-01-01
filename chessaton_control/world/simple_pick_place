@@ -3,8 +3,8 @@
       <light name='sun' type='directional'>
         <cast_shadows>1</cast_shadows>
         <pose frame=''>0 0 10 0 -0 0</pose>
-        <diffuse>0.8 0.8 0.8 1</diffuse>
-        <specular>0.2 0.2 0.2 1</specular>
+        <diffuse>0.7 0.7 0.7 1</diffuse>
+        <specular>1 1 1 0</specular>
         <attenuation>
           <range>1000</range>
           <constant>0.9</constant>
@@ -470,17 +470,17 @@
               </box>
             </geometry>
             <material>
-              <script>
-                <name>Gazebo/Grey</name>
+              <!-- <script>
+                <name>Gazebo/Blue</name>
                 <uri>file://media/materials/scripts/gazebo.material</uri>
-              </script>
-              <ambient>0 0 1 1</ambient>
+              </script> -->
+              <ambient>0.1 0.1 0.1 1</ambient>
               <shader type='vertex'>
                 <normal_map>__default__</normal_map>
               </shader>
-              <diffuse>0.7 0.7 0.7 1</diffuse>
+              <diffuse>0.5 0.5 0.5 1</diffuse>
               <specular>0.01 0.01 0.01 1</specular>
-              <emissive>0 0 0 1</emissive>
+              <emissive>0 0 0.5 1</emissive>
             </material>
             <pose>0 0 0 0 -0 0</pose>
             <transparency>0</transparency>
@@ -572,17 +572,17 @@
               </box>
             </geometry>
             <material>
-              <script>
-                <name>Gazebo/Grey</name>
+              <!-- <script>
+                <name>Gazebo/Blue</name>
                 <uri>file://media/materials/scripts/gazebo.material</uri>
-              </script>
-              <ambient>0 0.8 0 0</ambient>
+              </script> -->
+              <ambient>0.1 0.1 0.1 1</ambient>
               <shader type='vertex'>
                 <normal_map>__default__</normal_map>
               </shader>
-              <diffuse>0.7 0.7 0.7 1</diffuse>
+              <diffuse>0.5 0.5 0.5 1</diffuse>
               <specular>0.01 0.01 0.01 1</specular>
-              <emissive>0 0 0 1</emissive>
+              <emissive>0 0.5 0 1</emissive>
             </material>
             <pose>0 0 0 0 -0 0</pose>
             <transparency>0</transparency>

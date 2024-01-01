@@ -4,7 +4,7 @@
 
     <xacro:property name="cam_px" value="0.2" />
 	<xacro:property name="cam_py" value="0.0" />
-	<xacro:property name="cam_pz" value="0.8" />
+	<xacro:property name="cam_pz" value="1.0" />
 	<xacro:property name="cam_or" value="0" />
 	<xacro:property name="cam_op" value="1.5707" />
 	<xacro:property name="cam_oy" value="0" />
