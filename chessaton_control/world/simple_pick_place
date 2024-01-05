@@ -190,10 +190,10 @@
           </link>
         </model>
         <model name='unit_box_blue'>
-          <pose frame=''>0.22 0 0.04493 1e-06 2e-05 1e-06</pose>
+          <pose frame=''>0 -0.22 0.04493 1e-06 2e-05 1e-06</pose>
           <scale>1 1 1</scale>
           <link name='link'>
-            <pose frame=''>0.22 0 0.04493 1e-06 2e-05 1e-06</pose>
+            <pose frame=''>0 -0.22 0.04493 1e-06 2e-05 1e-06</pose>
             <velocity>0 0 0 0 -0 0</velocity>
             <acceleration>0 0 -9.8 0 0 -2e-06</acceleration>
             <wrench>0 0 -0.98 0 -0 0</wrench>
@@ -466,7 +466,7 @@
           <visual name='visual'>
             <geometry>
               <box>
-                <size>0.027368 0.028949 0.053568</size>
+                <size>0.0285 0.0285 0.054</size>
               </box>
             </geometry>
             <material>
@@ -492,7 +492,7 @@
             <pose>0 0 0 0 -0 0</pose>
             <geometry>
               <box>
-                <size>0.027368 0.028949 0.053568</size>
+                <size>0.0285 0.0285 0.054</size>
               </box>
             </geometry>
             <surface>
