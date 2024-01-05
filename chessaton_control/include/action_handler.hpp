@@ -26,6 +26,20 @@ class ActionHandler {
         moveit::planning_interface::MoveGroupInterface* move_group_interface_arm;
         moveit::planning_interface::MoveGroupInterface* move_group_interface_hand;
         moveit::planning_interface::MoveGroupInterface* move_group_interface_arm_hand;
+    protected:
+	    // list of objects to attach (true) / detach (false) to a given link
+	    // std::map<std::string, std::pair<Names, bool>> attach_objects_;
+	    // list of objects to add / remove to the planning scene
+	    std::vector<moveit_msgs::msg::CollisionObject> collision_objects_;
+
+	    // list of objects to mutually
+	    // struct CollisionMatrixPairs
+	    // {
+	    // 	Names first;
+	    // 	Names second;
+	    // 	bool allow;
+	    // };
+	    // std::list<CollisionMatrixPairs> collision_matrix_edits_;
     public:
         std::string PLANNING_GROUP_ARM = "chessaton_arm";
         std::string PLANNING_GROUP_HAND = "chessaton_hand";
@@ -41,8 +55,9 @@ class ActionHandler {
         bool move_gripper(std::string);
         bool add_collision_obj(shape_msgs::msg::SolidPrimitive, geometry_msgs::msg::Pose, std::string);
         void remove_obj(std::string);
-        void allow_collision(std::string);
+        void allow_collision(std::string, bool);
         void attach_obj(std::string);
+        void detach_obj(std::string);
 };
 
 extern rclcpp::Logger logger;  // ROS logger
