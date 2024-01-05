@@ -113,10 +113,10 @@
         <gripper_link> left_finger </gripper_link>
       </arm>
       <forces_angle_tolerance>100</forces_angle_tolerance>
-      <update_rate>10</update_rate>
+      <update_rate>30</update_rate>
       <grip_count_threshold>5</grip_count_threshold>
-      <max_grip_count>10</max_grip_count>
-      <release_tolerance>0.005</release_tolerance>
+      <max_grip_count>20</max_grip_count>
+      <release_tolerance>0.008</release_tolerance>
       <disable_collisions_on_attach>false</disable_collisions_on_attach>
       <contact_topic>__default_topic__</contact_topic>
     </plugin>
@@ -340,7 +340,7 @@
     <child link="left_finger"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="100" lower="0" upper="0.03" velocity="0.2"/>
+    <limit effort="100" lower="0" upper="0.03" velocity="0.02"/>
   </joint>
   <link name="left_finger">
     <visual>
@@ -368,7 +368,7 @@
     <child link="right_finger"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="100" lower="-0.03" upper="0" velocity="0.2"/>
+    <limit effort="100" lower="-0.03" upper="0" velocity="0.02"/>
   </joint>
   <link name="right_finger">
     <visual>

@@ -81,11 +81,11 @@
                 <gripper_link> right_finger </gripper_link>
                 <gripper_link> left_finger </gripper_link>
              </arm>
-            <forces_angle_tolerance>100</forces_angle_tolerance>
-            <update_rate>10</update_rate>
+            <forces_angle_tolerance>120</forces_angle_tolerance>
+            <update_rate>30</update_rate>
             <grip_count_threshold>5</grip_count_threshold>
-            <max_grip_count>10</max_grip_count>
-            <release_tolerance>0.005</release_tolerance>
+            <max_grip_count>20</max_grip_count>
+            <release_tolerance>0.008</release_tolerance>
             <disable_collisions_on_attach>false</disable_collisions_on_attach>
             <contact_topic>__default_topic__</contact_topic>
          </plugin>
