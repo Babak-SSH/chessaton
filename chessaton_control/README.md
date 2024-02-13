@@ -20,9 +20,9 @@ ros2 launch chessaton_control pick_place_demo.launch.py demo_program:="pick_plac
 ```
 pick and place with depth camera
 ```
-ros2 launch chessaton_control pick_place_demo.launch.py demo_program:="pick_place_depth_demo"
+ros2 launch chessaton_control pick_place_camera_demo.launch.py demo_program:="pick_place_depth_demo"
 ```
 pick and place with opencv
 ```
-ros2 launch chessaton_control pick_place_demo.launch.py demo_program:="pick_place_opencv_demo"
+ros2 launch chessaton_control pick_place_camera_demo.launch.py demo_program:="pick_place_opencv_demo" enable_service=true
 ```
