@@ -49,12 +49,12 @@ cv::Mat apply_cv_algorithms(cv::Mat camera_image) {
     cv::cvtColor(camera_image, img_gray, cv::COLOR_BGR2GRAY);
     cv::Mat canny_output;
     // numbers for min and max are low because of the lighting in simulation
-    cv::Canny(img_gray,canny_output,10,40);
+    cv::Canny(img_gray,canny_output,8,30);
 
     // show result of canny
-    cv::namedWindow( "Extracted canny");
-    cv::imshow("Extracted canny", canny_output);
-    cv::waitKey(3);
+    // cv::namedWindow( "view1");
+    // cv::imshow("view1", canny_output);
+    // cv::waitKey(3);
 
     return canny_output;
 }
@@ -75,30 +75,33 @@ std::vector<cv::Point2f> extract_centroids(cv::Mat canny_output) {
 
     for( size_t i = 0; i< contours.size(); i++ ) {
         // finding valid areas
-        cv::approxPolyDP(contours[i], tmp, 0.01*cv::arcLength(contours[i],true), true);
+        cv::approxPolyDP(contours[i], tmp, 0.008*cv::arcLength(contours[i],true), true);
         tmpContours.push_back(tmp);
     }
     for( size_t i = 0; i< contours.size(); i++ ) {
         // we are trying to find cubes or squares therefore we limit the contours 
-        if (tmpContours[i].size() < 10 && tmpContours[i].size() > 3) {
+        if ((tmpContours[i].size() < 12) && (tmpContours[i].size() > 3)) {
             boundRect[i] = boundingRect( tmpContours[i] );
             // simple and naive way to detect the big square table and the small blue square object according to their area  
-            if(boundRect[i].area() > 1000) {
+            if(boundRect[i].area() > 2000) {
                 bigBoxContours.push_back(tmpContours[i]);
-                // uncomment these if you want to see all the areas detected for
-                // each cube (cause a cube could have multiple squares or multi contour shapes in it)
-
-                // cv::Scalar color = cv::Scalar( rng.uniform(0, 256), rng.uniform(0,256), rng.uniform(0,256) );
-                // cv::drawContours(drawingt, tmpContours, (int)i, color, 2, cv::LINE_8, hierarchy, 0);
-            } 
-            else if (boundRect[i].area() > 200 && boundRect[i].area() < 500) {
+            } else if ((boundRect[i].area() > 80) && (boundRect[i].area() < 900)) {
                 smallBoxContours.push_back(tmpContours[i]);
             }
+            // uncomment these if you want to see all the areas detected for
+            // each cube (cause a cube could have multiple squares or multi contour shapes in it)
+
+            cv::Scalar color = cv::Scalar( rng.uniform(0, 256), rng.uniform(0,256), rng.uniform(0,256) );
+            cv::drawContours(drawingt, tmpContours, (int)i, color, 2, cv::LINE_8, hierarchy, 0);
         }
+
     }
 
-    // cv::imshow( "Contours", drawingt );
+    // cv::namedWindow( "view3");
+    // cv::imshow( "view2", drawingt );
+    // cv::waitKey(3);
 
+    int sc = smallBoxContours.size();
     // get the moments
     std::vector<cv::Moments> smallMu(smallBoxContours.size());
     for( int i = 0; i<smallBoxContours.size(); i++ )
@@ -110,11 +113,14 @@ std::vector<cv::Point2f> extract_centroids(cv::Mat canny_output) {
             float centroid_x = smallMu[i].m10/smallMu[i].m00;
             float centroid_y = smallMu[i].m01/smallMu[i].m00;
             smallCentroids[i] = cv::Point2f(centroid_x, centroid_y);
+        } else {
+            sc--;
         }
     }
+
     cv::Point2f zero(0.0f, 0.0f);
     cv::Point2f sum  = std::accumulate(smallCentroids.begin(), smallCentroids.end(), zero);
-    cv::Point2f small_mean_point(sum.x / smallCentroids.size(), sum.y / smallCentroids.size());
+    cv::Point2f small_mean_point(sum.x / sc, sum.y / sc);
     result.push_back(small_mean_point);
 
     int bc = bigBoxContours.size();
@@ -134,6 +140,7 @@ std::vector<cv::Point2f> extract_centroids(cv::Mat canny_output) {
             bc--;
         }
     }
+
     sum  = std::accumulate(bigCentroids.begin(), bigCentroids.end(), zero);
     cv::Point2f big_mean_point(sum.x / bc, sum.y / bc);
     result.push_back(big_mean_point);
@@ -142,21 +149,23 @@ std::vector<cv::Point2f> extract_centroids(cv::Mat canny_output) {
     // draw findal contours
     cv::Mat drawing(canny_output.size(), CV_8UC3, cv::Scalar(255,255,255));
 
-    for( int i = 0; i<smallBoxContours.size(); i++ ) {
-        cv::Scalar color = cv::Scalar(167,151,0); // B G R values
+    for( int i = 0; i<bigBoxContours.size(); i++ ) {
+        cv::Scalar color = cv::Scalar(0,151,100); // B G R values
         cv::drawContours(drawing, bigBoxContours, (int)i, color, 2, 8, hierarchy, 0, cv::Point());
         cv::circle( drawing, bigCentroids[i], 4, color, -1, 8, 0 );
     }
     for( int i = 0; i<smallBoxContours.size(); i++ ) {
-        cv::Scalar color = cv::Scalar(0,151,100); // B G R values
-        cv::drawContours(drawing, smallBoxContours, (int)i, color, 2, 8, hierarchy, 0, cv::Point());
-        cv::circle( drawing, smallCentroids[i], 4, color, -1, 8, 0 );
+        if (smallMu[i].m00 != 0) {
+            cv::Scalar color = cv::Scalar(167,151,0); // B G R values
+            cv::drawContours(drawing, smallBoxContours, (int)i, color, 2, 8, hierarchy, 0, cv::Point());
+            cv::circle( drawing, smallCentroids[i], 4, color, -1, 8, 0 );
+        }
     }
 
     // show final result.
-    cv::namedWindow( "Extracted centroids");
-    cv::imshow( "Extracted centroids", drawing );
-    cv::waitKey(3);
+    // cv::namedWindow( "view2");
+    // cv::imshow( "view3", drawing );
+    // cv::waitKey(3);
 
     return result;
 }
@@ -207,17 +216,17 @@ geometry_msgs::msg::Point transform_between_frames(geometry_msgs::msg::Point p, 
 void point_cloud_callback(const sensor_msgs::msg::PointCloud2::SharedPtr pCloud) {
     // sensor_msgs::msg::PointCloud2 tmpCloud = pCloud;
     if (tmpFlag) {
-    geometry_msgs::msg::Point box_position_camera_frame;
-    box_position_camera_frame = pixel_to_3d_point(pCloud, box_centroid.x, box_centroid.y);
+        geometry_msgs::msg::Point box_position_camera_frame;
+        box_position_camera_frame = pixel_to_3d_point(pCloud, box_centroid.x, box_centroid.y);
 
-    geometry_msgs::msg::Point target_position_camera_frame;
-    target_position_camera_frame = pixel_to_3d_point(pCloud, target_centroid.x, target_centroid.y);
+        geometry_msgs::msg::Point target_position_camera_frame;
+        target_position_camera_frame = pixel_to_3d_point(pCloud, target_centroid.x, target_centroid.y);
 
-    box_position_base_frame = transform_between_frames(box_position_camera_frame, from_frame, to_frame);
-    target_position_base_frame = transform_between_frames(target_position_camera_frame, from_frame, to_frame);
+        box_position_base_frame = transform_between_frames(box_position_camera_frame, from_frame, to_frame);
+        target_position_base_frame = transform_between_frames(target_position_camera_frame, from_frame, to_frame);
 
-    std::cout << "3d box position base frame: x " << box_position_base_frame.x << " y " << box_position_base_frame.y << " z " << box_position_base_frame.z << std::endl;
-    std::cout << "3d target position base frame: x " << target_position_base_frame.x << " y " << target_position_base_frame.y << " z " << target_position_base_frame.z << std::endl;
+        // std::cout << "3d box position base frame: x " << box_position_base_frame.x << " y " << box_position_base_frame.y << " z " << box_position_base_frame.z << std::endl;
+        // std::cout << "3d target position base frame: x " << target_position_base_frame.x << " y " << target_position_base_frame.y << " z " << target_position_base_frame.z << std::endl;
     }
 }
 
@@ -226,7 +235,16 @@ bool get_positions(std::shared_ptr<chessaton_interfaces::srv::BoxPositions::Requ
                     std::shared_ptr<chessaton_interfaces::srv::BoxPositions::Response> res) {
         res->box_position = box_position_base_frame;
         res->target_position = target_position_base_frame;
-        return true;
+
+        // TODO: process of the images should be removed from callback functions of subscriptions
+        // so that the program doesn't slow down. for now an ugly solution has implemented which 
+        // will kill the node after responding to request satisfying our one time use of the service
+        // but if we were going to make it a general process we have to change it to structure priorly mentioned.
+        node.reset();
+        // Shutdown ROS
+        rclcpp::shutdown();
+
+        // return true;
 }
 
 int main(int argc, char **argv) {
@@ -236,6 +254,10 @@ int main(int argc, char **argv) {
        "opencv_services",
        rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true)
     );
+
+    // we use sim_time for simulation in gazebo
+    // rclcpp::Parameter sim_time_param("use_sim_time", true);
+    // node->set_parameter(sim_time_param);
  
     tf_buffer = std::make_unique<tf2_ros::Buffer>(node->get_clock());
     std::shared_ptr<tf2_ros::TransformListener> tf_listner;
@@ -252,9 +274,8 @@ int main(int argc, char **argv) {
 
     rclcpp::spin(node);
     // Close down OpenCV
-    // cv::destroyWindow("view");
-    node.reset();
-    // Shutdown ROS
-    rclcpp::shutdown();
+    // cv::destroyWindow("view1");
+    // cv::destroyWindow("view2");
+    // cv::destroyWindow("view3");
     return 0;
 }
