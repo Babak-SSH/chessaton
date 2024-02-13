@@ -53,6 +53,8 @@ def generate_launch_description():
     log_level = LaunchConfiguration("log_level")
     use_camera = LaunchConfiguration("use_camera")
     demo_program = LaunchConfiguration("demo_program")
+    enable_service = LaunchConfiguration("enable_service")
+    service_node = LaunchConfiguration("service_node")
 
     # URDF
     robot_description_content = Command(
@@ -386,6 +388,21 @@ def generate_launch_description():
         ],
     )
 
+    # service node
+    service_node = Node(
+        package="chessaton_control",
+        executable=service_node,
+        output="screen",
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            robot_description_kinematics,
+            planning_pipeline,
+            joint_limits,
+        ],
+        condition=IfCondition(enable_service)
+    )
+
     return LaunchDescription(declared_arguments+
         [
             gazebo,
@@ -425,7 +442,7 @@ def generate_launch_description():
                     target_action = chessaton_hand_controller_spawner,
                     on_exit = [
                         TimerAction(
-                            period=5.0,
+                            period=2.0,
                             actions=[
                                 rviz_node_full,
                                 run_move_group_node
@@ -434,7 +451,15 @@ def generate_launch_description():
                     ]
                 )
             ),
-            demo_program_node,
+
+            service_node,
+
+            TimerAction(
+                period=3.0,
+                actions=[
+                    demo_program_node,
+                ]
+            ),
         ]
     )
 
@@ -559,5 +584,15 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             "demo_program",
             default_value="pick_place_demo",
             description="name of the demo program to run.",
+        ),
+        DeclareLaunchArgument(
+            "enable_service",
+            default_value="false",
+            description="enable running the service node,",
+        ),
+        DeclareLaunchArgument(
+            "service_node",
+            default_value="find_object_position",
+            description="a node providing a service for clients.",
         ),
     ]
