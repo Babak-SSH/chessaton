@@ -47,9 +47,9 @@ find_package(std_msgs REQUIRED)
 #     ADD_LINTER_TESTS
 # )
 
-add_executable(opencv_object_detection src/find_object_position.cpp)
-target_compile_features(opencv_object_detection PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(opencv_object_detection
+add_executable(find_object_position src/find_object_position.cpp)
+target_compile_features(find_object_position PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(find_object_position
   "rclcpp"
   "chessaton_interfaces"
   "image_transport"
@@ -58,16 +58,29 @@ ament_target_dependencies(opencv_object_detection
   "tf2_geometry_msgs"
   "OpenCV"
 )
-install(TARGETS opencv_object_detection 
+install(TARGETS find_object_position 
   RUNTIME DESTINATION lib/${PROJECT_NAME})
+
+add_executable(pick_place_opencv_demo src/pick_place_opencv_demo.cpp src/action_handler.cpp)
+target_include_directories(pick_place_opencv_demo PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_compile_features(pick_place_opencv_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(pick_place_opencv_demo
+  "moveit_ros_planning_interface"
+  "moveit_visual_tools"
+  "rclcpp"
+  "chessaton_interfaces"
+)
+install(TARGETS pick_place_opencv_demo
+  DESTINATION lib/${PROJECT_NAME})
 
 add_executable(pick_place_depth_demo src/pick_place_depth_demo.cpp src/action_handler.cpp)
 target_include_directories(pick_place_depth_demo PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 target_compile_features(pick_place_depth_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(
-  pick_place_depth_demo
+ament_target_dependencies(pick_place_depth_demo
   "moveit_ros_planning_interface"
   "moveit_visual_tools"
   "rclcpp"
@@ -80,8 +93,7 @@ target_include_directories(pick_place_demo PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 target_compile_features(pick_place_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(
-  pick_place_demo
+ament_target_dependencies(pick_place_demo
   "moveit_ros_planning_interface"
   "moveit_visual_tools"
   "rclcpp"
@@ -94,8 +106,7 @@ target_include_directories(movep_demo PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 target_compile_features(movep_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(
-  movep_demo
+ament_target_dependencies(movep_demo
   "moveit_ros_planning_interface"
   "moveit_visual_tools"
   "rclcpp"
@@ -108,8 +119,7 @@ add_executable(mtc_pick_place_demo src/mtc_pick_place_demo.cpp)
 #   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 #   $<INSTALL_INTERFACE:include>)
 target_compile_features(mtc_pick_place_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(
-  mtc_pick_place_demo
+ament_target_dependencies(mtc_pick_place_demo
   "moveit_task_constructor_core"
   "rclcpp"
 )
