@@ -14,8 +14,31 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 find_package(chessaton_description REQUIRED)
-find_package(chessaton_chessaton_arm_ikfast_plugin)
+find_package(chessaton_moveit_config REQUIRED)
+find_package(chessaton_interfaces REQUIRED)
+find_package(chessaton_chessaton_arm_ikfast_plugin REQUIRED)
+find_package(chessaton_control REQUIRED)
 
+find_package(moveit_task_constructor_core REQUIRED)
+find_package(moveit_ros_planning_interface REQUIRED)
+find_package(moveit_visual_tools REQUIRED)
+
+find_package(rclcpp REQUIRED)
+
+add_executable(chess_demo src/chess_demo.cpp)
+target_include_directories(chess_demo PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+target_compile_features(chess_demo PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(chess_demo
+    "moveit_ros_planning_interface"
+    "moveit_visual_tools"
+    "rclcpp"
+    chessaton_control
+)
+install(TARGETS chess_demo
+    DESTINATION lib/${PROJECT_NAME})
+  
 install(DIRECTORY launch worlds models DESTINATION share/${PROJECT_NAME})
 
 # Setup the project
