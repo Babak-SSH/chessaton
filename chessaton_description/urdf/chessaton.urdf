@@ -112,11 +112,11 @@
         <gripper_link> right_finger </gripper_link>
         <gripper_link> left_finger </gripper_link>
       </arm>
-      <forces_angle_tolerance>100</forces_angle_tolerance>
+      <forces_angle_tolerance>120</forces_angle_tolerance>
       <update_rate>30</update_rate>
-      <grip_count_threshold>5</grip_count_threshold>
+      <grip_count_threshold>4</grip_count_threshold>
       <max_grip_count>20</max_grip_count>
-      <release_tolerance>0.008</release_tolerance>
+      <release_tolerance>0.002</release_tolerance>
       <disable_collisions_on_attach>false</disable_collisions_on_attach>
       <contact_topic>__default_topic__</contact_topic>
     </plugin>
@@ -241,9 +241,9 @@
       <material name="color_link2"/>
     </visual>
     <inertial>
-      <origin rpy="0 0 0" xyz="1.94289029309402E-16 -0.0247721366408157 0.0510000000000001"/>
-      <mass value="0.045902162826317"/>
-      <inertia ixx="4.65002565093796E-05" ixy="2.26509482575262E-19" ixz="1.10875380838109E-14" iyy="2.11429163261091E-05" iyz="-2.47808875423641E-23" izz="3.01847862586687E-05"/>
+      <origin rpy="0 0 0" xyz="1.1343E-09 -0.02475 0.101"/>
+      <mass value="0.077067"/>
+      <inertia ixx="7.2952E-05" ixy="4.5829E-12" ixz="1.1087E-14" iyy="4.7593E-05" iyz="3.7988E-20" izz="3.1748E-05"/>
     </inertial>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -253,7 +253,7 @@
     </collision>
   </link>
   <joint name="chessaton_joint3" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.102"/>
+    <origin rpy="0 0 0" xyz="0 0 0.202"/>
     <parent link="chessaton_link2"/>
     <child link="chessaton_link3"/>
     <axis xyz="0 -1 0"/>
@@ -275,13 +275,13 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.030212 -0.026096 -0.0011497"/>
-      <mass value="0.076498"/>
-      <inertia ixx="2.3983E-05" ixy="7.4374E-08" ixz="-3.21E-07" iyy="2.2146E-05" iyz="4.236E-07" izz="3.9025E-05"/>
+      <origin rpy="0 0 0" xyz="0.071008 -0.024827 -0.00025021"/>
+      <mass value="0.10766"/>
+      <inertia ixx="2.5545E-05" ixy="8.4872E-08" ixz="-3.21E-07" iyy="4.8596E-05" iyz="4.236E-07" izz="6.5475E-05"/>
     </inertial>
   </link>
   <joint name="chessaton_joint4" type="revolute">
-    <origin rpy="0 0 0" xyz="0.098504 0.00041731 0.0019578"/>
+    <origin rpy="0 0 0" xyz="0.1985 0.0019174 0.0019578"/>
     <parent link="chessaton_link3"/>
     <child link="chessaton_link4"/>
     <axis xyz="0 -1 0"/>
@@ -304,8 +304,8 @@
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0.0016488 -0.027436 -0.0097099"/>
-      <mass value="0.046643"/>
-      <inertia ixx="1.458E-05" ixy="-4.236E-07" ixz="-1.6429E-09" iyy="1.0335E-05" iyz="-8.4986E-08" izz="8.1259E-06"/>
+      <mass value="0.0466425419935174"/>
+      <inertia ixx="1.458E-05" ixy="-4.2359E-07" ixz="-1.6429E-09" iyy="1.0335E-05" iyz="-8.4986E-08" izz="8.1259E-06"/>
     </inertial>
   </link>
   <joint name="gripper_joint" type="fixed">
@@ -390,13 +390,6 @@
       <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
     </inertial>
   </link>
-  <link name="chessaton_hand_tcp_roll">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.011394 -0.0086324 -0.005"/>
-      <mass value="0.0088"/>
-      <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
-    </inertial>
-  </link>
   <joint name="chessaton_hand_tcp_roll_virtual_joint" type="revolute">
     <parent link="chessaton_gripper"/>
     <child link="chessaton_hand_tcp_roll"/>
@@ -405,6 +398,13 @@
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="6"/>
   </joint>
+  <link name="chessaton_hand_tcp_roll">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.011394 -0.0086324 -0.005"/>
+      <mass value="0.0088"/>
+      <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
+    </inertial>
+  </link>
   <link name="chessaton_hand_tcp_yaw">
     <inertial>
       <origin rpy="0 0 0" xyz="0.011394 -0.0086324 -0.005"/>

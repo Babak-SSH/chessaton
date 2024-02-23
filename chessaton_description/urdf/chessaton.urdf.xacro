@@ -130,15 +130,15 @@
         </visual>
 
         <inertial>
-            <origin xyz="1.94289029309402E-16 -0.0247721366408157 0.0510000000000001" rpy="0 0 0" />
-            <mass value="0.045902162826317" />
+            <origin xyz="1.1343E-09 -0.02475 0.101" rpy="0 0 0" />
+            <mass value="0.077067" />
             <inertia
-              ixx="4.65002565093796E-05"
-              ixy="2.26509482575262E-19"
-              ixz="1.10875380838109E-14"
-              iyy="2.11429163261091E-05"
-              iyz="-2.47808875423641E-23"
-              izz="3.01847862586687E-05" />
+              ixx="7.2952E-05"
+              ixy="4.5829E-12"
+              ixz="1.1087E-14"
+              iyy="4.7593E-05"
+              iyz="3.7988E-20"
+              izz="3.1748E-05" />
         </inertial>
 
         <collision>
@@ -150,7 +150,7 @@
     </link>
 
 	<joint name="chessaton_joint3" type="revolute">
-	  	<origin xyz="0 0 0.102" rpy="0 0 0" />
+	  	<origin xyz="0 0 0.202" rpy="0 0 0" />
 	  	<parent link="chessaton_link2" />
 	  	<child link="chessaton_link3" />
 	  	<axis xyz="0 -1 0" />
@@ -175,20 +175,20 @@
 		</collision>
 
 		<inertial>
-            <origin xyz="0.030212 -0.026096 -0.0011497" rpy="0 0 0" />
-            <mass value="0.076498" />
+            <origin xyz="0.071008 -0.024827 -0.00025021" rpy="0 0 0" />
+            <mass value="0.10766" />
             <inertia
-              ixx="2.3983E-05"
-              ixy="7.4374E-08"
+              ixx="2.5545E-05"
+              ixy="8.4872E-08"
               ixz="-3.21E-07"
-              iyy="2.2146E-05"
+              iyy="4.8596E-05"
               iyz="4.236E-07"
-              izz="3.9025E-05" />
+              izz="6.5475E-05" />
         </inertial>
 	</link>
 
 	<joint name="chessaton_joint4" type="revolute">
-	    <origin xyz="0.098504 0.00041731 0.0019578" rpy="0 0 0" />
+	    <origin xyz="0.1985 0.0019174 0.0019578" rpy="0 0 0" />
 	    <parent link="chessaton_link3" />
 	    <child link="chessaton_link4" />
 	    <axis xyz="0 -1 0" />
@@ -214,10 +214,10 @@
 
         <inertial>
             <origin xyz="0.0016488 -0.027436 -0.0097099" rpy="0 0 0" />
-            <mass value="0.046643" />
+            <mass value="0.0466425419935174" />
             <inertia
               ixx="1.458E-05"
-              ixy="-4.236E-07"
+              ixy="-4.2359E-07"
               ixz="-1.6429E-09"
               iyy="1.0335E-05"
               iyz="-8.4986E-08"

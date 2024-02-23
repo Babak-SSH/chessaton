@@ -160,15 +160,15 @@
     <link name='chessaton_link2'>
       <pose relative_to='chessaton_joint2'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>1.94289029309402e-16 -0.0247721366408157 0.0510000000000001 0 0 0</pose>
-        <mass>0.045902162826316997</mass>
+        <pose>1.1343e-09 -0.02475 0.101 0 0 0</pose>
+        <mass>0.077066999999999997</mass>
         <inertia>
-          <ixx>4.6500256509379599e-05</ixx>
-          <ixy>2.2650948257526202e-19</ixy>
-          <ixz>1.10875380838109e-14</ixz>
-          <iyy>2.1142916326109098e-05</iyy>
-          <iyz>-2.4780887542364101e-23</iyz>
-          <izz>3.0184786258668701e-05</izz>
+          <ixx>7.2952000000000002e-05</ixx>
+          <ixy>4.5828999999999998e-12</ixy>
+          <ixz>1.1087e-14</ixz>
+          <iyy>4.7593000000000003e-05</iyy>
+          <iyz>3.7988e-20</iyz>
+          <izz>3.1748000000000002e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link2_collision'>
@@ -214,7 +214,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint3' type='revolute'>
-      <pose relative_to='chessaton_link2'>0 0 0.102 0 0 0</pose>
+      <pose relative_to='chessaton_link2'>0 0 0.202 0 0 0</pose>
       <parent>chessaton_link2</parent>
       <child>chessaton_link3</child>
       <axis>
@@ -236,15 +236,15 @@
     <link name='chessaton_link3'>
       <pose relative_to='chessaton_joint3'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.030212 -0.026096 -0.0011497 0 0 0</pose>
-        <mass>0.076497999999999997</mass>
+        <pose>0.071008 -0.024827 -0.00025021 0 0 0</pose>
+        <mass>0.10766000000000001</mass>
         <inertia>
-          <ixx>2.3983000000000001e-05</ixx>
-          <ixy>7.4374000000000001e-08</ixy>
+          <ixx>2.5545e-05</ixx>
+          <ixy>8.4871999999999994e-08</ixy>
           <ixz>-3.2099999999999998e-07</ixz>
-          <iyy>2.2146000000000001e-05</iyy>
+          <iyy>4.8596e-05</iyy>
           <iyz>4.2360000000000001e-07</iyz>
-          <izz>3.9025e-05</izz>
+          <izz>6.5475000000000006e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link3_collision'>
@@ -290,7 +290,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint4' type='revolute'>
-      <pose relative_to='chessaton_link3'>0.09850399999999999 0.00041731 0.0019578 0 0 0</pose>
+      <pose relative_to='chessaton_link3'>0.1985 0.0019174 0.0019578 0 0 0</pose>
       <parent>chessaton_link3</parent>
       <child>chessaton_link4</child>
       <axis>
@@ -312,15 +312,15 @@
     <link name='chessaton_link4'>
       <pose relative_to='chessaton_joint4'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0286300917891112 -0.02771335642326764 -0.009162185522710531 0 0 0</pose>
-        <mass>0.12080299999999999</mass>
+        <pose>0.02863019408502604 -0.02771335747482696 -0.009162183446125242 0 0 0</pose>
+        <mass>0.12080254199351741</mass>
         <inertia>
-          <ixx>4.0576637891933041e-05</ixx>
-          <ixy>2.298650559210205e-07</ixy>
-          <ixz>-1.54806624416279e-06</ixz>
-          <iyy>7.8751868129650258e-05</iyy>
-          <iyz>-7.508674445264648e-08</iyz>
-          <izz>8.9579819872050978e-05</izz>
+          <ixx>4.0576637719301682e-05</ixx>
+          <ixy>2.298716284465305e-07</ixy>
+          <ixz>-1.5480594756971059e-06</ixz>
+          <iyy>7.8751534566799686e-05</iyy>
+          <iyz>-7.5086814029667491e-08</iyz>
+          <izz>8.9579486411365861e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link4_collision'>
@@ -638,11 +638,11 @@
         <gripper_link>right_finger</gripper_link>
         <gripper_link>left_finger</gripper_link>
       </arm>
-      <forces_angle_tolerance>100</forces_angle_tolerance>
+      <forces_angle_tolerance>120</forces_angle_tolerance>
       <update_rate>30</update_rate>
-      <grip_count_threshold>5</grip_count_threshold>
+      <grip_count_threshold>4</grip_count_threshold>
       <max_grip_count>20</max_grip_count>
-      <release_tolerance>0.008</release_tolerance>
+      <release_tolerance>0.002</release_tolerance>
       <disable_collisions_on_attach>false</disable_collisions_on_attach>
       <contact_topic>__default_topic__</contact_topic>
     </plugin>

@@ -1,5 +1,5 @@
 #!/usr/bin/env -S ros2 launch
-"""Visualisation of SDF model for panda in Ignition Gazebo. Note that the generated model://panda/model.sdf descriptor is used."""
+"""Visualisation of SDF model for chessaton"""
 
 from os import path
 from typing import List
