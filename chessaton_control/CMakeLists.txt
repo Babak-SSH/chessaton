@@ -47,6 +47,29 @@ find_package(std_msgs REQUIRED)
 #     ADD_LINTER_TESTS
 # )
 
+include_directories(include)
+
+add_library(action_handler SHARED src/action_handler.cpp) 
+ament_target_dependencies(action_handler
+    "rclcpp"
+    "moveit_ros_planning_interface"
+    "moveit_visual_tools"
+)
+ament_export_libraries(action_handler)
+ament_export_include_directories(include)
+
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
+install(
+  TARGETS action_handler
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
 add_executable(find_object_position src/find_object_position.cpp)
 target_compile_features(find_object_position PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 ament_target_dependencies(find_object_position
