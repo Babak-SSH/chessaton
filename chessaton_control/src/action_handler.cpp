@@ -118,7 +118,7 @@ namespace Chessaton {
         // Plan the move
         move_group_interface_arm->setPlanningTime(60);
         move_group_interface_arm->setPoseTarget(pose);
-        move_group_interface_arm->setGoalTolerance(0.002);
+        move_group_interface_arm->setGoalTolerance(0.001);
         moveit::planning_interface::MoveGroupInterface::Plan my_plan;
         auto const success = static_cast<bool>(move_group_interface_arm->plan(my_plan));
 
