@@ -87,10 +87,10 @@
       </spherical_coordinates>
 
       <state world_name='default'>
-        <sim_time>2412 519000000</sim_time>
+        <!-- <sim_time>2412 519000000</sim_time>
         <real_time>220 75339881</real_time>
         <wall_time>1635089230 751925604</wall_time>
-        <iterations>148590</iterations>
+        <iterations>148590</iterations> -->
 
         <light name='sun'>
           <pose frame=''>0 0 10 0 -0 0</pose>
