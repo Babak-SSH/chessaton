@@ -432,12 +432,12 @@ def generate_launch_description():
                     ]
                 )
             ),
-            # TimerAction(
-            #     period=3.0,
-            #     actions=[
-            #         demo_program_node,
-            #     ]
-            # ),
+            TimerAction(
+                period=3.0,
+                actions=[
+                    demo_program_node,
+                ]
+            ),
         ]
     )
 
@@ -560,7 +560,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         ),
         DeclareLaunchArgument(
             "demo_program",
-            default_value="chess_demo",
+            default_value="chess_robot",
             description="name of the demo program to run.",
         ),
     ]
