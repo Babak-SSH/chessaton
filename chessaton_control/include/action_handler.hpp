@@ -1,3 +1,5 @@
+#ifndef ACTION_HANDLER_HPP
+#define ACTION_HANDLER_HPP
 // #include <memory>
 
 #include <rclcpp/rclcpp.hpp>
@@ -46,13 +48,13 @@ class ActionHandler {
         std::string PLANNING_GROUP_ARM_HAND = "chessaton_arm_hand";
 
         ActionHandler(rclcpp::Node::SharedPtr);
-        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Point);
-        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Pose);
+        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Point) const;
+        void visualize_path(moveit::planning_interface::MoveGroupInterface::Plan,  geometry_msgs::msg::Pose) const;
         bool home();
-        bool move_to(geometry_msgs::msg::Point);
-        bool move_to(geometry_msgs::msg::Pose);
-        bool move_gripper(double);
-        bool move_gripper(std::string);
+        bool move_to(geometry_msgs::msg::Point) const;
+        bool move_to(geometry_msgs::msg::Pose) const;
+        bool move_gripper(double) const;
+        bool move_gripper(std::string) const;
         bool add_collision_obj(shape_msgs::msg::SolidPrimitive, geometry_msgs::msg::Pose, std::string);
         void remove_obj(std::string);
         void allow_collision(std::string, bool);
@@ -62,3 +64,4 @@ class ActionHandler {
 
 extern rclcpp::Logger logger;  // ROS logger
 }
+#endif
