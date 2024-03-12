@@ -37,3 +37,5 @@ std::map<int, std::pair<float, float>> SqToPos = {
                                                 {a7, {Row7,FileA}}, {b7, {Row7,FileB}}, {c7, {Row7,FileC}}, {d7, {Row7,FileD}}, {e7, {Row7,FileE}}, {f7, {Row7,FileF}}, {g7, {Row7,FileG}}, {h7, {Row7,FileH}}, 
                                                 {a8, {Row8,FileA}}, {b8, {Row8,FileB}}, {c8, {Row8,FileC}}, {d8, {Row8,FileD}}, {e8, {Row8,FileE}}, {f8, {Row8,FileF}}, {g8, {Row8,FileG}}, {h8, {Row8,FileH}} 
                                                 };
+
+const std::string START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"; 

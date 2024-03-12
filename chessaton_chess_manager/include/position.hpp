@@ -2,6 +2,9 @@
 #define POSITION_HPP
 
 #include <map>
+#include <string>
+
+
 // center cord of chessboard
 extern const float BoardX;
 extern const float BoardY;
@@ -39,5 +42,7 @@ enum sq {
 };
 
 extern std::map<int, std::pair<float, float>> SqToPos;
+
+extern const std::string START_FEN;
 
 #endif
