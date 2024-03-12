@@ -24,6 +24,7 @@ find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_visual_tools REQUIRED)
 
 find_package(rclcpp REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
 include_directories(include)
 
@@ -32,6 +33,7 @@ ament_target_dependencies(chess_handler
     "rclcpp"
     "moveit_ros_planning_interface"
     "moveit_visual_tools"
+    "chessaton_interfaces"
     chessaton_control
 )
 ament_export_libraries(chess_handler)
@@ -63,6 +65,18 @@ ament_target_dependencies(chess_demo
 install(TARGETS chess_demo
     DESTINATION lib/${PROJECT_NAME})
 
+add_executable(chess_engine src/chess_engine.cpp)
+target_include_directories(chess_engine PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+target_compile_features(chess_engine PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(chess_engine
+    "rclcpp"
+    chessaton_interfaces
+)
+install(TARGETS chess_engine
+    DESTINATION lib/${PROJECT_NAME})
+
 add_executable(chess_robot src/chess_robot.cpp src/position.cpp src/chess_handler.cpp)
 target_include_directories(chess_robot PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -72,6 +86,7 @@ ament_target_dependencies(chess_robot
     "moveit_ros_planning_interface"
     "moveit_visual_tools"
     "rclcpp"
+    "chessaton_interfaces"
     chessaton_control
 )
 install(TARGETS chess_robot
