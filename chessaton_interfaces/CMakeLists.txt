@@ -26,6 +26,8 @@ set(msg_files
 
 set(srv_files
     "srv/BoxPositions.srv"
+    "srv/GetBestMove.srv"
+    "srv/SetState.srv"
     DEPENDENCIES geometry_msgs
 )
 

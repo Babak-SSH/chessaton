@@ -1,0 +1,5 @@
+string fen
+string[] moves
+int8 depth
+---
+string best_move
