@@ -42,6 +42,8 @@ enum sq {
 };
 
 extern std::map<int, std::pair<float, float>> SqToPos;
+extern std::map<std::string, int> StrToIdx; 
+extern std::map<std::string, float> graspZ;
 
 extern const std::string START_FEN;
 
