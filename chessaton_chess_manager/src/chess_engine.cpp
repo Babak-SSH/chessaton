@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
     );
 
     rclcpp::Service<chessaton_interfaces::srv::SetState>::SharedPtr node_service = 
-        node->create_service<chessaton_interfaces::srv::SetState>("set_node_state", &set_state);
+        node->create_service<chessaton_interfaces::srv::SetState>("set_state", &set_state);
 
     rclcpp::Service<chessaton_interfaces::srv::GetBestMove>::SharedPtr move_service = 
         node->create_service<chessaton_interfaces::srv::GetBestMove>("get_best_move", &get_best_move);
