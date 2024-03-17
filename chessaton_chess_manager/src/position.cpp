@@ -25,7 +25,12 @@ const float FileE = BoardY + (-0.5*Step);
 const float FileF = BoardY + (-1.5*Step);
 const float FileG = BoardY + (-2.5*Step);
 const float FileH = BoardY + (-3.5*Step);
-
+const float FileR1 = BoardY + (-4.5*Step);
+const float FileR2 = BoardY + (-5.5*Step);
+const float FileR3 = BoardY + (-6.5*Step);
+const float FileL1 = BoardY + (4.5*Step);
+const float FileL2 = BoardY + (5.5*Step);
+const float FileL3 = BoardY + (6.5*Step);
 
 std::map<int, std::pair<float, float>> SqToPos = {
                                                 {a1, {Row1,FileA}}, {b1, {Row1,FileB}}, {c1, {Row1,FileC}}, {d1, {Row1,FileD}}, {e1, {Row1,FileE}}, {f1, {Row1,FileF}}, {g1, {Row1,FileG}}, {h1, {Row1,FileH}}, 
@@ -35,7 +40,12 @@ std::map<int, std::pair<float, float>> SqToPos = {
                                                 {a5, {Row5,FileA}}, {b5, {Row5,FileB}}, {c5, {Row5,FileC}}, {d5, {Row5,FileD}}, {e5, {Row5,FileE}}, {f5, {Row5,FileF}}, {g5, {Row5,FileG}}, {h5, {Row5,FileH}}, 
                                                 {a6, {Row6,FileA}}, {b6, {Row6,FileB}}, {c6, {Row6,FileC}}, {d6, {Row6,FileD}}, {e6, {Row6,FileE}}, {f6, {Row6,FileF}}, {g6, {Row6,FileG}}, {h6, {Row6,FileH}}, 
                                                 {a7, {Row7,FileA}}, {b7, {Row7,FileB}}, {c7, {Row7,FileC}}, {d7, {Row7,FileD}}, {e7, {Row7,FileE}}, {f7, {Row7,FileF}}, {g7, {Row7,FileG}}, {h7, {Row7,FileH}}, 
-                                                {a8, {Row8,FileA}}, {b8, {Row8,FileB}}, {c8, {Row8,FileC}}, {d8, {Row8,FileD}}, {e8, {Row8,FileE}}, {f8, {Row8,FileF}}, {g8, {Row8,FileG}}, {h8, {Row8,FileH}} 
+                                                {a8, {Row8,FileA}}, {b8, {Row8,FileB}}, {c8, {Row8,FileC}}, {d8, {Row8,FileD}}, {e8, {Row8,FileE}}, {f8, {Row8,FileF}}, {g8, {Row8,FileG}}, {h8, {Row8,FileH}}, 
+                                                {r1, {Row1, FileR1}}, {r2, {Row2, FileR1}}, {r3, {Row3, FileR1}}, {r4, {Row4, FileR1}}, {r5, {Row5, FileR1}}, {r6, {Row6, FileR1}}, {r7, {Row7, FileR1}}, {r8, {Row8, FileR1}},
+                                                {r9, {Row1, FileR2}}, {r10, {Row2, FileR2}}, {r11, {Row3, FileR2}}, {r12, {Row4, FileR2}}, {r13, {Row5, FileR2}}, {r14, {Row6, FileR2}}, {r15, {Row7, FileR2}}, {r16, {Row8, FileR2}}, 
+                                                {l1, {Row1, FileL1}}, {l2, {Row2, FileL1}}, {l3, {Row3, FileL1}}, {l4, {Row4, FileL1}}, {l5, {Row5, FileL1}}, {l6, {Row6, FileL1}}, {l7, {Row7, FileL1}}, {l8, {Row8, FileL1}},
+                                                {l9, {Row1, FileL2}}, {l10, {Row2, FileL2}}, {l11, {Row3, FileL2}}, {l12, {Row4, FileL2}}, {l13, {Row5, FileL2}}, {l14, {Row6, FileL2}}, {l15, {Row7, FileL2}}, {l16, {Row8, FileL2}},
+                                                {r17, {Row1, FileR3}}, {l17, {Row1, FileL3}},
                                                 };
 
 std::map<std::string, int> StrToIdx = {

@@ -38,7 +38,13 @@ enum sq {
     a5, b5, c5, d5, e5, f5, g5, h5,
     a6, b6, c6, d6, e6, f6, g6, h6,
     a7, b7, c7, d7, e7, f7, g7, h7,
-    a8, b8, c8, d8, e8, f8, g8, h8
+    a8, b8, c8, d8, e8, f8, g8, h8,
+    // squares for removed pieces
+    r1, r2, r3, r4, r5, r6, r7, r8,
+    r9, r10,r11,r12,r13,r14,r15,r16,
+    l1, l2, l3, l4, l5, l6, l7, l8,
+    l9, l10,l11,l12,l13,l14,l15,l16,
+    r17, l17,
 };
 
 extern std::map<int, std::pair<float, float>> SqToPos;
