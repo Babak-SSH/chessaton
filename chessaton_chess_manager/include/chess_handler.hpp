@@ -2,14 +2,25 @@
 #define CHESS_HANDLER_HPP
 
 #include <action_handler.hpp>
+#include <array>
 
 namespace Chessaton {
+
+struct moveInfo {
+    int source;
+    int target;
+    std::string promotion = "-";
+    bool capture = false;
+    bool enpassant = false;
+    int en_sqr;
+    bool castling = false;
+};
 
 class ChessHandler {
     private:
         const ActionHandler& robotMP;
         std::string startFen;
-        std::string currentFen;
+        std::vector<std::string> moves;
 
         geometry_msgs::msg::Pose grasp_pose;
         geometry_msgs::msg::Pose approach_grasp_pose;
@@ -20,28 +31,35 @@ class ChessHandler {
         geometry_msgs::msg::Pose retreat_pose;
 
         geometry_msgs::msg::Quaternion gripperQ;
+
+        std::array<std::string, 64> board;
+        int rSq;
+
+        moveInfo parse_move(std::string);
+        void update_board(moveInfo);
+
     protected:
     public:
-        ChessHandler(const ActionHandler&);
+        ChessHandler(const ActionHandler&, std::string);
 
-        void update_board();
-        void get_engine_move();
+        std::string get_engine_move(rclcpp::Node::SharedPtr, int);
         void check_contacts();
-        void pick_piece(int);
-        void put_piece(int);
-        void remove_piece(int);
-        void promote_piece(int, int);
+        void pick_piece(int, std::string);
+        void put_piece(int, std::string);
+        void remove_piece(int, std::string);
+        void promote_piece(int, std::string, std::string, std::string);
+        void make_move(std::string);
 
-        float graspZ = 0.045;
-        float approachZ = 0.06;
-        float liftZ = 0.1;
-        float goalZ = 0.045;
-        float retreatZ = 0.1;
-        float graspWidth = 0.003;
-        float quaternionX = 0;
-        float quaternionY = 0.707107;
-        float quaternionZ = 0;
-        float quaternionW = 0.707107;
+        // float graspZ = 0.045;
+        float approachZ;
+        float liftZ;
+        float goalZ;
+        float retreatZ;
+        float graspWidth;
+        float quaternionX;
+        float quaternionY;
+        float quaternionZ;
+        float quaternionW;
 };
 
 }
