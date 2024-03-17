@@ -41,14 +41,21 @@ bool get_best_move(const std::shared_ptr<chessaton_interfaces::srv::GetBestMove:
                     std::shared_ptr<chessaton_interfaces::srv::GetBestMove::Response>   response) {
     std::string line;
     std::string key = "bestmove ";
+    bool end = false;
 
-    in_pipe << "position " + request->fen + " moves " +boost::algorithm::join(request->moves, " ") << std::endl;  
+    in_pipe << "position fen " + request->fen + " moves " +boost::algorithm::join(request->moves, " ") << std::endl;  
     in_pipe << "go depth " + std::to_string(request->depth) << std::endl;
     while (std::getline(out_pipe, line)) {
 
         std::cout << line << std::endl;
+        if (!line.find("mate 1")) {
+            end = true;
+        }
         if (!line.find(key)) {
-            response->best_move = line.substr(line.find(key)+key.length());
+            if (end)
+                response->best_move = line.substr(line.find(key)+key.length()) + " end";
+            else
+                response->best_move = line.substr(line.find(key)+key.length());
             return true;
         }
     }
