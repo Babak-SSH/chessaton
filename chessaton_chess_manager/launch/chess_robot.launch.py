@@ -50,7 +50,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     log_level = LaunchConfiguration("log_level")
     use_camera = LaunchConfiguration("use_camera")
-    demo_program = LaunchConfiguration("demo_program")
+    robot_program = LaunchConfiguration("robot_program")
 
     # URDF
     robot_description_content = Command(
@@ -369,10 +369,25 @@ def generate_launch_description():
         condition=IfCondition(enable_rviz),
     )
 
-    # Pick Place Demo node
-    demo_program_node = Node(
+    # chess robot node
+    chess_robot_node = Node(
         package="chessaton_chess_manager",
-        executable= demo_program,
+        executable= robot_program,
+        output="screen",
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            robot_description_kinematics,
+            planning_pipeline,
+            joint_limits,
+            {'use_sim_time': use_sim_time},
+        ],
+    )
+
+    # chess engine node
+    chess_engine_node = Node(
+        package="chessaton_chess_manager",
+        executable= "chess_engine",
         output="screen",
         parameters=[
             robot_description,
@@ -423,7 +438,7 @@ def generate_launch_description():
                     target_action = chessaton_hand_controller_spawner,
                     on_exit = [
                         TimerAction(
-                            period=2.0,
+                            period=1.0,
                             actions=[
                                 rviz_node_full,
                                 run_move_group_node
@@ -433,9 +448,15 @@ def generate_launch_description():
                 )
             ),
             TimerAction(
-                period=3.0,
+                period=1.0,
                 actions=[
-                    demo_program_node,
+                    chess_engine_node,
+                ]
+            ),
+            TimerAction(
+                period=2.0,
+                actions=[
+                    chess_robot_node,
                 ]
             ),
         ]
@@ -559,7 +580,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             description="If true, add camera to scene",
         ),
         DeclareLaunchArgument(
-            "demo_program",
+            "robot_program",
             default_value="chess_robot",
             description="name of the demo program to run.",
         ),
