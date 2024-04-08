@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include <Arduino.h>
 #include <micro_ros_platformio.h>
 
@@ -11,18 +13,15 @@
 #include <sensor_msgs/msg/joint_state.h>
 #include <rosidl_runtime_c/string_functions.h>
 
-// #include <Servo.h>
-#include <ESP32Servo.h> 
-
-#include <stdio.h>
-
-#define JOINT_DOUBLE_LEN 20
-#define ARRAY_LEN 200
+// #include <ESP32Servo.h> // use this library for sending commands from esp32
+#include <Adafruit_PWMServoDriver.h> // this library is used to communicate with pca9685
 
 
-rclc_support_t support;
-rcl_allocator_t allocator;
-rcl_node_t node;
+// called this way, it uses the default address 0x40 for the first board's address.
+Adafruit_PWMServoDriver pwmBoard = Adafruit_PWMServoDriver(0x40);
+static const int servoMin = 150; // servo minimum pulse
+static const int servoMax = 600; // servo maximum pulse 
+static const int servoFrequency = 50; // analo servo frequency
 
 // publisher
 rcl_publisher_t publisher;
@@ -37,31 +36,27 @@ sensor_msgs__msg__JointState joint_state_msg;
 rclc_executor_t executor_sub;
 rosidl_runtime_c__String__Sequence name__string_sequence;
 
+// use these two function to debug code and read errors
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){error_loop();}}
+// #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){\
+//    printf("Failed status on line %d: %d. Message: %s, Aborting.\n",__LINE__,(int)temp_rc, rcl_get_error_string().str);\
+//   rcutils_reset_error();}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){}}
 
+// radians to degrees conversion
 double rad2deg(double in) {
     return 180.0 * (in / M_PI);
 }
 
-double dist2deg(double in) {
-    return 180.0 * (in / 0.03);
+// convert grippers traveled distance to pulse width for servo
+double dist2pulse(double in) {
+    return map(int(in*1000), 0, 30, servoMin, servoMax);
 }
 
-static const int servoPin1 = 4;
-static const int servoPin2 = 16;
-static const int servoPin3 = 17;
-static const int servoPin4 = 5;
-static const int servoPin5 = 18;
-
-Servo servo1;
-Servo servo2;
-Servo servo3;
-Servo servo4;
-Servo servo5;
-
-const int min_pulse = 544;
-const int max_pulse = 2400;
+// radians to pulse width conversion
+int rad2pulse(double in) { // -1* is for reverse direction in hardware
+    return map(int(-1*rad2deg(in)*10), -900, 900, servoMin, servoMax);
+}
 
 // Error handle loop
 void error_loop() {
@@ -70,6 +65,7 @@ void error_loop() {
     }
 }
 
+// place holder for publisher callback (it can be used to send feedback or status)
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
     RCLC_UNUSED(last_call_time);
     if (timer != NULL) {
@@ -82,66 +78,65 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
 }
 
 void subscription_callback(const void * msgin) {
-    // Serial.println("subscription_callback");
     const sensor_msgs__msg__JointState * joint_state_msg = (const sensor_msgs__msg__JointState *)msgin;
 
     double joint = 0.0;
+    int pulse = 0;
 
     Serial.println("--------------------------------------");
 
     Serial.println(rad2deg(joint_state_msg->position.data[0]), 5);
-    joint = rad2deg(joint_state_msg->position.data[0]) + 90.0;
-    servo1.write(joint);
+    pulse = rad2pulse(joint_state_msg->position.data[0]);
+    Serial.println(pulse);
+    pwmBoard.setPWM(0, 0, pulse);
 
     Serial.println(rad2deg(joint_state_msg->position.data[1]), 5);
-    joint = rad2deg(joint_state_msg->position.data[1]) + 90.0;
-    servo2.write(joint);
+    pulse = rad2pulse(joint_state_msg->position.data[1]);
+    Serial.println(pulse);
+    pwmBoard.setPWM(1, 0, pulse);
 
     Serial.println(rad2deg(joint_state_msg->position.data[2]), 5);
-    joint = rad2deg(joint_state_msg->position.data[2]) + 90.0;
-    servo3.write(joint);
+    pulse = rad2pulse(joint_state_msg->position.data[2]);
+    Serial.println(pulse);
+    pwmBoard.setPWM(2, 0, pulse);
 
     Serial.println(rad2deg(joint_state_msg->position.data[3]), 5);
-    joint = rad2deg(joint_state_msg->position.data[3]) + 90.0;
-    servo4.write(joint);
+    pulse = rad2pulse(joint_state_msg->position.data[3]);
+    Serial.println(pulse);
+    pwmBoard.setPWM(3, 0, pulse);
 
     Serial.println(joint_state_msg->position.data[4], 5);
     Serial.println(joint_state_msg->position.data[5], 5);
-    joint = dist2deg(joint_state_msg->position.data[5]);
-    servo5.write(joint);
+    pulse = dist2pulse(joint_state_msg->position.data[4]);
+    pwmBoard.setPWM(4, 0, pulse);
     
-    Serial.println("--------------------------------------");
 }
 
 void setup() {
-	// Allow allocation of all timers
-	ESP32PWM::allocateTimer(0);
-	ESP32PWM::allocateTimer(1);
-	ESP32PWM::allocateTimer(2);
-	ESP32PWM::allocateTimer(3);
-
     // Configure serial transport
     Serial.begin(115200);
 
-    servo1.attach(servoPin1, 544, 2400);
-    servo2.attach(servoPin2, 544, 2400);
-    servo3.attach(servoPin3, 544, 2400);
-    servo4.attach(servoPin4, 544, 2400);
-    servo5.attach(servoPin5, 544, 2400);
+    pwmBoard.begin();
+    pwmBoard.setOscillatorFrequency(27000000);    //Set the PWM oscillator frequency, used for fine calibration
+    pwmBoard.setPWMFreq(servoFrequency);          //Set the servo operating frequency
 
     Serial.println("connecting to wifi...");
-    IPAddress agent_ip(192, 168, 0, 100);
+    IPAddress agent_ip(192, 168, 0, 101);
     size_t agent_port = 8888;
-    char SSID[] = "YOUR_WIFI_SSID";
-    char SSID_PW[]= "YOUR_WIFI_PASS";
+    char SSID[] = "dlink_2.4G";
+    char SSID_PW[]= "ujitgr12";
 
     set_microros_wifi_transports(SSID, SSID_PW, agent_ip, agent_port);
     delay(2000);
     Serial.println("connected to wifi.");
-    allocator = rcl_get_default_allocator();
+
+    rclc_support_t support;
+    rcl_allocator_t allocator = rcl_get_default_allocator();
+    rcl_node_t node;
 
     //create init_options
     RCCHECK(rclc_support_init(&support, 0, NULL, &allocator));
+    Serial.println("init options");
 
     // create node
     RCCHECK(rclc_node_init_default(&node, "micro_ros_platformio_node", "", &support));
@@ -231,7 +226,8 @@ void setup() {
 }
 
 void loop() {
-    delay(100);
-    RCSOFTCHECK(rclc_executor_spin_some(&executor_pub, RCL_MS_TO_NS(100)));
+    delay(20);
+    // uncomment to enable publisher
+    // RCSOFTCHECK(rclc_executor_spin_some(&executor_pub, RCL_MS_TO_NS(100)));
     RCSOFTCHECK(rclc_executor_spin_some(&executor_sub, RCL_MS_TO_NS(100)));
 }
