@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script converts xacro (URDF variant) into SDF for `panda_description` package
+# This script converts xacro (URDF variant) into SDF for `chessaton_description` package
 
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" &>/dev/null && pwd)"
 XACRO_PATH="$(dirname "${SCRIPT_DIR}")/urdf/chessaton.urdf.xacro"

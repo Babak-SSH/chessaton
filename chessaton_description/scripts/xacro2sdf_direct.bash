@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script converts xacro (URDF variant) into SDF for `panda_description` package
+# This script converts xacro (URDF variant) into SDF for `chessaton_description` package
 
 TMP_URDF_PATH=$(mktemp /tmp/chessaton_XXXXXX.urdf)
 
