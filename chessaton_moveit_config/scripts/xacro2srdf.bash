@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script converts xacro (SRDF variant) into SRDF for `panda_description` package
+# This script converts xacro (SRDF variant) into SRDF for `chessaton_moveit_config` package
 
 SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" &>/dev/null && pwd)"
 XACRO_PATH="$(dirname "${SCRIPT_DIR}")/srdf/chessaton.srdf.xacro"
