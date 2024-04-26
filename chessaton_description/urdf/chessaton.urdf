@@ -191,18 +191,18 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="-0.00073528 0.0040282 0.031188"/>
-      <mass value="0.094842"/>
-      <inertia ixx="3.0463E-05" ixy="-6.3087E-09" ixz="4.236E-07" iyy="4.8143E-05" iyz="-8.1925E-08" izz="5.1511E-05"/>
+      <origin rpy="0 0 0" xyz="-0.050129 -0.010271 0.035819"/>
+      <mass value="0.17447"/>
+      <inertia ixx="0.00011969" ixy="1.6753E-09" ixz="4.5328E-07" iyy="0.00034675" iyz="-4.0946E-09" izz="0.00045331"/>
     </inertial>
   </link>
   <joint name="chessaton_joint1" type="revolute">
-    <origin rpy="0 0 0" xyz="0.00015368 0.01229 0.07705"/>
+    <origin rpy="0 0 0" xyz="0 0 0.08094"/>
     <parent link="chessaton_link0"/>
     <child link="chessaton_link1"/>
     <axis xyz="0 0 -1"/>
     <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="0" lower="-3.141592653589793" upper="3.141592653589793" velocity="5"/>
+    <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="5"/>
   </joint>
   <link name="chessaton_link1">
     <visual>
@@ -219,13 +219,13 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.012256 -0.0045169 0.011915"/>
-      <mass value="0.047535"/>
-      <inertia ixx="8.1555E-06" ixy="-8.4986E-08" ixz="1.6429E-09" iyy="1.0365E-05" iyz="4.236E-07" izz="1.4637E-05"/>
+      <origin rpy="0 0 0" xyz="0.012052 -0.0041948 0.012838"/>
+      <mass value="0.046511"/>
+      <inertia ixx="7.7123E-06" ixy="-4.0766E-09" ixz="1.6732E-09" iyy="1.046E-05" iyz="4.5327E-07" izz="1.4407E-05"/>
     </inertial>
   </link>
   <joint name="chessaton_joint2" type="revolute">
-    <origin rpy="0 0 0" xyz="0.022504 0.022833 0.013792"/>
+    <origin rpy="0 0 0" xyz="0.022104 0.022723 0.015309"/>
     <parent link="chessaton_link1"/>
     <child link="chessaton_link2"/>
     <axis xyz="0 -1 0"/>
@@ -241,9 +241,9 @@
       <material name="color_link2"/>
     </visual>
     <inertial>
-      <origin rpy="0 0 0" xyz="1.1343E-09 -0.02475 0.101"/>
-      <mass value="0.077067"/>
-      <inertia ixx="7.2952E-05" ixy="4.5829E-12" ixz="1.1087E-14" iyy="4.7593E-05" iyz="3.7988E-20" izz="3.1748E-05"/>
+      <origin rpy="0 0 0" xyz="-6.8198E-09 -0.0253 0.093503"/>
+      <mass value="0.070955"/>
+      <inertia ixx="6.1321E-05" ixy="7.7897E-20" ixz="4.4464E-12" iyy="3.639E-05" iyz="-5.6971E-19" izz="3.1036E-05"/>
     </inertial>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -253,7 +253,7 @@
     </collision>
   </link>
   <joint name="chessaton_joint3" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.202"/>
+    <origin rpy="0 0 0" xyz="0 0 0.18701"/>
     <parent link="chessaton_link2"/>
     <child link="chessaton_link3"/>
     <axis xyz="0 -1 0"/>
@@ -275,13 +275,13 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.071008 -0.024827 -0.00025021"/>
-      <mass value="0.10766"/>
-      <inertia ixx="2.5545E-05" ixy="8.4872E-08" ixz="-3.21E-07" iyy="4.8596E-05" iyz="4.236E-07" izz="6.5475E-05"/>
+      <origin rpy="0 0 0" xyz="0.061953 -0.024546 -0.0017072"/>
+      <mass value="0.099802"/>
+      <inertia ixx="2.455E-05" ixy="6.6798E-10" ixz="-2.7683E-07" iyy="3.4978E-05" iyz="4.5265E-07" izz="5.1335E-05"/>
     </inertial>
   </link>
   <joint name="chessaton_joint4" type="revolute">
-    <origin rpy="0 0 0" xyz="0.1985 0.0019174 0.0019578"/>
+    <origin rpy="0 0 0" xyz="0.17811 0.0028273 9.1141E-05"/>
     <parent link="chessaton_link3"/>
     <child link="chessaton_link4"/>
     <axis xyz="0 -1 0"/>
@@ -303,13 +303,13 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0016488 -0.027436 -0.0097099"/>
+      <origin rpy="0 0 0" xyz="0.00247132842176606 -0.0269174421054227 -0.0100525933944812"/>
       <mass value="0.0466425419935174"/>
-      <inertia ixx="1.458E-05" ixy="-4.2359E-07" ixz="-1.6429E-09" iyy="1.0335E-05" iyz="-8.4986E-08" izz="8.1259E-06"/>
+      <inertia ixx="1.4406877106279E-05" ixy="-4.53266983583288E-07" ixz="-1.6729067017079E-09" iyy="1.04604416782095E-05" iyz="-4.07637977779482E-09" izz="7.71225534218515E-06"/>
     </inertial>
   </link>
   <joint name="gripper_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.072842 -0.034194 -0.0048547"/>
+    <origin rpy="0 0 0" xyz="0.070609 -0.033634 -0.0087075"/>
     <parent link="chessaton_link4"/>
     <child link="chessaton_gripper"/>
     <axis xyz="0 0 0"/>
@@ -329,9 +329,9 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="-0.027242 0.0063062 -0.003963"/>
+      <origin rpy="0 0 0" xyz="-0.0266113093832042 -0.00792294858682179 -0.00177094549286488"/>
       <mass value="0.07416"/>
-      <inertia ixx="2.5968E-05" ixy="8.488E-08" ixz="-4.236E-07" iyy="1.3082E-05" iyz="-1.6429E-09" izz="2.6136E-05"/>
+      <inertia ixx="1.94087256012664E-05" ixy="-4.11947485817516E-09" ixz="4.53529646177736E-07" iyy="9.16253998980345E-06" iyz="-1.67298780752208E-09" izz="2.20817956679352E-05"/>
     </inertial>
   </link>
   <joint name="left_finger_joint" type="prismatic">
@@ -340,7 +340,7 @@
     <child link="left_finger"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="100" lower="0" upper="0.03" velocity="0.02"/>
+    <limit effort="100" lower="0" upper="0.023" velocity="0.02"/>
   </joint>
   <link name="left_finger">
     <visual>
@@ -357,9 +357,9 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.011394 0.0086324 -0.005"/>
-      <mass value="0.0088"/>
-      <inertia ixx="6.0646E-07" ixy="1.4141E-07" ixz="2.4551E-21" iyy="9.0397E-07" iyz="-6.5992E-22" izz="8.4377E-07"/>
+      <origin rpy="0 0 0" xyz="0.0127036998303536 0.00249799647668462 0.00302307598216517"/>
+      <mass value="0.00601945436907758"/>
+      <inertia ixx="8.35687237301018E-07" ixy="-1.33370717821302E-07" ixz="1.71869210411339E-07" iyy="1.12520988095806E-06" iyz="1.94902986855749E-07" izz="1.56286387867122E-06"/>
     </inertial>
   </link>
   <joint name="right_finger_joint" type="prismatic">
@@ -368,7 +368,7 @@
     <child link="right_finger"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="100" lower="-0.03" upper="0" velocity="0.02"/>
+    <limit effort="100" lower="-0.023" upper="0" velocity="0.02"/>
   </joint>
   <link name="right_finger">
     <visual>
@@ -385,15 +385,15 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.011394 -0.0086324 -0.005"/>
-      <mass value="0.0088"/>
-      <inertia ixx="6.0646E-07" ixy="-1.4141E-07" ixz="1.2142E-21" iyy="9.0397E-07" iyz="7.2151E-22" izz="8.4377E-07"/>
+      <origin rpy="0 0 0" xyz="0.0127036998303538 -0.00154590959997161 -0.00302307586801204"/>
+      <mass value="0.0060194543690775"/>
+      <inertia ixx="8.35687237301015E-07" ixy="1.33370717821309E-07" ixz="-1.71869210411314E-07" iyy="1.12520988095806E-06" iyz="1.94902986855771E-07" izz="1.5628638786712E-06"/>
     </inertial>
   </link>
   <joint name="chessaton_hand_tcp_roll_virtual_joint" type="revolute">
     <parent link="chessaton_gripper"/>
     <child link="chessaton_hand_tcp_roll"/>
-    <origin rpy="0 0 0" xyz="0.02 0 -0.005"/>
+    <origin rpy="0 0 0" xyz="0.03 0 0"/>
     <axis xyz="-1 0 0"/>
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="6"/>

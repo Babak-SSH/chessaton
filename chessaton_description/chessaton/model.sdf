@@ -8,15 +8,15 @@
     <link name='chessaton_link0'>
       <pose relative_to='virtual_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>-0.00073528 0.0040282 0.031188 0 0 0</pose>
-        <mass>0.094841999999999996</mass>
+        <pose>-0.050129 -0.010271 0.035819 0 0 0</pose>
+        <mass>0.17446999999999999</mass>
         <inertia>
-          <ixx>3.0463e-05</ixx>
-          <ixy>-6.3086999999999999e-09</ixy>
-          <ixz>4.2360000000000001e-07</ixz>
-          <iyy>4.8143000000000003e-05</iyy>
-          <iyz>-8.1925000000000001e-08</iyz>
-          <izz>5.1511000000000002e-05</izz>
+          <ixx>0.00011969</ixx>
+          <ixy>1.6753e-09</ixy>
+          <ixz>4.5327999999999999e-07</ixz>
+          <iyy>0.00034675</iyy>
+          <iyz>-4.0946000000000003e-09</iyz>
+          <izz>0.00045331000000000001</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link0_collision'>
@@ -62,14 +62,14 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint1' type='revolute'>
-      <pose relative_to='chessaton_link0'>0.00015368 0.01229 0.07704999999999999 0 0 0</pose>
+      <pose relative_to='chessaton_link0'>0 0 0.08094 0 0 0</pose>
       <parent>chessaton_link0</parent>
       <child>chessaton_link1</child>
       <axis>
         <xyz>0 0 -1</xyz>
         <limit>
-          <lower>-3.1415926535897931</lower>
-          <upper>3.1415926535897931</upper>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
           <effort>0</effort>
           <velocity>5</velocity>
         </limit>
@@ -84,15 +84,15 @@
     <link name='chessaton_link1'>
       <pose relative_to='chessaton_joint1'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.012256 -0.0045169 0.011915 0 0 0</pose>
-        <mass>0.047535000000000001</mass>
+        <pose>0.012052 -0.0041948 0.012838 0 0 0</pose>
+        <mass>0.046510999999999997</mass>
         <inertia>
-          <ixx>8.1555000000000001e-06</ixx>
-          <ixy>-8.4986000000000004e-08</ixy>
-          <ixz>1.6429e-09</ixz>
-          <iyy>1.0365e-05</iyy>
-          <iyz>4.2360000000000001e-07</iyz>
-          <izz>1.4637000000000001e-05</izz>
+          <ixx>7.7123000000000007e-06</ixx>
+          <ixy>-4.0765999999999998e-09</ixy>
+          <ixz>1.6732e-09</ixz>
+          <iyy>1.046e-05</iyy>
+          <iyz>4.5326999999999998e-07</iyz>
+          <izz>1.4406999999999999e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link1_collision'>
@@ -138,7 +138,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint2' type='revolute'>
-      <pose relative_to='chessaton_link1'>0.022504 0.022833 0.013792 0 0 0</pose>
+      <pose relative_to='chessaton_link1'>0.022104 0.022723 0.015309 0 0 0</pose>
       <parent>chessaton_link1</parent>
       <child>chessaton_link2</child>
       <axis>
@@ -160,15 +160,15 @@
     <link name='chessaton_link2'>
       <pose relative_to='chessaton_joint2'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>1.1343e-09 -0.02475 0.101 0 0 0</pose>
-        <mass>0.077066999999999997</mass>
+        <pose>-6.8198e-09 -0.0253 0.093503 0 0 0</pose>
+        <mass>0.070955000000000004</mass>
         <inertia>
-          <ixx>7.2952000000000002e-05</ixx>
-          <ixy>4.5828999999999998e-12</ixy>
-          <ixz>1.1087e-14</ixz>
-          <iyy>4.7593000000000003e-05</iyy>
-          <iyz>3.7988e-20</iyz>
-          <izz>3.1748000000000002e-05</izz>
+          <ixx>6.1321000000000005e-05</ixx>
+          <ixy>7.7896999999999994e-20</ixy>
+          <ixz>4.4464000000000001e-12</ixz>
+          <iyy>3.6390000000000002e-05</iyy>
+          <iyz>-5.6970999999999997e-19</iyz>
+          <izz>3.1035999999999999e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link2_collision'>
@@ -214,7 +214,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint3' type='revolute'>
-      <pose relative_to='chessaton_link2'>0 0 0.202 0 0 0</pose>
+      <pose relative_to='chessaton_link2'>0 0 0.18701 0 0 0</pose>
       <parent>chessaton_link2</parent>
       <child>chessaton_link3</child>
       <axis>
@@ -236,15 +236,15 @@
     <link name='chessaton_link3'>
       <pose relative_to='chessaton_joint3'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.071008 -0.024827 -0.00025021 0 0 0</pose>
-        <mass>0.10766000000000001</mass>
+        <pose>0.061953 -0.024546 -0.0017072 0 0 0</pose>
+        <mass>0.099802000000000002</mass>
         <inertia>
-          <ixx>2.5545e-05</ixx>
-          <ixy>8.4871999999999994e-08</ixy>
-          <ixz>-3.2099999999999998e-07</ixz>
-          <iyy>4.8596e-05</iyy>
-          <iyz>4.2360000000000001e-07</iyz>
-          <izz>6.5475000000000006e-05</izz>
+          <ixx>2.455e-05</ixx>
+          <ixy>6.6798e-10</ixy>
+          <ixz>-2.7683000000000002e-07</ixz>
+          <iyy>3.4978000000000003e-05</iyy>
+          <iyz>4.5265000000000002e-07</iyz>
+          <izz>5.1335000000000002e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link3_collision'>
@@ -290,7 +290,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint4' type='revolute'>
-      <pose relative_to='chessaton_link3'>0.1985 0.0019174 0.0019578 0 0 0</pose>
+      <pose relative_to='chessaton_link3'>0.17811 0.0028273 9.1141e-05 0 0 0</pose>
       <parent>chessaton_link3</parent>
       <child>chessaton_link4</child>
       <axis>
@@ -312,15 +312,15 @@
     <link name='chessaton_link4'>
       <pose relative_to='chessaton_joint4'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.02863019408502604 -0.02771335747482696 -0.009162183446125242 0 0 0</pose>
+        <pose>0.02796412823841781 -0.03590455266406323 -0.01031402159868098 0 0 0</pose>
         <mass>0.12080254199351741</mass>
         <inertia>
-          <ixx>4.0576637719301682e-05</ixx>
-          <ixy>2.298716284465305e-07</ixy>
-          <ixz>-1.5480594756971059e-06</ixz>
-          <iyy>7.8751534566799686e-05</iyy>
-          <iyz>-7.5086814029667491e-08</iyz>
-          <izz>8.9579486411365861e-05</izz>
+          <ixx>3.995740835518598e-05</ixx>
+          <ixy>1.6949703878521241e-05</ixy>
+          <ixz>9.582157452368205e-07</ixz>
+          <iyy>6.9005053229981032e-05</iyy>
+          <iyz>-1.842587663122212e-07</iyz>
+          <izz>8.5307542814712085e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link4_collision'>
@@ -347,7 +347,7 @@
         </surface>
       </collision>
       <collision name='chessaton_link4_fixed_joint_lump__chessaton_gripper_collision_1'>
-        <pose>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+        <pose>0.07060900000000001 -0.033634 -0.0087075 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -387,7 +387,7 @@
         </material>
       </visual>
       <visual name='chessaton_link4_fixed_joint_lump__chessaton_gripper_visual_1'>
-        <pose>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+        <pose>0.07060900000000001 -0.033634 -0.0087075 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -406,7 +406,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_hand_tcp_roll_virtual_joint' type='revolute'>
-      <pose relative_to='chessaton_link4'>0.09284200000000001 -0.034194 -0.009854700000000001 0 0 0</pose>
+      <pose relative_to='chessaton_link4'>0.100609 -0.033634 -0.0087075 0 0 0</pose>
       <parent>chessaton_link4</parent>
       <child>chessaton_hand_tcp_roll</child>
       <axis>
@@ -478,14 +478,14 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='left_finger_joint' type='prismatic'>
-      <pose relative_to='chessaton_link4'>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+      <pose relative_to='chessaton_link4'>0.07060900000000001 -0.033634 -0.0087075 0 0 0</pose>
       <parent>chessaton_link4</parent>
       <child>left_finger</child>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
           <lower>0</lower>
-          <upper>0.029999999999999999</upper>
+          <upper>0.023</upper>
           <effort>100</effort>
           <velocity>0.02</velocity>
         </limit>
@@ -500,15 +500,15 @@
     <link name='left_finger'>
       <pose relative_to='left_finger_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.011394 0.0086324 -0.005 0 0 0</pose>
-        <mass>0.0088000000000000005</mass>
+        <pose>0.0127036998303536 0.00249799647668462 0.00302307598216517 0 0 0</pose>
+        <mass>0.0060194543690775797</mass>
         <inertia>
-          <ixx>6.0645999999999999e-07</ixx>
-          <ixy>1.4140999999999999e-07</ixy>
-          <ixz>2.4551e-21</ixz>
-          <iyy>9.0396999999999996e-07</iyy>
-          <iyz>-6.5991999999999996e-22</iyz>
-          <izz>8.4376999999999999e-07</izz>
+          <ixx>8.3568723730101801e-07</ixx>
+          <ixy>-1.3337071782130201e-07</ixy>
+          <ixz>1.7186921041133901e-07</ixz>
+          <iyy>1.12520988095806e-06</iyy>
+          <iyz>1.9490298685574901e-07</iyz>
+          <izz>1.56286387867122e-06</izz>
         </inertia>
       </inertial>
       <collision name='left_finger_collision'>
@@ -555,13 +555,13 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='right_finger_joint' type='prismatic'>
-      <pose relative_to='chessaton_link4'>0.072842 -0.034194 -0.0048547 0 0 0</pose>
+      <pose relative_to='chessaton_link4'>0.07060900000000001 -0.033634 -0.0087075 0 0 0</pose>
       <parent>chessaton_link4</parent>
       <child>right_finger</child>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.029999999999999999</lower>
+          <lower>-0.023</lower>
           <upper>0</upper>
           <effort>100</effort>
           <velocity>0.02</velocity>
@@ -577,15 +577,15 @@
     <link name='right_finger'>
       <pose relative_to='right_finger_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.011394 -0.0086324 -0.005 0 0 0</pose>
-        <mass>0.0088000000000000005</mass>
+        <pose>0.0127036998303538 -0.00154590959997161 -0.00302307586801204 0 0 0</pose>
+        <mass>0.0060194543690774999</mass>
         <inertia>
-          <ixx>6.0645999999999999e-07</ixx>
-          <ixy>-1.4140999999999999e-07</ixy>
-          <ixz>1.2141999999999999e-21</ixz>
-          <iyy>9.0396999999999996e-07</iyy>
-          <iyz>7.2150999999999998e-22</iyz>
-          <izz>8.4376999999999999e-07</izz>
+          <ixx>8.3568723730101505e-07</ixx>
+          <ixy>1.33370717821309e-07</ixy>
+          <ixz>-1.7186921041131399e-07</ixz>
+          <iyy>1.12520988095806e-06</iyy>
+          <iyz>1.94902986855771e-07</iyz>
+          <izz>1.5628638786712001e-06</izz>
         </inertia>
       </inertial>
       <collision name='right_finger_collision'>

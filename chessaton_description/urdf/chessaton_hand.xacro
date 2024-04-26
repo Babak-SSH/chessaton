@@ -24,15 +24,15 @@
     		</collision>
 
             <inertial>
-                <origin xyz="-0.027242 0.0063062 -0.003963" rpy="0 0 0" />
+                <origin xyz="-0.0266113093832042 -0.00792294858682179 -0.00177094549286488" rpy="0 0 0" />
                 <mass value="0.07416" />
                 <inertia
-                  ixx="2.5968E-05"
-                  ixy="8.488E-08"
-                  ixz="-4.236E-07"
-                  iyy="1.3082E-05"
-                  iyz="-1.6429E-09"
-                  izz="2.6136E-05" />
+                  ixx="1.94087256012664E-05"
+                  ixy="-4.11947485817516E-09"
+                  ixz="4.53529646177736E-07"
+                  iyy="9.16253998980345E-06"
+                  iyz="-1.67298780752208E-09"
+                  izz="2.20817956679352E-05" />
             </inertial>
     	</link>
 
@@ -42,7 +42,7 @@
     		<child link="left_finger" />
     		<axis xyz="0 1 0" />
     		<dynamics damping="1.0" friction="1.0" />
-    		<limit lower="0" upper="0.03" effort="100" velocity="0.02" />
+    		<limit lower="0" upper="0.023" effort="100" velocity="0.02" />
     	</joint>
 
     	<link name="left_finger">
@@ -63,17 +63,17 @@
 
             <inertial>
                 <origin
-                  xyz="0.011394 0.0086324 -0.005"
+                  xyz="0.0127036998303536 0.00249799647668462 0.00302307598216517"
                   rpy="0 0 0" />
                 <mass
-                  value="0.0088" />
+                  value="0.00601945436907758" />
                 <inertia
-                  ixx="6.0646E-07"
-                  ixy="1.4141E-07"
-                  ixz="2.4551E-21"
-                  iyy="9.0397E-07"
-                  iyz="-6.5992E-22"
-                  izz="8.4377E-07" />
+                  ixx="8.35687237301018E-07"
+                  ixy="-1.33370717821302E-07"
+                  ixz="1.71869210411339E-07"
+                  iyy="1.12520988095806E-06"
+                  iyz="1.94902986855749E-07"
+                  izz="1.56286387867122E-06" />
             </inertial>
     	</link>
 
@@ -83,7 +83,7 @@
     		<child link="right_finger" />
     		<axis xyz="0 1 0" />
     		<dynamics damping="1.0" friction="1.0" />
-    		<limit lower="-0.03" upper="0" effort="100" velocity="0.02" />
+    		<limit lower="-0.023" upper="0" effort="100" velocity="0.02" />
     	</joint>
 
     	<link name="right_finger">
@@ -102,15 +102,15 @@
     		  </geometry>
     		</collision>
             <inertial>
-                <origin xyz="0.011394 -0.0086324 -0.005" rpy="0 0 0" />
-                <mass value="0.0088" />
+                <origin xyz="0.0127036998303538 -0.00154590959997161 -0.00302307586801204" rpy="0 0 0" />
+                <mass value="0.0060194543690775" />
                 <inertia
-                  ixx="6.0646E-07"
-                  ixy="-1.4141E-07"
-                  ixz="1.2142E-21"
-                  iyy="9.0397E-07"
-                  iyz="7.2151E-22"
-                  izz="8.4377E-07" />
+                  ixx="8.35687237301015E-07"
+                  ixy="1.33370717821309E-07"
+                  ixz="-1.71869210411314E-07"
+                  iyy="1.12520988095806E-06"
+                  iyz="1.94902986855771E-07"
+                  izz="1.5628638786712E-06" />
             </inertial>
     	</link>
 
@@ -118,7 +118,7 @@
             <joint name="chessaton_hand_tcp_roll_virtual_joint" type="revolute">
                 <parent link="chessaton_gripper"/>
                 <child link="chessaton_hand_tcp_roll"/>
-                <origin rpy="0 0 0" xyz="0.02 0 -0.005"/>
+                <origin rpy="0 0 0" xyz="0.03 0 0"/>
                 <axis xyz="-1 0 0" />
     		    <dynamics damping="1.0" friction="1.0" />
     	        <limit lower="${-pi/2}" upper="${pi/2}" effort="0" velocity="6" />
@@ -174,7 +174,7 @@
             <joint name="chessaton_hand_tcp_virtual_joint" type="fixed">
               <parent link="chessaton_gripper"/>
               <child link="chessaton_hand_tcp"/>
-              <origin rpy="0 0 0" xyz="0.02 0 -0.005"/>
+              <origin rpy="0 0 0" xyz="0.03 0 0"/>
             </joint>
         </xacro:unless>
     </xacro:macro>
