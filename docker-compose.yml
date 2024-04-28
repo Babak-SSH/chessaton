@@ -1,7 +1,8 @@
 version: "3.4"
 
 services:
-  dev:
+  # no gui only cli
+  chessaton-cli:
     build:
         context: ../workspace
         dockerfile: ../ros_docker_setup/Dockerfile
@@ -20,11 +21,11 @@ services:
     volumes:
        - /tmp/.X11-unix:/tmp/.X11-unix:rw
        - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
-       - ../workspace/src:/home/ros/workspace/src
-       - ../data:/home/ros/data
+      #  - ../workspace/src:/home/ros/workspace/src
+      #  - ../data:/home/ros/data
 
-
-  dev-nvidia:
+  # using nvidia gui
+  chessaton-nvidia:
     image: syllo/ros:humble
     container_name: ros_humble_nvidia
     network_mode: "host"           # access to host's network
@@ -33,6 +34,7 @@ services:
     runtime: nvidia
     environment:
       - DISPLAY=${DISPLAY}             # Pass the display for GUI
+      # - DISPLAY=host.docker.internal:0.0 # for Windows x11 server
       - QT_X11_NO_MITSHM=1             # Needed by QT programs
       - XAUTHORITY=/tmp/.docker.xauth
       - NVIDIA_VISIBLE_DEVICES=all
@@ -40,6 +42,7 @@ services:
     volumes:
        - /tmp/.X11-unix:/tmp/.X11-unix:rw
        - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
-       - ../workspace/src:/home/ros/workspace/src
-       - ../data:/home/ros/data
+      # dirs used for development
+      #  - ../workspace/src:/home/ros/workspace/src
+      #  - ../data:/home/ros/data
        - /dev/dri:/dev/dri
