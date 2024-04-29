@@ -173,7 +173,7 @@ def generate_launch_description():
     # Trajectory execution
     trajectory_execution = {
         "allow_trajectory_execution": True,
-        "moveit_manage_controllers": True,
+        "moveit_manage_controllers": False,
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
         "trajectory_execution.allowed_goal_duration_margin": 0.5,
         "trajectory_execution.allowed_start_tolerance": 0.01,
@@ -252,19 +252,28 @@ def generate_launch_description():
     joint_state_broadcaster_spawner=Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+                output="log",
+                arguments=["joint_state_broadcaster", "--ros-args", "--log-level", log_level],
+                parameters=[{"use_sim_time": use_sim_time}],
+        # arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
     )
 
     joint_trajectory_controller_spawner=Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["chessaton_arm_controller", "-c", "/controller_manager"],
+                output="log",
+                arguments=["chessaton_arm_controller", "--ros-args", "--log-level", log_level],
+                parameters=[{"use_sim_time": use_sim_time}],
+        # arguments=["chessaton_arm_controller", "-c", "/controller_manager"],
     )
 
     chessaton_hand_controller_spawner=Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["chessaton_hand_controller", "-c", "/controller_manager"],
+                output="log",
+                arguments=["chessaton_hand_controller", "--ros-args", "--log-level", log_level],
+                parameters=[{"use_sim_time": use_sim_time}],
+        # arguments=["chessaton_hand_controller", "-c", "/controller_manager"],
     )
 
     # left_finger_controller_spawner = Node(
@@ -407,7 +416,7 @@ def generate_launch_description():
                     target_action = chessaton_hand_controller_spawner,
                     on_exit = [
                         TimerAction(
-                            period=5.0,
+                            period=2.0,
                             actions=[
                                 rviz_node_full,
                                 run_move_group_node
