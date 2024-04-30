@@ -201,7 +201,7 @@
     <parent link="chessaton_link0"/>
     <child link="chessaton_link1"/>
     <axis xyz="0 0 -1"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
     <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="5"/>
   </joint>
   <link name="chessaton_link1">
@@ -229,7 +229,7 @@
     <parent link="chessaton_link1"/>
     <child link="chessaton_link2"/>
     <axis xyz="0 -1 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
     <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="5"/>
   </joint>
   <link name="chessaton_link2">
@@ -257,7 +257,7 @@
     <parent link="chessaton_link2"/>
     <child link="chessaton_link3"/>
     <axis xyz="0 -1 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
     <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="6"/>
   </joint>
   <link name="chessaton_link3">
@@ -285,7 +285,7 @@
     <parent link="chessaton_link3"/>
     <child link="chessaton_link4"/>
     <axis xyz="0 -1 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="0.5" friction="0.0"/>
     <limit effort="0" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="6"/>
   </joint>
   <link name="chessaton_link4">
