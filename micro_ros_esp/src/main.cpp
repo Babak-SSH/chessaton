@@ -50,7 +50,7 @@ double rad2deg(double in) {
 
 // convert grippers traveled distance to pulse width for servo
 double dist2pulse(double in) {
-    return map(int(in*1000), 0, 30, servoMin, servoMax);
+    return map(int(in*1000), 0, 23, servoMin, servoMax);
 }
 
 // radians to pulse width conversion
@@ -80,36 +80,47 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time) {
 void subscription_callback(const void * msgin) {
     const sensor_msgs__msg__JointState * joint_state_msg = (const sensor_msgs__msg__JointState *)msgin;
 
-    double joint = 0.0;
     int pulse = 0;
 
     Serial.println("--------------------------------------");
-
-    Serial.println(rad2deg(joint_state_msg->position.data[0]), 5);
-    pulse = rad2pulse(joint_state_msg->position.data[0]);
-    Serial.println(pulse);
-    pwmBoard.setPWM(0, 0, pulse);
-
-    Serial.println(rad2deg(joint_state_msg->position.data[1]), 5);
-    pulse = rad2pulse(joint_state_msg->position.data[1]);
-    Serial.println(pulse);
-    pwmBoard.setPWM(1, 0, pulse);
-
-    Serial.println(rad2deg(joint_state_msg->position.data[2]), 5);
-    pulse = rad2pulse(joint_state_msg->position.data[2]);
-    Serial.println(pulse);
-    pwmBoard.setPWM(2, 0, pulse);
-
-    Serial.println(rad2deg(joint_state_msg->position.data[3]), 5);
-    pulse = rad2pulse(joint_state_msg->position.data[3]);
-    Serial.println(pulse);
-    pwmBoard.setPWM(3, 0, pulse);
-
-    Serial.println(joint_state_msg->position.data[4], 5);
-    Serial.println(joint_state_msg->position.data[5], 5);
-    pulse = dist2pulse(joint_state_msg->position.data[4]);
-    pwmBoard.setPWM(4, 0, pulse);
-    
+    for (int i=0; i < 8; i++) {
+        String joint_name = joint_state_msg->name.data[i].data;
+        if (joint_name == "chessaton_joint1") {
+            // Serial.println("joint1");
+            // Serial.println(rad2deg(joint_state_msg->position.data[i]), 5);
+            pulse = rad2pulse(joint_state_msg->position.data[i]);
+            Serial.println(pulse);
+            pwmBoard.setPWM(0, 0, pulse);
+        }
+        else if (joint_name == "chessaton_joint2") {
+            // Serial.println("joint2");
+            // Serial.println(rad2deg(joint_state_msg->position.data[i]), 5);
+            pulse = rad2pulse(joint_state_msg->position.data[i]);
+            Serial.println(pulse);
+            pwmBoard.setPWM(1, 0, pulse);
+        }
+        else if (joint_name == "chessaton_joint3") {
+            // Serial.println("joint3");
+            // Serial.println(rad2deg(-joint_state_msg->position.data[i]), 5);
+            pulse = rad2pulse(-joint_state_msg->position.data[i]);
+            Serial.println(pulse);
+            pwmBoard.setPWM(2, 0, pulse);
+        }
+        else if (joint_name == "chessaton_joint4") {
+            // Serial.println("joint4");
+            // Serial.println(rad2deg(-joint_state_msg->position.data[i]), 5);
+            pulse = rad2pulse(-joint_state_msg->position.data[i]);
+            Serial.println(pulse);
+            pwmBoard.setPWM(3, 0, pulse);
+        }
+        else if (joint_name == "left_finger_joint") {
+            // Serial.println("joint5");
+            // Serial.println(joint_state_msg->position.data[i], 5);
+            Serial.println(joint_state_msg->position.data[i+1], 5);
+            pulse = dist2pulse(joint_state_msg->position.data[i]);
+            pwmBoard.setPWM(4, 0, pulse);
+        }
+    }
 }
 
 void setup() {
@@ -226,8 +237,8 @@ void setup() {
 }
 
 void loop() {
-    delay(20);
+    delay(10);
     // uncomment to enable publisher
     // RCSOFTCHECK(rclc_executor_spin_some(&executor_pub, RCL_MS_TO_NS(100)));
-    RCSOFTCHECK(rclc_executor_spin_some(&executor_sub, RCL_MS_TO_NS(100)));
+    RCSOFTCHECK(rclc_executor_spin_some(&executor_sub, RCL_MS_TO_NS(1)));
 }
