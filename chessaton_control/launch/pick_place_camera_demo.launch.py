@@ -178,7 +178,7 @@ def generate_launch_description():
         "allow_trajectory_execution": True,
         "moveit_manage_controllers": True,
         "publish_monitored_planning_scene": True,
-        "capabilities": "move_group/ExecuteTaskSolutionCapability",
+        "capabilities": "move_group/ApplyPlanningSceneService move_group/ClearOctomapService move_group/MoveGroupExecuteTrajectoryAction move_group/MoveGroupGetPlanningSceneService move_group/MoveGroupKinematicsService move_group/MoveGroupMoveAction move_group/MoveGroupPlanService move_group/MoveGroupQueryPlannersService move_group/MoveGroupStateValidationService move_group/TfPublisher",
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
         "trajectory_execution.allowed_goal_duration_margin": 0.5,
         "trajectory_execution.allowed_start_tolerance": 0.01,
@@ -236,7 +236,8 @@ def generate_launch_description():
                 ]
             )
         ),
-                launch_arguments={'world': world}.items(),
+        # add 'verbos': 'true' to enable gazebo debug
+        launch_arguments={'world': world, }.items(),
     )
 
     spawn_entity=Node(
