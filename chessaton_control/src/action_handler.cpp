@@ -206,9 +206,9 @@ void ActionHandler::remove_obj(std::string object_id) {
     std::vector<std::string> object_ids;
     moveit_msgs::msg::AttachedCollisionObject aco;
 
-    aco.object.id = object_id;
-    aco.object.operation = moveit_msgs::msg::CollisionObject::REMOVE;
-    planning_scene_interface.applyAttachedCollisionObject(aco);
+    // aco.object.id = object_id;
+    // aco.object.operation = moveit_msgs::msg::CollisionObject::REMOVE;
+    // planning_scene_interface.applyAttachedCollisionObject(aco);
 
     collision_object.id = object_id;
     collision_object.operation = collision_object.REMOVE; 
@@ -226,10 +226,10 @@ void ActionHandler::allow_collision(std::string object_id, bool allow) {
     acm.setEntry(object_id, "left_finger", allow);
     acm.setEntry(object_id, "right_finger", allow);
     acm.setEntry(object_id, "chessaton_gripper", allow);
-    // moveit_msgs::msg::PlanningScene diff_scene;
-    // ls->getPlanningSceneDiffMsg(diff_scene);
+    moveit_msgs::msg::PlanningScene diff_scene;
+    ls->getPlanningSceneDiffMsg(diff_scene);
     
-    // planning_scene_interface.applyPlanningScene(diff_scene); 
+    planning_scene_interface.applyPlanningScene(diff_scene); 
 }
 
 void ActionHandler::attach_obj(std::string object_id) {
