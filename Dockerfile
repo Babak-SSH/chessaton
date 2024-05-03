@@ -77,6 +77,7 @@ RUN sudo apt install -y \
     ros-$ROS_DISTRO-moveit\
     ros-$ROS_DISTRO-joint-trajectory-controller \
     ros-$ROS_DISTRO-joint-state-broadcaster \
+    ros-$ROS_DISTRO-moveit-ros-perception \
     ros-$ROS_DISTRO-gazebo-ros2-control \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp \
     ros-$ROS_DISTRO-gazebo-ros \
@@ -99,6 +100,7 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
     && source ~/ws_chessaton/install/setup.bash \
     && echo 'source ~/ws_chessaton/install/local_setup.bash' >> /home/$USERNAME/.bashrc \
     && echo 'source /usr/share/gazebo/setup.bash' >> /home/$USERNAME/.bashrc \
+    && export GAZEBO_PLUGIN_PATH=/usr/share/gazebo/../../lib/x86_64-linux-gnu/gazebo-11/plugins:/home/ros/workspace/build/gazebo_grasp_plugin \
     && sudo chown ros -R /home/$USERNAME/ws_chessaton/src \
     && /home/$USERNAME/ws_chessaton/src/chessaton_description/scripts/xacro2urdf.bash \
     && /home/$USERNAME/ws_chessaton/src/chessaton_description/scripts/xacro2sdf.bash \
