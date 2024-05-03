@@ -21,7 +21,7 @@ int main(int argc, char * argv[]) {
     geometry_msgs::msg::Pose grasp_pose;
     grasp_pose.orientation.w = 1;
     grasp_pose.position.x = 0;
-    grasp_pose.position.y = -0.205;
+    grasp_pose.position.y = -0.285;
     grasp_pose.position.z = 0.035;
     geometry_msgs::msg::Pose approach_pose = grasp_pose;
     approach_pose.position.y += 0.04;
@@ -36,7 +36,7 @@ int main(int argc, char * argv[]) {
     goal_pose.position.y = 0.22;
     goal_pose.position.z = 0.19;
     geometry_msgs::msg::Pose approach_goal_pose = goal_pose;
-    approach_goal_pose.position.z += 0.05;
+    approach_goal_pose.position.z += 0.005;
     geometry_msgs::msg::Pose retreat_pose = goal_pose;
     retreat_pose.position.y -= 0.08;
 
@@ -91,7 +91,7 @@ int main(int argc, char * argv[]) {
     // robot_mp.allow_collision(box_id, true);
     robot_mp.move_to(grasp_pose);
 
-    // grasp the bo
+    // grasp the box
     robot_mp.move_gripper(0.014);
     // robot_mp.attach_obj(box_id);
 
@@ -110,7 +110,9 @@ int main(int argc, char * argv[]) {
     // got to home position
     robot_mp.home();
 
+    robot_mp.remove_obj(table_id);
 
+    executor.remove_node(node); 
     // Shutdown ROS
     rclcpp::shutdown();
     return 0;
