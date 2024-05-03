@@ -312,15 +312,15 @@
     <link name='chessaton_link4'>
       <pose relative_to='chessaton_joint4'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.02796412823841781 -0.03590455266406323 -0.01031402159868098 0 0 0</pose>
-        <mass>0.12080254199351741</mass>
+        <pose>0.02677970391123109 -0.03551016874070208 -0.01030187534848121 0 0 0</pose>
+        <mass>0.11249254199351739</mass>
         <inertia>
-          <ixx>3.995740835518598e-05</ixx>
-          <ixy>1.6949703878521241e-05</ixy>
-          <ixz>9.582157452368205e-07</ixz>
-          <iyy>6.9005053229981032e-05</iyy>
-          <iyz>-1.842587663122212e-07</iyz>
-          <izz>8.5307542814712085e-05</izz>
+          <ixx>3.9703734389478682e-05</ixx>
+          <ixy>1.618582359279513e-05</ixy>
+          <ixz>9.3468973283239383e-07</ixz>
+          <iyy>6.6710706304359661e-05</iyy>
+          <iyz>-1.7642518770348599e-07</iyz>
+          <izz>8.2760004441052534e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link4_collision'>
@@ -500,13 +500,13 @@
     <link name='left_finger'>
       <pose relative_to='left_finger_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0127036998303536 0.00249799647668462 0.00302307598216517 0 0 0</pose>
+        <pose>0.0127036998303557 0.00154590778352602 0.00302307598216484 0 0 0</pose>
         <mass>0.0060194543690775797</mass>
         <inertia>
-          <ixx>8.3568723730101801e-07</ixx>
-          <ixy>-1.3337071782130201e-07</ixy>
+          <ixx>8.3568723730101695e-07</ixx>
+          <ixy>-1.3337071782130299e-07</ixy>
           <ixz>1.7186921041133901e-07</ixz>
-          <iyy>1.12520988095806e-06</iyy>
+          <iyy>1.1252098809580501e-06</iyy>
           <iyz>1.9490298685574901e-07</iyz>
           <izz>1.56286387867122e-06</izz>
         </inertia>
@@ -577,14 +577,14 @@
     <link name='right_finger'>
       <pose relative_to='right_finger_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0127036998303538 -0.00154590959997161 -0.00302307586801204 0 0 0</pose>
+        <pose>0.0127036998303559 -0.00154590852707946 -0.00302307586801259 0 0 0</pose>
         <mass>0.0060194543690774999</mass>
         <inertia>
-          <ixx>8.3568723730101505e-07</ixx>
-          <ixy>1.33370717821309e-07</ixy>
-          <ixz>-1.7186921041131399e-07</ixz>
+          <ixx>8.3568723730101399e-07</ixx>
+          <ixy>1.3337071782130799e-07</ixy>
+          <ixz>-1.71869210411315e-07</ixz>
           <iyy>1.12520988095806e-06</iyy>
-          <iyz>1.94902986855771e-07</iyz>
+          <iyz>1.9490298685577e-07</iyz>
           <izz>1.5628638786712001e-06</izz>
         </inertia>
       </inertial>
@@ -638,7 +638,7 @@
         <gripper_link>right_finger</gripper_link>
         <gripper_link>left_finger</gripper_link>
       </arm>
-      <forces_angle_tolerance>120</forces_angle_tolerance>
+      <forces_angle_tolerance>140</forces_angle_tolerance>
       <update_rate>30</update_rate>
       <grip_count_threshold>4</grip_count_threshold>
       <max_grip_count>20</max_grip_count>

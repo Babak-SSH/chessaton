@@ -112,7 +112,7 @@
         <gripper_link> right_finger </gripper_link>
         <gripper_link> left_finger </gripper_link>
       </arm>
-      <forces_angle_tolerance>120</forces_angle_tolerance>
+      <forces_angle_tolerance>140</forces_angle_tolerance>
       <update_rate>30</update_rate>
       <grip_count_threshold>4</grip_count_threshold>
       <max_grip_count>20</max_grip_count>
@@ -329,8 +329,8 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="-0.0266113093832042 -0.00792294858682179 -0.00177094549286488"/>
-      <mass value="0.07416"/>
+      <origin rpy="0 0 0" xyz="-0.0266113093832023 -0.00796252580865704 -0.00177094549286499"/>
+      <mass value="0.06585"/>
       <inertia ixx="1.94087256012664E-05" ixy="-4.11947485817516E-09" ixz="4.53529646177736E-07" iyy="9.16253998980345E-06" iyz="-1.67298780752208E-09" izz="2.20817956679352E-05"/>
     </inertial>
   </link>
@@ -357,9 +357,9 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0127036998303536 0.00249799647668462 0.00302307598216517"/>
+      <origin rpy="0 0 0" xyz="0.0127036998303557 0.00154590778352602 0.00302307598216484"/>
       <mass value="0.00601945436907758"/>
-      <inertia ixx="8.35687237301018E-07" ixy="-1.33370717821302E-07" ixz="1.71869210411339E-07" iyy="1.12520988095806E-06" iyz="1.94902986855749E-07" izz="1.56286387867122E-06"/>
+      <inertia ixx="8.35687237301017E-07" ixy="-1.33370717821303E-07" ixz="1.71869210411339E-07" iyy="1.12520988095805E-06" iyz="1.94902986855749E-07" izz="1.56286387867122E-06"/>
     </inertial>
   </link>
   <joint name="right_finger_joint" type="prismatic">
@@ -385,9 +385,9 @@
       </geometry>
     </collision>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0127036998303538 -0.00154590959997161 -0.00302307586801204"/>
+      <origin rpy="0 0 0" xyz="0.0127036998303559 -0.00154590852707946 -0.00302307586801259"/>
       <mass value="0.0060194543690775"/>
-      <inertia ixx="8.35687237301015E-07" ixy="1.33370717821309E-07" ixz="-1.71869210411314E-07" iyy="1.12520988095806E-06" iyz="1.94902986855771E-07" izz="1.5628638786712E-06"/>
+      <inertia ixx="8.35687237301014E-07" ixy="1.33370717821308E-07" ixz="-1.71869210411315E-07" iyy="1.12520988095806E-06" iyz="1.9490298685577E-07" izz="1.5628638786712E-06"/>
     </inertial>
   </link>
   <joint name="chessaton_hand_tcp_roll_virtual_joint" type="revolute">
