@@ -43,6 +43,7 @@ def generate_launch_description():
     ros2_control_command_interface = LaunchConfiguration(
         "ros2_control_command_interface"
     )
+    gazebo_sim = LaunchConfiguration("gazebo_sim")
     world = LaunchConfiguration("world")
     model = LaunchConfiguration("model")
     gazebo_preserve_fixed_joint = LaunchConfiguration("gazebo_preserve_fixed_joint")
@@ -174,9 +175,9 @@ def generate_launch_description():
     # Trajectory execution
     trajectory_execution = {
         "allow_trajectory_execution": True,
-        "moveit_manage_controllers": True,
+        "moveit_manage_controllers": False,
         "publish_monitored_planning_scene": True,
-        "capabilities": "move_group/ExecuteTaskSolutionCapability",
+        # "capabilities": "move_group/ExecuteTaskSolutionCapability",
         "trajectory_execution.allowed_execution_duration_scaling": 1.2,
         "trajectory_execution.allowed_goal_duration_margin": 0.5,
         "trajectory_execution.allowed_start_tolerance": 0.01,
@@ -234,7 +235,9 @@ def generate_launch_description():
                 ]
             )
         ),
-                launch_arguments={'world': world}.items(),
+        # add 'verbos': 'true' to enable gazebo debug
+        launch_arguments={'world': world, 'pause': 'false'}.items(),
+        condition=IfCondition(gazebo_sim),
     )
 
     spawn_entity=Node(
@@ -242,7 +245,9 @@ def generate_launch_description():
         executable='spawn_entity.py',
         arguments=['-topic', 'robot_description',
                    '-entity', 'chessaton'],
-        output='screen')
+        output='screen',
+        condition=IfCondition(gazebo_sim),
+        )
 
     robot_state_publisher=Node(
         package="robot_state_publisher",
@@ -388,21 +393,17 @@ def generate_launch_description():
 
     return LaunchDescription(declared_arguments+
         [
+            # Gazebo nodes:
             gazebo,
             spawn_entity,
-
             # ROS2_control:
             robot_state_publisher,
 
             # ROS2 Controllers:
-            RegisterEventHandler(
-                OnProcessExit(
-                    target_action = spawn_entity,
-                    on_exit = [
-                        joint_state_broadcaster_spawner,
-                    ]
-                )
-            ),
+            fake_ros2_controller_node,
+
+            joint_state_broadcaster_spawner,
+
             RegisterEventHandler(
                 OnProcessExit(
                     target_action = joint_state_broadcaster_spawner,
@@ -435,7 +436,7 @@ def generate_launch_description():
                 )
             ),
             TimerAction(
-                period=3.0,
+                period=2.0,
                 actions=[
                     demo_program_node,
                 ]
@@ -511,6 +512,11 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             description="The output control command interface provided by ros2_control ('position', 'velocity', 'effort' or certain combinations 'position,velocity').",
         ),
         # Gazebo
+        DeclareLaunchArgument(
+            "gazebo_sim",
+            default_value="true",
+            description="enable gazebo simulation.",
+        ),
         DeclareLaunchArgument(
             "world",
             default_value=path.join(get_package_share_directory('chessaton_chess_manager'), "worlds", "chessboard_demo"),
