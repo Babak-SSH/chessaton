@@ -1,7 +1,7 @@
 # joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
 
 # For beginners, we downscale velocity and acceleration limits.
-# You can always specify higher scaling factors (<= 1.5.0) in your motion requests.  # Increase the values below to 1.5.0 to always move at maximum speed.
+# You can always specify higher scaling factors (<= 1.0.2618) in your motion requests.  # Increase the values below to 1.0.2618 to always move at maximum speed.
 default_velocity_scaling_factor: 1.0
 default_acceleration_scaling_factor: 1.0
 
@@ -10,41 +10,41 @@ default_acceleration_scaling_factor: 1.0
 joint_limits:
   chessaton_joint1:
     has_velocity_limits: true
-    max_velocity: 50.0
-    has_acceleration_limits: true
-    max_acceleration: 2.0
+    max_velocity: 0.2618
+    has_acceleration_limits: false
+    # max_acceleration: 0.5
   chessaton_joint2:
     has_velocity_limits: true
-    max_velocity: 50.0
-    has_acceleration_limits: true
-    max_acceleration: 2.0
+    max_velocity: 0.2618
+    has_acceleration_limits: false
+    # max_acceleration: 0.5
   chessaton_joint3:
     has_velocity_limits: true
-    max_velocity: 50.0
-    has_acceleration_limits: true
-    max_acceleration: 2.0
+    max_velocity: 0.2618
+    has_acceleration_limits: false
+    # max_acceleration: 0.5
   chessaton_joint4:
     has_velocity_limits: true
-    max_velocity: 50.0
-    has_acceleration_limits: true
-    max_acceleration: 2.0
+    max_velocity: 0.2618
+    has_acceleration_limits: false
+    # max_acceleration: 0.5
   chessaton_hand_tcp_roll_virtual_joint:
     has_velocity_limits: true
-    max_velocity: 50.0
-    has_acceleration_limits: true
-    max_acceleration: 2.0
+    max_velocity: 0.2618
+    has_acceleration_limits: false
+    # max_acceleration: 0.5
   chessaton_hand_tcp_yaw_virtual_joint:
     has_velocity_limits: true
-    max_velocity: 50.0
-    has_acceleration_limits: true
-    max_acceleration: 2.0
+    max_velocity: 0.2618
+    has_acceleration_limits: false
+    # max_acceleration: 0.5
   left_finger_joint:
     has_velocity_limits: true
-    max_velocity: 5.0
-    has_acceleration_limits: true
-    max_acceleration: 0.2
+    max_velocity: 0.01
+    has_acceleration_limits: false
+    # max_acceleration: 0.1
   right_finger_joint:
     has_velocity_limits: true
-    max_velocity: 5.0
-    has_acceleration_limits: true
-    max_acceleration: 0.2
+    max_velocity: 0.01
+    has_acceleration_limits: false
+    # max_acceleration: 0.1

@@ -37,8 +37,8 @@
     <joint name="right_finger_joint" value="0"/>
   </group_state>
   <group_state group="chessaton_hand" name="hand_open">
-    <joint name="left_finger_joint" value="0.023"/>
-    <joint name="right_finger_joint" value="-0.023"/>
+    <joint name="left_finger_joint" value="0.02"/>
+    <joint name="right_finger_joint" value="-0.02"/>
   </group_state>
   <group name="chessaton_arm_hand">
     <group name="chessaton_arm"/>
