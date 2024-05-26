@@ -132,10 +132,10 @@ void setup() {
     pwmBoard.setPWMFreq(servoFrequency);          //Set the servo operating frequency
 
     Serial.println("connecting to wifi...");
-    IPAddress agent_ip(192, 168, 0, 101);
+    IPAddress agent_ip(192, 168, 0, 100);
     size_t agent_port = 8888;
-    char SSID[] = "dlink_2.4G";
-    char SSID_PW[]= "ujitgr12";
+    char SSID[] = "WIFI_ID";
+    char SSID_PW[]= "PASS";
 
     set_microros_wifi_transports(SSID, SSID_PW, agent_ip, agent_port);
     delay(2000);
@@ -237,7 +237,7 @@ void setup() {
 }
 
 void loop() {
-    delay(10);
+    delay(1);
     // uncomment to enable publisher
     // RCSOFTCHECK(rclc_executor_spin_some(&executor_pub, RCL_MS_TO_NS(100)));
     RCSOFTCHECK(rclc_executor_spin_some(&executor_sub, RCL_MS_TO_NS(1)));
