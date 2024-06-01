@@ -52,7 +52,7 @@
             <material>
               <script>
                 <uri>file://media/materials/scripts/gazebo.material</uri>
-                <name>Gazebo/Grey</name>
+                <name>Gazebo/White</name>
               </script>
             </material>
           </visual>
@@ -126,10 +126,10 @@
         </model>
 
         <model name='blue_box'>
-          <pose frame=''>0 -0.30 0.045 0 0 0</pose>
+          <pose frame=''>0.02 -0.30 0.045 0 0 0</pose>
           <scale>1 1 1</scale>
           <link name='link'>
-            <pose frame=''>0 -0.30 0.045 0 0 0</pose>
+            <pose frame=''>0.02 -0.30 0.045 0 0 0</pose>
             <velocity>0 0 0 0 -0 0</velocity>
             <acceleration>0 0 -9.8 0 0 -2e-06</acceleration>
             <wrench>0 0 -0.98 0 -0 0</wrench>

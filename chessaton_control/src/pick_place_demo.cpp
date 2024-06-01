@@ -20,7 +20,7 @@ int main(int argc, char * argv[]) {
 
     geometry_msgs::msg::Pose grasp_pose;
     grasp_pose.orientation.w = 1;
-    grasp_pose.position.x = 0;
+    grasp_pose.position.x = 0.02;
     grasp_pose.position.y = -0.285;
     grasp_pose.position.z = 0.035;
     geometry_msgs::msg::Pose approach_pose = grasp_pose;
