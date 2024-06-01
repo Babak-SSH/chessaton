@@ -200,7 +200,7 @@ def generate_launch_description():
     octomap_config = {'octomap_frame': 'camera_link_optical', 
                       'octomap_resolution': 0.005,
                       'max_range': 5.0} 
-    octomap_updater_config = load_yaml(moveit_config_package, "config/sensors_3d.yaml")
+    octomap_updater_config = load_yaml(moveit_config_package, "config/sensor_3d.yaml")
 
     # List of processes to be executed
     # xacro2sdf
