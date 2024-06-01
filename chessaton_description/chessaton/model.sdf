@@ -9,7 +9,7 @@
       <pose relative_to='virtual_joint'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>-0.00088323 -3.593e-07 0.021799 0 0 0</pose>
-        <mass>0.35099000000000002</mass>
+        <mass>0.34999999999999998</mass>
         <inertia>
           <ixx>0.00040857000000000003</ixx>
           <ixy>-1.2568e-09</ixy>
@@ -52,7 +52,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/Green</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>1 1 1 1</diffuse>
@@ -71,11 +71,11 @@
           <lower>-1.570796326794897</lower>
           <upper>1.570796326794897</upper>
           <effort>0</effort>
-          <velocity>0.26179999999999998</velocity>
+          <velocity>0.29999999999999999</velocity>
         </limit>
         <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
+          <damping>0.10000000000000001</damping>
+          <friction>0.10000000000000001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -84,15 +84,15 @@
     <link name='chessaton_link1'>
       <pose relative_to='chessaton_joint1'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>-2.48292998257112e-06 1.80948923297683e-11 0.0255783185959284 0 0 0</pose>
-        <mass>0.11596191407717001</mass>
+        <pose>-2.4829e-06 1.8095e-11 0.025578 0 0 0</pose>
+        <mass>0.11600000000000001</mass>
         <inertia>
-          <ixx>5.46629273225896e-05</ixx>
-          <ixy>-1.3315666918778601e-07</ixy>
-          <ixz>3.3525862420040201e-14</ixz>
-          <iyy>4.2516541502248197e-05</iyy>
-          <iyz>-8.2983289116075996e-14</iyz>
-          <izz>8.9443474960238705e-05</izz>
+          <ixx>5.4663000000000002e-05</ixx>
+          <ixy>-1.3316000000000001e-07</ixy>
+          <ixz>3.3525999999999998e-14</ixz>
+          <iyy>4.2517e-05</iyy>
+          <iyz>-8.2983000000000006e-14</iyz>
+          <izz>8.9443000000000004e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link1_collision'>
@@ -128,7 +128,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/Blue</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.62255 0.62255 0.62255 1</diffuse>
@@ -138,7 +138,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint2' type='revolute'>
-      <pose relative_to='chessaton_link1'>0 1.2977e-05 0.030569 0 0 0</pose>
+      <pose relative_to='chessaton_link1'>0 1.29770906784333e-05 0.0305688591051693 0 0 0</pose>
       <parent>chessaton_link1</parent>
       <child>chessaton_link2</child>
       <axis>
@@ -147,11 +147,11 @@
           <lower>-1.570796326794897</lower>
           <upper>1.570796326794897</upper>
           <effort>0</effort>
-          <velocity>0.26179999999999998</velocity>
+          <velocity>0.29999999999999999</velocity>
         </limit>
         <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
+          <damping>0.10000000000000001</damping>
+          <friction>0.10000000000000001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -161,7 +161,7 @@
       <pose relative_to='chessaton_joint2'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>-2.3338e-06 4.5723e-05 0.093503 0 0 0</pose>
-        <mass>0.070955000000000004</mass>
+        <mass>0.070999999999999994</mass>
         <inertia>
           <ixx>6.1321000000000005e-05</ixx>
           <ixy>-6.9446999999999998e-10</ixy>
@@ -204,7 +204,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/Orange</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.941176 0.941176 0.941176 1</diffuse>
@@ -214,7 +214,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint3' type='revolute'>
-      <pose relative_to='chessaton_link2'>0 0.025346 0.18701 0 0 0</pose>
+      <pose relative_to='chessaton_link2'>0 0.025345720651074 0.187006906655083 0 0 0</pose>
       <parent>chessaton_link2</parent>
       <child>chessaton_link3</child>
       <axis>
@@ -223,11 +223,11 @@
           <lower>-1.570796326794897</lower>
           <upper>1.570796326794897</upper>
           <effort>0</effort>
-          <velocity>0.26179999999999998</velocity>
+          <velocity>0.29999999999999999</velocity>
         </limit>
         <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
+          <damping>0.10000000000000001</damping>
+          <friction>0.10000000000000001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -236,15 +236,15 @@
     <link name='chessaton_link3'>
       <pose relative_to='chessaton_joint3'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0619519890876748 -0.0245474768443102 -0.00170721074679331 0 0 0</pose>
+        <pose>0.041523 -0.024547 -0.0018439 0 0 0</pose>
         <mass>0.01</mass>
         <inertia>
-          <ixx>2.45504457142139e-05</ixx>
-          <ixy>9.4895203673748893e-10</ixy>
-          <ixz>-2.7696574725715598e-07</ixz>
-          <iyy>3.4977843679795602e-05</iyy>
-          <iyz>4.5265768375941601e-07</iyz>
-          <izz>5.1335074477081399e-05</izz>
+          <ixx>2.455e-05</ixx>
+          <ixy>-7.2470000000000003e-09</ixy>
+          <ixz>-2.7697000000000002e-07</ixz>
+          <iyy>3.4978000000000003e-05</iyy>
+          <iyz>4.524e-07</iyz>
+          <izz>5.1335000000000002e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link3_collision'>
@@ -280,7 +280,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/Red</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.941176 0.941176 0.941176 1</diffuse>
@@ -290,7 +290,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_joint4' type='revolute'>
-      <pose relative_to='chessaton_link3'>0.17811 0.0028223 9.113700000000001e-05 0 0 0</pose>
+      <pose relative_to='chessaton_link3'>0.157407990853242 0.00282292319687479 -0.000108863252950619 0 0 0</pose>
       <parent>chessaton_link3</parent>
       <child>chessaton_link4</child>
       <axis>
@@ -299,11 +299,11 @@
           <lower>-1.570796326794897</lower>
           <upper>1.570796326794897</upper>
           <effort>0</effort>
-          <velocity>0.26179999999999998</velocity>
+          <velocity>0.29999999999999999</velocity>
         </limit>
         <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
+          <damping>0.10000000000000001</damping>
+          <friction>0.10000000000000001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -312,15 +312,15 @@
     <link name='chessaton_link4'>
       <pose relative_to='chessaton_joint4'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0268095181555883 -0.03552160506460533 -0.01030242325963767 0 0 0</pose>
-        <mass>0.11235000000000001</mass>
+        <pose>0.02683363885910224 -0.0227045149743018 -0.01030261214487833 0 0 0</pose>
+        <mass>0.1125</mass>
         <inertia>
-          <ixx>3.9693860788623121e-05</ixx>
-          <ixy>1.6156329229099931e-05</ixy>
-          <ixz>9.3332821147132638e-07</ixz>
-          <iyy>6.6625344852722692e-05</iyy>
-          <iyz>-1.7577677256902071e-07</iyz>
-          <izz>8.2664737268044013e-05</izz>
+          <ixx>3.522810161290297e-05</ixx>
+          <ixy>-8.5942234932725127e-06</ixy>
+          <ixz>9.3401235384077093e-07</ixz>
+          <iyy>6.6674628198797159e-05</iyy>
+          <iyz>7.7740711555380966e-08</iyz>
+          <izz>7.824765285932461e-05</izz>
         </inertia>
       </inertial>
       <collision name='chessaton_link4_collision'>
@@ -347,7 +347,7 @@
         </surface>
       </collision>
       <collision name='chessaton_link4_fixed_joint_lump__chessaton_gripper_collision_1'>
-        <pose>0.070608 -0.033636 -0.0087075 0 0 0</pose>
+        <pose>0.070608507146197 -0.0126359232516508 -0.0087074752469517 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -379,7 +379,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/Black</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.941175 0.941175 0.941175 1</diffuse>
@@ -387,7 +387,7 @@
         </material>
       </visual>
       <visual name='chessaton_link4_fixed_joint_lump__chessaton_gripper_visual_1'>
-        <pose>0.070608 -0.033636 -0.0087075 0 0 0</pose>
+        <pose>0.070608507146197 -0.0126359232516508 -0.0087074752469517 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -396,7 +396,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/White</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.62255 0.62255 0.62255 1</diffuse>
@@ -406,7 +406,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='chessaton_hand_tcp_roll_virtual_joint' type='revolute'>
-      <pose relative_to='chessaton_link4'>0.100608 -0.033636 -0.0087075 0 0 0</pose>
+      <pose relative_to='chessaton_link4'>0.100608507146197 -0.0126359232516508 -0.0087074752469517 0 0 0</pose>
       <parent>chessaton_link4</parent>
       <child>chessaton_hand_tcp_roll</child>
       <axis>
@@ -478,7 +478,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='left_finger_joint' type='prismatic'>
-      <pose relative_to='chessaton_link4'>0.070608 -0.033636 -0.0087075 0 0 0</pose>
+      <pose relative_to='chessaton_link4'>0.070608507146197 -0.0126359232516508 -0.0087074752469517 0 0 0</pose>
       <parent>chessaton_link4</parent>
       <child>left_finger</child>
       <axis>
@@ -500,15 +500,15 @@
     <link name='left_finger'>
       <pose relative_to='left_finger_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0127034645973708 0.00154565127207735 0.0030231093837057 0 0 0</pose>
+        <pose>0.012703 0.0015457 0.0030231 0 0 0</pose>
         <mass>0.0060000000000000001</mass>
         <inertia>
-          <ixx>8.3567308647556801e-07</ixx>
-          <ixy>-1.3337305597894901e-07</ixy>
-          <ixz>1.7187138234773101e-07</ixz>
-          <iyy>1.1251817271019101e-06</iyy>
-          <iyz>1.94898487683555e-07</iyz>
-          <izz>1.56282552281173e-06</izz>
+          <ixx>8.3567000000000002e-07</ixx>
+          <ixy>-1.3337000000000001e-07</ixy>
+          <ixz>1.7186999999999999e-07</ixz>
+          <iyy>1.1252e-06</iyy>
+          <iyz>1.949e-07</iyz>
+          <izz>1.5628000000000001e-06</izz>
         </inertia>
       </inertial>
       <collision name='left_finger_collision'>
@@ -545,7 +545,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/White</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.990196 1 1 1</diffuse>
@@ -555,7 +555,7 @@
       <self_collide>false</self_collide>
     </link>
     <joint name='right_finger_joint' type='prismatic'>
-      <pose relative_to='chessaton_link4'>0.070608 -0.033636 -0.0087075 0 0 0</pose>
+      <pose relative_to='chessaton_link4'>0.070608507146197 -0.0126359232516508 -0.0087074752469517 0 0 0</pose>
       <parent>chessaton_link4</parent>
       <child>right_finger</child>
       <axis>
@@ -577,15 +577,15 @@
     <link name='right_finger'>
       <pose relative_to='right_finger_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.0127037648728564 -0.00154618659083175 -0.00302306815560061 0 0 0</pose>
+        <pose>0.012704 -0.0015462 -0.0030231 0 0 0</pose>
         <mass>0.0060000000000000001</mass>
         <inertia>
-          <ixx>8.3569847910999304e-07</ixx>
-          <ixy>1.3336829239872401e-07</ixy>
-          <ixz>-1.7186462212618799e-07</ixz>
-          <iyy>1.1252213355055999e-06</iyy>
-          <iyz>1.94907513457399e-07</iyz>
-          <izz>1.5628843517514201e-06</izz>
+          <ixx>8.357e-07</ixx>
+          <ixy>1.3337000000000001e-07</ixy>
+          <ixz>-1.7186e-07</ixz>
+          <iyy>1.1252e-06</iyy>
+          <iyz>1.9490999999999999e-07</iyz>
+          <izz>1.5629000000000001e-06</izz>
         </inertia>
       </inertial>
       <collision name='right_finger_collision'>
@@ -622,7 +622,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/White</name>
+            <name>Gazebo/Grey</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <diffuse>0.9902 1 1 1</diffuse>
@@ -638,11 +638,11 @@
         <gripper_link>right_finger</gripper_link>
         <gripper_link>left_finger</gripper_link>
       </arm>
-      <forces_angle_tolerance>140</forces_angle_tolerance>
-      <update_rate>30</update_rate>
-      <grip_count_threshold>4</grip_count_threshold>
+      <forces_angle_tolerance>165</forces_angle_tolerance>
+      <update_rate>60</update_rate>
+      <grip_count_threshold>1</grip_count_threshold>
       <max_grip_count>20</max_grip_count>
-      <release_tolerance>0.00025</release_tolerance>
+      <release_tolerance>0.0004</release_tolerance>
       <disable_collisions_on_attach>false</disable_collisions_on_attach>
       <contact_topic>__default_topic__</contact_topic>
     </plugin>
@@ -650,7 +650,7 @@
       <parameters>/home/ros/workspace/install/chessaton_description/share/chessaton_description/config/controllers_position.yaml</parameters>
     </plugin>
     <frame name='gripper_joint' attached_to='chessaton_link4'>
-      <pose>0.070608 -0.033636 -0.008708 0 -0 0</pose>
+      <pose>0.070609 -0.012636 -0.008707 0 -0 0</pose>
     </frame>
     <frame name='chessaton_gripper' attached_to='gripper_joint'/>
     <frame name='chessaton_hand_tcp_virtual_joint' attached_to='chessaton_hand_tcp_yaw'>

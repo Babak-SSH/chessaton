@@ -9,7 +9,7 @@
         <mu2 value="0.85"/>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
-        <material>Gazebo/Green</material>
+    <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="chessaton_link1">
@@ -17,7 +17,7 @@
         <mu2 value="0.85"/>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="chessaton_link2">
@@ -25,7 +25,7 @@
         <mu2 value="0.85"/>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="chessaton_link3">
@@ -33,7 +33,7 @@
         <mu2 value="0.85"/>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
-        <material>Gazebo/Red</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="chessaton_link4">
@@ -41,7 +41,7 @@
         <mu2 value="0.85"/>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
-        <material>Gazebo/Black</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="chessaton_gripper">
@@ -49,7 +49,7 @@
         <mu2 value="0.85"/>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
-        <material>Gazebo/White</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="left_finger">
@@ -58,7 +58,7 @@
         <kp value="1000000.0"/>
         <kd value="1.0"/>
         <minDepth>0.001</minDepth>
-        <material>Gazebo/White</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="right_finger">
@@ -67,7 +67,7 @@
         <kp value="1000000.0"/>
         <kd value="1.0"/>
         <minDepth>0.001</minDepth>
-        <material>Gazebo/White</material>
+        <material>Gazebo/Grey</material>
     </gazebo>
 
     <!-- <gazebo reference="[joint name]">
@@ -81,11 +81,11 @@
                 <gripper_link> right_finger </gripper_link>
                 <gripper_link> left_finger </gripper_link>
              </arm>
-            <forces_angle_tolerance>140</forces_angle_tolerance>
-            <update_rate>30</update_rate>
-            <grip_count_threshold>4</grip_count_threshold>
+            <forces_angle_tolerance>165</forces_angle_tolerance>
+            <update_rate>60</update_rate>
+            <grip_count_threshold>1</grip_count_threshold>
             <max_grip_count>20</max_grip_count>
-            <release_tolerance>0.00025</release_tolerance>
+            <release_tolerance>0.0004</release_tolerance>
             <disable_collisions_on_attach>false</disable_collisions_on_attach>
             <contact_topic>__default_topic__</contact_topic>
          </plugin>
