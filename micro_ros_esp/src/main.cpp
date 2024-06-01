@@ -19,8 +19,8 @@
 
 // called this way, it uses the default address 0x40 for the first board's address.
 Adafruit_PWMServoDriver pwmBoard = Adafruit_PWMServoDriver(0x40);
-static const int servoMin = 150; // servo minimum pulse
-static const int servoMax = 600; // servo maximum pulse 
+static const int servoMin = 121; // servo minimum pulse
+static const int servoMax = 491; // servo maximum pulse 
 static const int servoFrequency = 50; // analo servo frequency
 
 // publisher
@@ -82,7 +82,7 @@ void subscription_callback(const void * msgin) {
 
     int pulse = 0;
 
-    Serial.println("--------------------------------------");
+    // Serial.println("--------------------------------------");
     for (int i=0; i < 8; i++) {
         String joint_name = joint_state_msg->name.data[i].data;
         if (joint_name == "chessaton_joint1") {
@@ -96,29 +96,32 @@ void subscription_callback(const void * msgin) {
             // Serial.println("joint2");
             // Serial.println(rad2deg(joint_state_msg->position.data[i]), 5);
             pulse = rad2pulse(joint_state_msg->position.data[i]);
-            Serial.println(pulse);
+            int Rpulse = rad2pulse(-joint_state_msg->position.data[i]);
+            // Serial.println(pulse);
             pwmBoard.setPWM(1, 0, pulse);
+            pwmBoard.setPWM(2, 0, Rpulse);
         }
         else if (joint_name == "chessaton_joint3") {
             // Serial.println("joint3");
             // Serial.println(rad2deg(-joint_state_msg->position.data[i]), 5);
             pulse = rad2pulse(-joint_state_msg->position.data[i]);
-            Serial.println(pulse);
+            // Serial.println(pulse);
             pwmBoard.setPWM(2, 0, pulse);
         }
         else if (joint_name == "chessaton_joint4") {
             // Serial.println("joint4");
             // Serial.println(rad2deg(-joint_state_msg->position.data[i]), 5);
             pulse = rad2pulse(-joint_state_msg->position.data[i]);
-            Serial.println(pulse);
+            // Serial.println(pulse);
             pwmBoard.setPWM(3, 0, pulse);
         }
         else if (joint_name == "left_finger_joint") {
             // Serial.println("joint5");
             // Serial.println(joint_state_msg->position.data[i], 5);
-            Serial.println(joint_state_msg->position.data[i+1], 5);
-            pulse = dist2pulse(joint_state_msg->position.data[i]);
-            pwmBoard.setPWM(4, 0, pulse);
+            // Serial.println(joint_state_msg->position.data[i+1], 5);
+            pulse = dist2pulse(0.023-joint_state_msg->position.data[i]);
+            // Serial.println(pulse);
+            pwmBoard.setPWM(5, 0, pulse);
         }
     }
 }
@@ -132,6 +135,7 @@ void setup() {
     pwmBoard.setPWMFreq(servoFrequency);          //Set the servo operating frequency
 
     Serial.println("connecting to wifi...");
+    // ip
     IPAddress agent_ip(192, 168, 0, 100);
     size_t agent_port = 8888;
     char SSID[] = "WIFI_ID";
@@ -237,8 +241,8 @@ void setup() {
 }
 
 void loop() {
-    delay(1);
+    delay(5);
     // uncomment to enable publisher
     // RCSOFTCHECK(rclc_executor_spin_some(&executor_pub, RCL_MS_TO_NS(100)));
-    RCSOFTCHECK(rclc_executor_spin_some(&executor_sub, RCL_MS_TO_NS(1)));
+    RCSOFTCHECK(rclc_executor_spin_some(&executor_sub, RCL_MS_TO_NS(5)));
 }
