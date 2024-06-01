@@ -202,8 +202,8 @@ def generate_launch_description():
 
     # sensors
     octomap_config = {'octomap_frame': 'camera_link_optical', 
-                      'octomap_resolution': 0.01,
-                      'max_range': 6.0} 
+                      'octomap_resolution': 0.015,
+                      'max_range': 5.0} 
     octomap_updater_config = load_yaml(moveit_config_package, "config/sensor_3d.yaml")
 
     # List of processes to be executed
