@@ -10,16 +10,30 @@ namespace Chessaton {
 ChessHandler::ChessHandler(const ActionHandler& newRobotMP, std::string fen) : robotMP(newRobotMP) {
     startFen = fen;
 
-    // graspZ = 0.045;
-    approachZ = 0.08;
-    liftZ = 0.12;
-    goalZ = 0.045;
-    retreatZ = 0.12;
-    graspWidth = 0.003;
-    quaternionX = 0;
-    quaternionY = 0.707107;
-    quaternionZ = 0;
-    quaternionW = 0.707107;
+    gripperQ90.x = 0;
+    gripperQ90.y = 0.707107;
+    gripperQ90.z = 0;
+    gripperQ90.w = 0.707107;
+
+    gripperQ70.x = 0;
+    gripperQ70.y = 0.573576436;
+    gripperQ70.z = 0;
+    gripperQ70.w = 0.819152044;
+    
+    gripperQ45.x = 0;
+    gripperQ45.y = 0.382683432;
+    gripperQ45.z = 0;
+    gripperQ45.w = 0.923879533;
+
+    gripperQ60.x = 0;
+    gripperQ60.y = 0.5;
+    gripperQ60.z = 0;
+    gripperQ60.w = 0.866025404;
+
+    gripperQ0.x = 0;
+    gripperQ0.y = 0;
+    gripperQ0.z = 0;
+    gripperQ0.w = 1;
 
     board = {"rw", "nw", "bw", "qw", "kw", "bw", "nw", "rw",
              "pw", "pw", "pw", "pw", "pw", "pw", "pw", "pw",
@@ -42,6 +56,7 @@ std::string ChessHandler::get_engine_move(rclcpp::Node::SharedPtr node, int dept
     request->moves = moves;
     request->depth = depth;
 
+    // wait to recieve the bestmove from chess engine
     while (!client->wait_for_service(std::chrono::seconds(1))) {
       if (!rclcpp::ok()) {
         RCLCPP_ERROR(rclcpp::get_logger("rclcpp"), "Interrupted while waiting for the service. Exiting.");
@@ -151,67 +166,103 @@ void ChessHandler::update_board(moveInfo mInfo) {
 }
 
 void ChessHandler::check_contacts() {
-
+    // not implemented
 }
 
 void ChessHandler::pick_piece(int sq, std::string pType) {
-    gripperQ.x = quaternionX;
-    gripperQ.y = quaternionY;
-    gripperQ.z = quaternionZ;
-    gripperQ.w = quaternionW;
-    grasp_pose.orientation = gripperQ;
+    /// we take a sharper rotation when we are in the first 4 row.
+    if (sq > h4) {
+        grasp_pose.orientation = gripperQ60;
+        approach_grasp_pose.orientation = gripperQ60;
+        lift_pose.orientation = gripperQ60;
+    } else {
+        grasp_pose.orientation = gripperQ70;
+        approach_grasp_pose.orientation = gripperQ70;
+        lift_pose.orientation = gripperQ70;
+    }
+
     std::tie(grasp_pose.position.x, grasp_pose.position.y) = SqToPos[sq];
-    grasp_pose.position.z = graspZ[pType];
+    grasp_pose.position.z = BoardZ + graspZ[pType];
 
     approach_grasp_pose = grasp_pose;
-    approach_grasp_pose.position.z = approachZ;
+    approach_grasp_pose.position.z = BoardZ + approachZ;
 
     lift_pose  = grasp_pose;
-    lift_pose.position.z = liftZ;
+    lift_pose.position.z = BoardZ + liftZ;
+
+    center_pose.orientation = gripperQ0;
+    center_pose.position.x = centerX;
+    center_pose.position.z = centerZ;
 
     // open gripper
-    // robotMP.move_gripper("hand_open");
-    robotMP.move_gripper(graspWidth+0.003);
+    robotMP.move_gripper(graspOpen);
+    sleep(0.5);
 
     // approach to chess piece 
     robotMP.move_to(approach_grasp_pose);
+    sleep(0.5);
 
     // move tcp to chess piece
     robotMP.move_to(grasp_pose);
+    sleep(0.5);
 
     // grasp the chess piece
-    robotMP.move_gripper(graspWidth);
+    robotMP.move_gripper(graspWidth[pType]);
+    sleep(0.5);
 
     // lift the chess piece 
     robotMP.move_to(lift_pose);
+    sleep(0.5);
 
-
+    // move above the center of board
+    robotMP.move_to(center_pose);
+    sleep(0.5);
 }
 
 void ChessHandler::put_piece(int sq, std::string pType) {
-    gripperQ.x = quaternionX;
-    gripperQ.y = quaternionY;
-    gripperQ.z = quaternionZ;
-    gripperQ.w = quaternionW;
-    goal_pose.orientation = gripperQ;
+    /// we take a sharper rotation when we are in the first 4 row.
+    if (sq > h4) {
+        goal_pose.orientation = gripperQ60;
+        approach_goal_pose.orientation = gripperQ60;
+        retreat_pose.orientation = gripperQ60;
+    } else {
+        goal_pose.orientation = gripperQ70;
+        approach_goal_pose.orientation = gripperQ70;
+        retreat_pose.orientation = gripperQ70;
+    }
+
     std::tie(goal_pose.position.x, goal_pose.position.y) = SqToPos[sq];
-    goal_pose.position.z = graspZ[pType];
+    goal_pose.position.z = BoardZ + graspZ[pType];
 
     approach_goal_pose = goal_pose;
-    approach_goal_pose.position.z = approachZ;
+    /// last constant is a offset to not push into the chessboard
+    /// if some physical inaccuracies happen.
+    approach_goal_pose.position.z = BoardZ + approachZ + 0.002;
 
     retreat_pose = goal_pose;
-    retreat_pose.position.z = retreatZ;
+    retreat_pose.position.z = BoardZ + retreatZ;
+
+    center_pose.orientation = gripperQ0;
+    center_pose.position.x = centerX;
+    center_pose.position.z = centerZ;
 
     // go to goal position  
     robotMP.move_to(approach_goal_pose);
+    sleep(0.5);
     robotMP.move_to(goal_pose);
+    sleep(0.5);
    
     // open the gripper to release the chess piece
-    robotMP.move_gripper(graspWidth+0.003);
+    robotMP.move_gripper(graspOpen);
+    sleep(0.5);
 
     // retreat from goal pose
     robotMP.move_to(retreat_pose);
+    sleep(0.5);
+
+    // move above the center of board
+    robotMP.move_to(center_pose);
+    sleep(0.5);
 }
 
 void ChessHandler::remove_piece(int sq, std::string pType) {
