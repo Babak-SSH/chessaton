@@ -5,9 +5,12 @@
 #include <string>
 
 
+// chessboard and pieces
+
 // center cord of chessboard
 extern const float BoardX;
 extern const float BoardY;
+extern const float BoardZ;
 extern const float Step; // square tile size
 
 // x values
@@ -50,7 +53,16 @@ enum sq {
 extern std::map<int, std::pair<float, float>> SqToPos;
 extern std::map<std::string, int> StrToIdx; 
 extern std::map<std::string, float> graspZ;
+extern std::map<std::string, float> graspWidth;
 
 extern const std::string START_FEN;
+
+// robot
+extern const float approachZ;
+extern const float liftZ;
+extern const float centerZ;
+extern const float centerX; 
+extern const float retreatZ;
+extern const float graspOpen; 
 
 #endif

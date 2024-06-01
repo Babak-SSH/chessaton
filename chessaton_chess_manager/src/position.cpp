@@ -2,8 +2,9 @@
 
 
 // center cord of chessboard
-const float BoardX = 0.25;
+const float BoardX = 0.18;
 const float BoardY = 0.0;
+const float BoardZ = 0.135;
 const float Step = 0.027; // square tile size
 
 // x values
@@ -60,12 +61,29 @@ std::map<std::string, int> StrToIdx = {
                                     };
 
 std::map<std::string, float> graspZ = {
-                                    {"k", 0.05},
-                                    {"q", 0.05},
-                                    {"b", 0.045},
-                                    {"n", 0.04},
-                                    {"r", 0.04},
+                                    {"k", 0.04},
+                                    {"q", 0.04},
+                                    {"b", 0.03},
+                                    {"n", 0.03},
+                                    {"r", 0.03},
                                     {"p", 0.03}
 };
 
+std::map<std::string, float> graspWidth = {
+                                    {"k", 0.003},
+                                    {"q", 0.003},
+                                    {"b", 0.003},
+                                    {"n", 0.003},
+                                    {"r", 0.003},
+                                    {"p", 0.003}
+};
+
 const std::string START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"; 
+
+// robot 
+const float approachZ = 0.08;
+const float liftZ = 0.08;
+const float centerZ = 0.25;
+const float centerX = 0.18;
+const float retreatZ = 0.08;
+const float graspOpen = 0.008;
