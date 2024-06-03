@@ -1,6 +1,4 @@
 #!/usr/bin/env -S ros2 launch
-"""Configure and setup move group for planning with MoveIt 2"""
-
 from os import path
 from typing import List
 
