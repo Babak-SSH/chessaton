@@ -33,3 +33,9 @@ TODO: fix 4dof kinematic solver
 ```bash
 ros2 launch chessaton_moveit_config chessaton.launch.py use_camera:=false
 ```
+
+<div>
+    <div align="center">
+        <img src="../assets/chessaton_moveit.gif">
+    </div>
+</div>
