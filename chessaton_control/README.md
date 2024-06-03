@@ -52,13 +52,31 @@ ros2 run chessaton_control movep_demo
 ros2 launch chessaton_control pick_place_demo.launch.py demo_program:="pick_place_demo"
 ```
 
+<div>
+    <div align="true">
+        <img src="../assets/pick_place_demo.gif">
+    </div>
+</div>
+
 ### pick and place using depth map to avoid collision
 ```
 ros2 launch chessaton_control pick_place_camera_demo.launch.py demo_program:="pick_place_depth_demo" world:=/home/ros/workspace/src/chessaton/chessaton_control/world/simple_pick_place_obstacle
 ```
 
+<div>
+    <div align="true">
+        <img src="../assets/pick_place_depth.gif">
+    </div>
+</div>
+
 ### pick and place with OpenCV
-- in this part classic algorithms are used to find the boxes position and convert them to useful pose for robot to use (certainly there are more robust and elegant solutions TODO: change algorithms to find boxes), these coords are then sent with Ros2 service call to any program that requests it. 
+- in this part classic algorithms are used to find the boxes position and convert them to useful pose by fusing them with point cloud data from camera for robot to use (certainly there are more robust and elegant solutions TODO: change algorithms to find boxes), these coords are then sent with Ros2 service call to any program that requests it. 
 ```
 ros2 launch chessaton_control pick_place_camera_demo.launch.py demo_program:="pick_place_opencv_demo" enable_service:=true
 ```
+
+<div>
+    <div align="true">
+        <img src="../assets/opencv_views.png">
+    </div>
+</div>
