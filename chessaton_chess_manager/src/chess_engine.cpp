@@ -78,8 +78,12 @@ int main(int argc, char **argv) {
     std::string filePath = __FILE__;
     std::size_t found = filePath.find_last_of("/");
     std::string dir = filePath.substr(0,found);
+    std::string engine = "kojiro";
+    if (argv[1] == "--engine") {
+        engine = argv[2];
+    }
 
-    child c(dir+"/engines/kojiro", std_out > out_pipe, std_in < in_pipe);
+    child c(dir+"/engines/" + engine, std_out > out_pipe, std_in < in_pipe);
 
     rclcpp::spin(node);
 }

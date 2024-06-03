@@ -52,6 +52,7 @@ def generate_launch_description():
     log_level = LaunchConfiguration("log_level")
     use_camera = LaunchConfiguration("use_camera")
     robot_program = LaunchConfiguration("robot_program")
+    engine = LaunchConfiguration("engine")
 
     # URDF
     robot_description_content = Command(
@@ -394,6 +395,10 @@ def generate_launch_description():
         package="chessaton_chess_manager",
         executable= "chess_engine",
         output="screen",
+        arguments=[
+            "--engine",
+            engine,
+        ],
         parameters=[
             robot_description,
             robot_description_semantic,
@@ -589,5 +594,10 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             "robot_program",
             default_value="chess_robot",
             description="name of the demo program to run.",
+        ),
+        DeclareLaunchArgument(
+            "engine",
+            default_value="kojiro",
+            description="chess engine used to get moves.",
         ),
     ]
