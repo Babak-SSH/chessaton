@@ -25,7 +25,6 @@
     <exec_depend>moveit_configs_utils</exec_depend>
     <exec_depend>moveit_ros_move_group</exec_depend>
     <exec_depend>moveit_ros_visualization</exec_depend>
-    <exec_depend>moveit_ros_warehouse</exec_depend>
     <exec_depend>moveit_setup_assistant</exec_depend>
     <exec_depend>joint_state_publisher</exec_depend>
     <exec_depend>joint_state_publisher_gui</exec_depend>
@@ -36,7 +35,6 @@
     <exec_depend>rviz_common</exec_depend>
     <exec_depend>rviz_default_plugins</exec_depend>
     <exec_depend>tf2_ros</exec_depend>
-    <exec_depend>warehouse_ros_mongo</exec_depend>
     <exec_depend>xacro</exec_depend>
 
     <build_depend>rosidl_default_generators</build_depend>
