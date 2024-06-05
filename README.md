@@ -2,8 +2,14 @@
 chess playing 4dof robotic arm!
 ## Description
 This ROS package contains the motion planning stack and chess interface (which uses my own chess engine [Kojiro](https://github.com/Babak-SSH/Kojiro/blob/main/)) for a semi-custom 4 DOF robotic arm.
-The associated simulation environment in Gazebo includes chess-board and it's pieces with same size as their real life counter parts. 
+The associated simulation environment in Gazebo includes chess-board and it's pieces with same size as their real life counter parts, and to simulate grasping, [gazebo_grasp_plugin](https://github.com/JenniferBuehler/gazebo-pkgs/tree/master/gazebo_grasp_plugin) is used.
 The robotic manipulator hardware is controlled using micro-ros + esp32 + pca9685.
+
+<p align="center">
+    <a href="https://youtu.be/DYEWLB1PKyM" target="_blank" rel="noopener noreferrer">
+        <img  src="https://markdown-videos-api.jorgenkh.no/url?url=https://youtu.be/DYEWLB1PKyM.gif" alt=" chessaton - 4dof robotic arm playing chess (moveit2 + micro-ros) " title=" chessaton - 4dof robotic arm playing chess (moveit2 + micro-ros) "/>
+    </a>
+</p>
 
 ### packages
 - [chessaton_description](./chessaton_description/README.md) : robots urdfs and base configurations
@@ -31,16 +37,21 @@ to enable nvidia gpu :
 #### linux:
 add this config to daemon.json which is usually located at /etc/docker/daemon.json:
 ```json
-"default-runtime": "nvidia",
-    "runtimes": {
-        "nvidia": {
-            "args": [],
-            "path": "nvidia-container-runtime"
+{
+    "runtimes":{
+        "nvidia":{
+            "path":"/usr/bin/nvidia-container-runtime",
+            "runtimeArgs":[
+                
+            ]
         }
     }
+}
 ```
 #### windows
-add above config to docker hub settings.
+if docker desktop doesn't look for /etc/docker/daemon.json (in wsl),
+ add the above config to daemon.json in the **Docker Desktop Settings under Docker Engine**.
+also inorder to show GUI apps you will need X server.
 
 ---
 ### Manual
@@ -50,6 +61,7 @@ core dependencies:
 - ros-humble
 - gazebo
 - moveit2
+- [grasp-plugin](https://github.com/JenniferBuehler/gazebo-pkgs)
 
 rest of the dependencies could be found in [Dockerfile](./Dockerfile)
 
